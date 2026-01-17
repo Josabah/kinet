@@ -11,7 +11,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: XLogo, href: 'https://x.com/yosefbabay', label: 'X' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/yoseph-abay', label: 'LinkedIn' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/yoseph-abay', label: 'LinkedIn' },
     { icon: Github, href: 'https://github.com/josabah', label: 'GitHub' },
   ];
 
