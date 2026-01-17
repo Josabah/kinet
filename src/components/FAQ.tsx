@@ -11,11 +11,11 @@ import {
 const faqs = [
   {
     question: "What services does Kinet offer?",
-    answer: "Kinet offers comprehensive digital solutions including custom web and app development, UI/UX design, branding and marketing, and ongoing support and maintenance. We specialize in building scalable, modern applications using cutting-edge technologies."
+    answer: "We offer three core services: Branding & Marketing Sites for businesses needing a strong digital presence, MVPs & Startup Solutions for founders ready to validate their ideas quickly, and Full-Scale Applications for enterprises requiring robust, scalable platforms. Check out our Services section above for full details and pricing."
   },
   {
     question: "How long does a typical project take?",
-    answer: "Project timelines vary based on complexity and scope. A simple landing page might take 1-2 weeks, while a full-featured web application could take 2-4 months. During our discovery phase, we'll provide you with a detailed timeline tailored to your specific needs."
+    answer: "Timelines depend on the service: Branding & Marketing Sites typically take about 1 week. MVPs & Startup projects range from 2-4 weeks depending on complexity and scope. Full-Scale Applications require a custom timeline based on project requirements. We'll provide a detailed schedule during our discovery phase."
   },
   {
     question: "What is your development process?",
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     question: "How do you handle project pricing?",
-    answer: "We offer flexible pricing models including fixed-price projects, time-and-materials, and retainer arrangements. After our initial consultation, we'll provide a detailed proposal with transparent pricing based on your project requirements."
+    answer: "The prices listed in our Services section reflect typical ranges for each tier. However, we understand every project is unique—pricing can go up or down based on your specific requirements, timeline, and scope. After our initial consultation, we'll provide a transparent proposal tailored to your needs."
   },
   {
     question: "Can you work with our existing team?",
