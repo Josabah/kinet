@@ -13,7 +13,7 @@ const comparisons = [
     kinet: "Fixed pricing starting at $997"
   },
   {
-    traditional: "Hiring 3-5 developers at £100k+/year each",
+    traditional: "Hiring 3-5 developers at $100k+/year each",
     kinet: "Senior experts handle everything"
   },
   {
