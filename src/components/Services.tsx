@@ -35,14 +35,7 @@ const Services = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-muted relative overflow-hidden">
-      {/* Subtle Background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "radial-gradient(ellipse 60% 40% at 20% 80%, hsl(var(--kinet-indigo) / 0.04), transparent)",
-        }}
-      />
+    <section id="services" className="py-16 md:py-20 bg-background relative overflow-hidden">
 
       <div ref={ref} className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
