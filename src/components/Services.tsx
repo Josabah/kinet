@@ -1,28 +1,57 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Code2, Brain, Rocket, Gauge } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-const services = [
+const plans = [
   {
-    title: 'Custom Web & SaaS Development',
-    description: 'From complex B2B platforms to engaging consumer applications. We architect and build scalable solutions that drive business growth.',
-    icon: Code2,
+    name: 'Branding & Marketing Sites',
+    description: 'High-converting websites that establish your digital presence and drive results.',
+    price: '$2,497',
+    priceNote: 'starting at',
+    popular: false,
+    features: [
+      'Custom design & branding',
+      'Responsive landing pages',
+      'SEO optimization',
+      'Analytics integration',
+      'CMS integration',
+      '2-week delivery',
+    ],
+    stacks: ['Framer', 'Webflow', 'Figma', 'WordPress'],
   },
   {
-    title: 'AI Integration & Automation',
-    description: 'Embedding intelligent features and optimizing workflows with cutting-edge AI. Transform your operations with smart automation.',
-    icon: Brain,
+    name: 'MVPs & Startups',
+    description: 'Launch your product fast with a fully functional MVP built for growth.',
+    price: '$5,997',
+    priceNote: 'starting at',
+    popular: true,
+    features: [
+      '3-4 core features',
+      'User authentication',
+      'Database integration',
+      'Payment processing',
+      'Admin dashboard',
+      '3-4 week delivery',
+    ],
+    stacks: ['React', 'Next.js', 'Supabase', 'Stripe'],
   },
   {
-    title: 'MVP & Product Launch',
-    description: 'Rapid development of market-ready Minimum Viable Products. Get your startup from idea to launch in record time.',
-    icon: Rocket,
-  },
-  {
-    title: 'Performance Optimization',
-    description: 'Enhancing speed, security, and scalability for existing platforms. Make your application faster and more reliable.',
-    icon: Gauge,
+    name: 'Full-Scale Applications',
+    description: 'Enterprise-grade solutions built for scale, security, and long-term success.',
+    price: 'Custom',
+    priceNote: 'tailored pricing',
+    popular: false,
+    features: [
+      'Custom architecture',
+      'Advanced integrations',
+      'Real-time features',
+      'CI/CD pipelines',
+      'Ongoing support',
+      'Dedicated team',
+    ],
+    stacks: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
   },
 ];
 
@@ -30,13 +59,20 @@ const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="services" className="py-24 md:py-32 bg-muted relative overflow-hidden">
       {/* Subtle Background */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 60% 40% at 20% 80%, hsl(var(--kinet-indigo) / 0.04), transparent)',
+          background: 'radial-gradient(ellipse 60% 40% at 50% 0%, hsl(var(--kinet-indigo) / 0.06), transparent)',
         }}
       />
 
@@ -49,54 +85,134 @@ const Services = () => {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
-            Transforming Ideas into
+            Solutions That Scale
             <br />
-            <span className="text-primary">Digital Realities</span>
+            <span className="text-primary">With Your Ambition</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Comprehensive services tailored to accelerate your digital transformation 
-            and deliver measurable business impact.
+            From stunning marketing sites to enterprise applications—choose the path 
+            that matches your vision and budget.
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {services.map((service, index) => (
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, index) => (
             <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              key={plan.name}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="card-glass group relative overflow-hidden"
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className={`relative rounded-2xl p-8 flex flex-col ${
+                plan.popular 
+                  ? 'bg-kinet-nav text-white ring-2 ring-primary shadow-2xl shadow-primary/20 lg:scale-105' 
+                  : 'bg-card border border-border'
+              }`}
             >
-              {/* Hover Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="relative z-10">
-                {/* Icon */}
-                <div className="inline-flex p-4 rounded-xl bg-primary/10 border border-primary/20 mb-6 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-105">
-                  <service.icon className="w-7 h-7 text-primary" />
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
+                    Most Popular
+                  </span>
                 </div>
+              )}
 
-                {/* Content */}
-                <h3 className="text-xl font-display font-semibold text-foreground mb-3">
-                  {service.title}
+              {/* Plan Header */}
+              <div className="mb-6">
+                <h3 className={`text-xl font-display font-semibold mb-2 ${
+                  plan.popular ? 'text-white' : 'text-foreground'
+                }`}>
+                  {plan.name}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {service.description}
+                <p className={`text-sm leading-relaxed ${
+                  plan.popular ? 'text-white/70' : 'text-muted-foreground'
+                }`}>
+                  {plan.description}
                 </p>
+              </div>
 
-                {/* Arrow indicator */}
-                <div className="mt-6 flex items-center gap-2 text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span>Learn more</span>
-                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+              {/* Price */}
+              <div className="mb-6">
+                <span className={`text-xs uppercase tracking-wider ${
+                  plan.popular ? 'text-white/50' : 'text-muted-foreground'
+                }`}>
+                  {plan.priceNote}
+                </span>
+                <div className={`text-4xl font-display font-bold ${
+                  plan.popular ? 'text-white' : 'text-foreground'
+                }`}>
+                  {plan.price}
                 </div>
               </div>
+
+              {/* Features */}
+              <ul className="space-y-3 mb-6 flex-grow">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3">
+                    <Check className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                      plan.popular ? 'text-primary' : 'text-primary'
+                    }`} />
+                    <span className={`text-sm ${
+                      plan.popular ? 'text-white/90' : 'text-foreground'
+                    }`}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech Stack */}
+              <div className={`mb-6 pt-4 border-t ${
+                plan.popular ? 'border-white/10' : 'border-border'
+              }`}>
+                <span className={`text-xs uppercase tracking-wider mb-3 block ${
+                  plan.popular ? 'text-white/50' : 'text-muted-foreground'
+                }`}>
+                  Tech Stack
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {plan.stacks.map((stack) => (
+                    <span
+                      key={stack}
+                      className={`text-xs px-3 py-1.5 rounded-full font-medium ${
+                        plan.popular 
+                          ? 'bg-white/10 text-white/90' 
+                          : 'bg-muted text-muted-foreground'
+                      }`}
+                    >
+                      {stack}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <Button
+                onClick={scrollToContact}
+                className={`w-full group ${
+                  plan.popular 
+                    ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                    : 'bg-kinet-nav hover:bg-kinet-nav/90 text-white'
+                }`}
+                size="lg"
+              >
+                Get Started
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              </Button>
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom Note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center text-sm text-muted-foreground mt-12"
+        >
+          All plans include dedicated project management and post-launch support.
+        </motion.p>
       </div>
     </section>
   );
