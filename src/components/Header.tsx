@@ -1,16 +1,6 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
     { label: 'Services', href: '#services' },
@@ -21,10 +11,10 @@ const Header = () => {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 bg-kinet-nav py-4"
+      className="relative bg-kinet-nav py-4"
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}

@@ -31,7 +31,7 @@ const Services = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-background relative overflow-hidden">
+    <section id="services" className="py-24 md:py-32 bg-muted relative overflow-hidden">
       {/* Subtle Background */}
       <div 
         className="absolute inset-0"
