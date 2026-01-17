@@ -9,7 +9,7 @@ const comparisons = [
     kinet: "MVP ready in 2-4 weeks"
   },
   {
-    traditional: "£50,000+ for a basic MVP",
+    traditional: "$50,000+ for a basic MVP",
     kinet: "Fixed pricing starting at $997"
   },
   {
