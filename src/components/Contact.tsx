@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { CheckCircle, Mail, Loader2 } from 'lucide-react';
+import { CheckCircle, Loader2 } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
 interface FormData {
@@ -143,16 +143,9 @@ const Contact = () => {
             <br />
             <span className="text-primary">Your Vision?</span>
           </h2>
-          <p className="text-lg text-muted-foreground mb-4">
+          <p className="text-lg text-muted-foreground">
             Reach out to discuss your project. We're eager to partner with innovators.
           </p>
-          <a 
-            href="mailto:yosefabay03@gmail.com" 
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-          >
-            <Mail className="w-5 h-5" />
-            yosefabay03@gmail.com
-          </a>
         </motion.div>
 
         {/* Contact Form */}

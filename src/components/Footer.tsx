@@ -1,4 +1,4 @@
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const XLogo = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
@@ -29,6 +29,13 @@ const Footer = () => {
             <span className="text-xl font-display font-bold text-white">
               Kinet
             </span>
+            <a 
+              href="mailto:yosefabay03@gmail.com" 
+              className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              yosefabay03@gmail.com
+            </a>
             <p className="text-sm text-white/60">
               © {currentYear} Kinet. All rights reserved.
             </p>
