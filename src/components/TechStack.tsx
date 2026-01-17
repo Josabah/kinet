@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-
+import cursorLogo from '@/assets/cursor-logo.ico';
+import lovableLogo from '@/assets/lovable-logo.ico';
+import opencodeLogo from '@/assets/opencode-logo.ico';
 
 // Technology logos as simple SVG components
 const ReactLogo = () => (
@@ -70,40 +72,21 @@ const technologies = [
   { name: 'Cloudflare', Logo: CloudflareLogo },
 ];
 
-// AI Tool logos - Real company logos
-const CursorLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M12.003 1.5c-5.79 0-10.5 4.709-10.5 10.5s4.71 10.5 10.5 10.5c5.79 0 10.5-4.709 10.5-10.5s-4.71-10.5-10.5-10.5zm-1.147 15.75l-4.5-4.5 1.06-1.06 3.44 3.44 6.94-6.94 1.06 1.06-8 8z"/>
-  </svg>
-);
-
-const LovableLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-6 h-6" fill="currentColor">
-    <path d="M50 10 L90 50 L50 90 L10 50 Z M50 25 L75 50 L50 75 L25 50 Z"/>
-  </svg>
-);
-
-const OpenCodeLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-  </svg>
-);
-
 const aiTools = [
   {
     name: 'Cursor AI',
     description: 'Intelligent code generation & refactoring for accelerated development workflows',
-    Logo: CursorLogo,
+    logo: cursorLogo,
   },
   {
     name: 'Lovable',
     description: 'Lightning-fast UI prototyping & iteration for rapid design-to-code pipelines',
-    Logo: LovableLogo,
+    logo: lovableLogo,
   },
   {
     name: 'OpenCode',
     description: 'Open-source terminal AI assistant for seamless coding workflows',
-    Logo: OpenCodeLogo,
+    logo: opencodeLogo,
   },
 ];
 
@@ -112,14 +95,7 @@ const TechStack = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="tech" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Subtle Background Gradient */}
-      <div 
-        className="absolute inset-0 opacity-50"
-        style={{
-          background: 'radial-gradient(ellipse 80% 50% at 50% 100%, hsl(var(--kinet-indigo) / 0.05), transparent)',
-        }}
-      />
+    <section id="tech" className="py-16 md:py-20 relative overflow-hidden bg-background">
 
       <div ref={ref} className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -181,8 +157,8 @@ const TechStack = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative z-10 flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
-                    <tool.Logo />
+                  <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
+                    <img src={tool.logo} alt={tool.name} className="w-8 h-8" />
                   </div>
                   <div>
                     <h4 className="text-lg font-display font-semibold text-foreground mb-2">
