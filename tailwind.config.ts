@@ -57,6 +57,7 @@ export default {
           midnight: "hsl(var(--kinet-midnight))",
           indigo: "hsl(var(--kinet-indigo))",
           text: "hsl(var(--kinet-text))",
+          nav: "hsl(var(--kinet-nav))",
         },
       },
       borderRadius: {
