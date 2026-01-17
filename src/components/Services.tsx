@@ -103,19 +103,28 @@ const Services = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className={`relative rounded-2xl p-8 flex flex-col ${
+              whileHover={{ 
+                y: -8, 
+                transition: { duration: 0.3, ease: "easeOut" } 
+              }}
+              className={`relative rounded-2xl p-8 flex flex-col transition-shadow duration-300 cursor-pointer ${
                 plan.popular 
-                  ? 'bg-kinet-nav text-white ring-2 ring-primary shadow-2xl shadow-primary/20 lg:scale-105' 
-                  : 'bg-card border border-border'
+                  ? 'bg-kinet-nav text-white ring-2 ring-primary shadow-2xl shadow-primary/20 lg:scale-105 hover:shadow-primary/40 hover:ring-primary/80' 
+                  : 'bg-card border border-border hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10'
               }`}
             >
               {/* Popular Badge */}
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                <motion.div 
+                  className="absolute -top-4 left-1/2 -translate-x-1/2"
+                  initial={{ scale: 0 }}
+                  animate={isInView ? { scale: 1 } : {}}
+                  transition={{ duration: 0.4, delay: index * 0.15 + 0.3, type: "spring" }}
+                >
                   <span className="bg-primary text-primary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
                     Most Popular
                   </span>
-                </div>
+                </motion.div>
               )}
 
               {/* Plan Header */}
@@ -139,26 +148,41 @@ const Services = () => {
                 }`}>
                   {plan.priceNote}
                 </span>
-                <div className={`text-4xl font-display font-bold ${
-                  plan.popular ? 'text-white' : 'text-foreground'
-                }`}>
+                <motion.div 
+                  className={`text-4xl font-display font-bold ${
+                    plan.popular ? 'text-white' : 'text-foreground'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   {plan.price}
-                </div>
+                </motion.div>
               </div>
 
               {/* Features */}
               <ul className="space-y-3 mb-6 flex-grow">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
-                      plan.popular ? 'text-primary' : 'text-primary'
-                    }`} />
-                    <span className={`text-sm ${
-                      plan.popular ? 'text-white/90' : 'text-foreground'
+                {plan.features.map((feature, featureIndex) => (
+                  <motion.li 
+                    key={feature} 
+                    className="flex items-start gap-3 group/feature"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.3, delay: index * 0.15 + featureIndex * 0.05 + 0.3 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Check className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                        plan.popular ? 'text-primary' : 'text-primary'
+                      }`} />
+                    </motion.div>
+                    <span className={`text-sm transition-colors duration-200 ${
+                      plan.popular ? 'text-white/90 group-hover/feature:text-white' : 'text-foreground group-hover/feature:text-primary'
                     }`}>
                       {feature}
                     </span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
@@ -172,34 +196,46 @@ const Services = () => {
                   Tech Stack
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {plan.stacks.map((stack) => (
-                    <span
+                  {plan.stacks.map((stack, stackIndex) => (
+                    <motion.span
                       key={stack}
-                      className={`text-xs px-3 py-1.5 rounded-full font-medium ${
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.3, delay: index * 0.15 + stackIndex * 0.05 + 0.5 }}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className={`text-xs px-3 py-1.5 rounded-full font-medium cursor-default transition-colors duration-200 ${
                         plan.popular 
-                          ? 'bg-white/10 text-white/90' 
-                          : 'bg-muted text-muted-foreground'
+                          ? 'bg-white/10 text-white/90 hover:bg-white/20' 
+                          : 'bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary'
                       }`}
                     >
                       {stack}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
 
               {/* CTA Button */}
-              <Button
-                onClick={scrollToContact}
-                className={`w-full group ${
-                  plan.popular 
-                    ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
-                    : 'bg-kinet-nav hover:bg-kinet-nav/90 text-white'
-                }`}
-                size="lg"
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
               >
-                Get Started
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
+                <Button
+                  onClick={scrollToContact}
+                  className={`w-full group overflow-hidden relative ${
+                    plan.popular 
+                      ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                      : 'bg-kinet-nav hover:bg-kinet-nav/90 text-white'
+                  }`}
+                  size="lg"
+                >
+                  <span className="relative z-10 flex items-center justify-center">
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </Button>
+              </motion.div>
             </motion.div>
           ))}
         </div>
