@@ -6,43 +6,44 @@
 
 @layer base {
   :root {
-    /* Kinet Dark Theme */
-    --background: 258 72% 6%;
-    --foreground: 60 7% 94%;
+    /* Kinet Light Theme */
+    --background: 240 33% 99%;
+    --foreground: 231 44% 11%;
     
-    --card: 232 40% 12%;
-    --card-foreground: 60 7% 94%;
+    --card: 0 0% 100%;
+    --card-foreground: 231 44% 11%;
     
-    --popover: 232 40% 12%;
-    --popover-foreground: 60 7% 94%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 231 44% 11%;
     
     --primary: 234 60% 46%;
-    --primary-foreground: 60 7% 94%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 232 40% 12%;
-    --secondary-foreground: 60 7% 94%;
+    --secondary: 231 44% 11%;
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 232 30% 18%;
-    --muted-foreground: 230 10% 60%;
+    --muted: 240 20% 96%;
+    --muted-foreground: 231 20% 40%;
     
     --accent: 234 60% 46%;
-    --accent-foreground: 60 7% 94%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
-    --destructive-foreground: 60 7% 94%;
+    --destructive-foreground: 0 0% 100%;
     
-    --border: 234 60% 46% / 0.5;
-    --input: 232 40% 12%;
+    --border: 231 30% 85%;
+    --input: 231 30% 90%;
     --ring: 234 60% 46%;
     
     --radius: 0.75rem;
     
     /* Custom Kinet tokens */
-    --kinet-deep: 258 72% 6%;
-    --kinet-midnight: 232 40% 12%;
+    --kinet-deep: 240 33% 99%;
+    --kinet-midnight: 231 44% 11%;
     --kinet-indigo: 234 60% 46%;
-    --kinet-text: 60 7% 94%;
-    --kinet-border: 234 60% 46% / 0.5;
+    --kinet-text: 0 0% 100%;
+    --kinet-nav: 231 44% 11%;
+    --kinet-border: 231 30% 85%;
     --kinet-glow: 234 60% 46% / 0.3;
   }
 }

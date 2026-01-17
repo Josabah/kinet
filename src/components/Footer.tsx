@@ -15,15 +15,15 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-12 bg-background border-t border-border/30">
+    <footer className="py-12 bg-kinet-nav">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Copyright */}
           <div className="flex flex-col items-center md:items-start gap-2">
-            <span className="text-xl font-display font-bold text-foreground">
+            <span className="text-xl font-display font-bold text-white">
               Kinet
             </span>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-white/60">
               © {currentYear} Kinet. All rights reserved.
             </p>
           </div>
@@ -34,7 +34,7 @@ const Footer = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-white/60 hover:text-white transition-colors"
               >
                 {link.label}
               </a>
@@ -48,7 +48,7 @@ const Footer = () => {
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
+                className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-all"
               >
                 <social.icon className="w-5 h-5" />
               </a>
@@ -57,8 +57,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom text */}
-        <div className="mt-8 pt-8 border-t border-border/20 text-center">
-          <p className="text-xs text-muted-foreground/60 font-mono">
+        <div className="mt-8 pt-8 border-t border-white/10 text-center">
+          <p className="text-xs text-white/40 font-mono">
             Engineered by Kinet
           </p>
         </div>
