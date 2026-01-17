@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Cpu, Sparkles } from 'lucide-react';
+
 
 // Technology logos as simple SVG components
 const ReactLogo = () => (
@@ -70,16 +70,40 @@ const technologies = [
   { name: 'Cloudflare', Logo: CloudflareLogo },
 ];
 
+// AI Tool logos
+const CursorLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M3.5 2L21.5 12L14 14L11 21.5L3.5 2Z"/>
+  </svg>
+);
+
+const LovableLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+);
+
+const OpenCodeLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+  </svg>
+);
+
 const aiTools = [
   {
     name: 'Cursor AI',
     description: 'Intelligent code generation & refactoring for accelerated development workflows',
-    icon: Cpu,
+    Logo: CursorLogo,
   },
   {
     name: 'Lovable',
     description: 'Lightning-fast UI prototyping & iteration for rapid design-to-code pipelines',
-    icon: Sparkles,
+    Logo: LovableLogo,
+  },
+  {
+    name: 'OpenCode',
+    description: 'Open-source terminal AI assistant for seamless coding workflows',
+    Logo: OpenCodeLogo,
   },
 ];
 
@@ -88,7 +112,7 @@ const TechStack = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="tech" className="py-24 md:py-32 bg-muted relative overflow-hidden">
+    <section id="tech" className="py-16 md:py-20 relative overflow-hidden">
       {/* Subtle Background Gradient */}
       <div 
         className="absolute inset-0 opacity-50"
@@ -146,7 +170,7 @@ const TechStack = () => {
           <h3 className="text-center text-sm font-semibold text-primary uppercase tracking-wider mb-8">
             Powered by Advanced AI
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {aiTools.map((tool, index) => (
               <motion.div
                 key={tool.name}
@@ -158,7 +182,7 @@ const TechStack = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative z-10 flex items-start gap-4">
                   <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
-                    <tool.icon className="w-6 h-6 text-primary" />
+                    <tool.Logo />
                   </div>
                   <div>
                     <h4 className="text-lg font-display font-semibold text-foreground mb-2">
