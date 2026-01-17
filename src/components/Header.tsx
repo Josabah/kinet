@@ -1,21 +1,26 @@
 import { motion } from 'framer-motion';
-
 const Header = () => {
-
-  const navLinks = [
-    { label: 'Services', href: '#services' },
-    { label: 'Process', href: '#process' },
-    { label: 'Tech Stack', href: '#tech' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
-  return (
-    <motion.header
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="relative bg-kinet-nav py-4"
-    >
+  const navLinks = [{
+    label: 'Services',
+    href: '#services'
+  }, {
+    label: 'Process',
+    href: '#process'
+  }, {
+    label: 'Tech Stack',
+    href: '#tech'
+  }, {
+    label: 'Contact',
+    href: '#contact'
+  }];
+  return <motion.header initial={{
+    opacity: 0
+  }} animate={{
+    opacity: 1
+  }} transition={{
+    duration: 0.6,
+    ease: 'easeOut'
+  }} className="relative bg-kinet-nav py-[8px]">
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="text-2xl font-display font-bold text-white tracking-tight">
@@ -24,16 +29,10 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 relative group"
-            >
+          {navLinks.map(link => <a key={link.label} href={link.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 relative group">
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+            </a>)}
         </nav>
 
         {/* CTA Button */}
@@ -48,8 +47,6 @@ const Header = () => {
           </svg>
         </button>
       </div>
-    </motion.header>
-  );
+    </motion.header>;
 };
-
 export default Header;
