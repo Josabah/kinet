@@ -1,12 +1,25 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [submitted, setSubmitted] = useState(false);
+  const [selectedService, setSelectedService] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash.includes('service=')) {
+      const service = hash.split('service=')[1];
+      if (service) {
+        setSelectedService(service);
+      }
+    }
+  }, [location.hash]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,6 +117,8 @@ const Contact = () => {
                 id="projectType"
                 name="projectType"
                 required
+                value={selectedService}
+                onChange={(e) => setSelectedService(e.target.value)}
                 className="input-dark appearance-none cursor-pointer"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23efefee'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
