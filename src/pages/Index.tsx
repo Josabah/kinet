@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
+import WhyKinet from '@/components/WhyKinet';
 import Process from '@/components/Process';
 import TechStack from '@/components/TechStack';
 import FAQ from '@/components/FAQ';
@@ -14,6 +15,7 @@ const Index = () => {
       <main>
         <Hero />
         <Services />
+        <WhyKinet />
         <Process />
         <TechStack />
         <FAQ />
