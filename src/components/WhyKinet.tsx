@@ -18,11 +18,15 @@ const comparisons = [
   },
   {
     traditional: "Endless meetings and slow progress",
-    kinet: "Weekly updates and rapid iterations"
+    kinet: "48-hour updates and rapid iterations"
   },
   {
     traditional: "Outdated tech and technical debt",
     kinet: "AI-augmented workflows, future-proof stack"
+  },
+  {
+    traditional: "Devs who don't understand business goals",
+    kinet: "Experts in both technology and business strategy"
   }
 ];
 
@@ -90,9 +94,9 @@ const WhyKinet = () => {
                 </div>
 
                 {/* Kinet */}
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-primary/5 border border-primary/10">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Check className="w-5 h-5 text-primary" />
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-accent/30 border border-accent/20">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center">
+                    <Check className="w-5 h-5 text-accent-foreground" />
                   </div>
                   <p className="text-foreground font-medium text-base md:text-lg">
                     {item.kinet}
