@@ -1,14 +1,38 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Send, CheckCircle } from 'lucide-react';
+import { CheckCircle, Mail, Loader2 } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  projectType: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  projectType?: string;
+  message?: string;
+}
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [selectedService, setSelectedService] = useState('');
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    company: '',
+    projectType: '',
+    message: '',
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const location = useLocation();
 
   useEffect(() => {
@@ -17,7 +41,7 @@ const Contact = () => {
       if (hash.includes('service=')) {
         const service = hash.split('service=')[1];
         if (service) {
-          setSelectedService(service);
+          setFormData(prev => ({ ...prev, projectType: service }));
         }
       }
     };
@@ -27,11 +51,73 @@ const Contact = () => {
     return () => window.removeEventListener('hashchange', updateService);
   }, [location.hash]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    
+    if (!formData.projectType) {
+      newErrors.projectType = 'Please select a project type';
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleBlur = (field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+  };
+
+  const handleChange = (field: keyof FormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (errors[field as keyof FormErrors]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Mark all fields as touched
+    setTouched({ name: true, email: true, projectType: true, message: true });
+    
+    if (!validateForm()) return;
+    
+    setIsSubmitting(true);
+    
+    // Simulate submission delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
     setSubmitted(true);
-    // Reset after 3 seconds for demo
-    setTimeout(() => setSubmitted(false), 3000);
+    
+    // Reset form after success
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ name: '', email: '', company: '', projectType: '', message: '' });
+      setTouched({});
+    }, 4000);
   };
 
   return (
@@ -57,9 +143,16 @@ const Contact = () => {
             <br />
             <span className="text-primary">Your Vision?</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground mb-4">
             Reach out to discuss your project. We're eager to partner with innovators.
           </p>
+          <a 
+            href="mailto:yosefabay03@gmail.com" 
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+          >
+            <Mail className="w-5 h-5" />
+            yosefabay03@gmail.com
+          </a>
         </motion.div>
 
         {/* Contact Form */}
@@ -81,9 +174,14 @@ const Contact = () => {
                   id="name"
                   name="name"
                   placeholder="John Doe"
-                  required
-                  className="input-dark"
+                  value={formData.name}
+                  onChange={(e) => handleChange('name', e.target.value)}
+                  onBlur={() => handleBlur('name')}
+                  className={`input-dark ${touched.name && errors.name ? 'border-red-500 focus:border-red-500' : ''}`}
                 />
+                {touched.name && errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
@@ -94,9 +192,14 @@ const Contact = () => {
                   id="email"
                   name="email"
                   placeholder="john@company.com"
-                  required
-                  className="input-dark"
+                  value={formData.email}
+                  onChange={(e) => handleChange('email', e.target.value)}
+                  onBlur={() => handleBlur('email')}
+                  className={`input-dark ${touched.email && errors.email ? 'border-red-500 focus:border-red-500' : ''}`}
                 />
+                {touched.email && errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
             </div>
 
@@ -110,6 +213,8 @@ const Contact = () => {
                 id="company"
                 name="company"
                 placeholder="Your Company"
+                value={formData.company}
+                onChange={(e) => handleChange('company', e.target.value)}
                 className="input-dark"
               />
             </div>
@@ -122,10 +227,10 @@ const Contact = () => {
               <select
                 id="projectType"
                 name="projectType"
-                required
-                value={selectedService}
-                onChange={(e) => setSelectedService(e.target.value)}
-                className="input-dark appearance-none cursor-pointer"
+                value={formData.projectType}
+                onChange={(e) => handleChange('projectType', e.target.value)}
+                onBlur={() => handleBlur('projectType')}
+                className={`input-dark appearance-none cursor-pointer ${touched.projectType && errors.projectType ? 'border-red-500 focus:border-red-500' : ''}`}
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23efefee'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
@@ -138,6 +243,9 @@ const Contact = () => {
                 <option value="mvp-startup">MVPs & Startups</option>
                 <option value="full-scale">Full-Scale Applications</option>
               </select>
+              {touched.projectType && errors.projectType && (
+                <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>
+              )}
             </div>
 
             {/* Message */}
@@ -150,29 +258,36 @@ const Contact = () => {
                 name="message"
                 rows={5}
                 placeholder="Tell us about your project..."
-                required
-                className="input-dark resize-none"
+                value={formData.message}
+                onChange={(e) => handleChange('message', e.target.value)}
+                onBlur={() => handleBlur('message')}
+                className={`input-dark resize-none ${touched.message && errors.message ? 'border-red-500 focus:border-red-500' : ''}`}
               />
+              {touched.message && errors.message && (
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+              )}
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={submitted}
-              className={`btn-primary w-full flex items-center justify-center gap-2 ${
+              disabled={isSubmitting || submitted}
+              className={`btn-primary w-full flex items-center justify-center gap-2 transition-all duration-300 ${
                 submitted ? 'bg-green-600 border-green-600' : ''
-              }`}
+              } ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
             >
               {submitted ? (
                 <>
                   <CheckCircle className="w-5 h-5" />
                   Message Sent!
                 </>
-              ) : (
+              ) : isSubmitting ? (
                 <>
-                  <Send className="w-5 h-5" />
-                  Send to Kinet
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Sending...
                 </>
+              ) : (
+                'Send Message'
               )}
             </button>
           </form>
