@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 const Header = () => {
   const navLinks = [{
-    label: 'Services',
+    label: 'Solutions',
     href: '#services'
   }, {
     label: 'Process',
@@ -9,9 +9,6 @@ const Header = () => {
   }, {
     label: 'Tech Stack',
     href: '#tech'
-  }, {
-    label: 'Contact',
-    href: '#contact'
   }];
   return <motion.header initial={{
     opacity: 0
@@ -35,10 +32,15 @@ const Header = () => {
             </a>)}
         </nav>
 
-        {/* CTA Button */}
-        <a href="#contact" className="btn-primary text-sm hidden md:inline-flex">
-          Start Your Vision
-        </a>
+        {/* CTA Buttons */}
+        <div className="hidden md:flex items-center gap-4">
+          <a href="#why-kinet" className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200">
+            Why Us
+          </a>
+          <a href="#contact" className="btn-primary text-sm">
+            Start Your Vision
+          </a>
+        </div>
 
         {/* Mobile Menu Button */}
         <button className="md:hidden text-white p-2">

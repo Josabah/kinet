@@ -83,8 +83,8 @@ const Hero = () => {
             }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#services" className="btn-primary inline-flex items-center gap-2 group">
-              Explore Our Capabilities
+            <a href="#contact" className="btn-primary inline-flex items-center gap-2 group">
+              Get Started
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a href="#process" className="btn-outline">
