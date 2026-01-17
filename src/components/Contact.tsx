@@ -171,7 +171,7 @@ const Contact = () => {
               ) : (
                 <>
                   <Send className="w-5 h-5" />
-                  Get a Quote
+                  Send to Kinet
                 </>
               )}
             </button>
