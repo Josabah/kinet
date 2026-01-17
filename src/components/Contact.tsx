@@ -12,13 +12,19 @@ const Contact = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const hash = location.hash;
-    if (hash.includes('service=')) {
-      const service = hash.split('service=')[1];
-      if (service) {
-        setSelectedService(service);
+    const updateService = () => {
+      const hash = window.location.hash;
+      if (hash.includes('service=')) {
+        const service = hash.split('service=')[1];
+        if (service) {
+          setSelectedService(service);
+        }
       }
-    }
+    };
+    
+    updateService();
+    window.addEventListener('hashchange', updateService);
+    return () => window.removeEventListener('hashchange', updateService);
   }, [location.hash]);
 
   const handleSubmit = (e: React.FormEvent) => {
