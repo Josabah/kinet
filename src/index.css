@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Kinet Light Theme */
-    --background: 240 100% 100%;
+    --background: 60 7% 94%; /* #EFEFEE */
     --foreground: 231 44% 11%;
     
     /* Section backgrounds */
