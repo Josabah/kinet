@@ -9,6 +9,7 @@ const pricingTiers = [
     description: "High-converting websites that establish your digital presence and drive results.",
     priceLabel: "STARTING AT",
     price: "$2,497",
+    serviceId: "branding-marketing",
     features: [
       "Custom design & branding",
       "Responsive landing pages",
@@ -23,6 +24,7 @@ const pricingTiers = [
     description: "Launch your product fast with a fully functional MVP built for growth.",
     priceLabel: "STARTING AT",
     price: "$5,997",
+    serviceId: "mvp-startup",
     features: [
       "3-4 core features",
       "User authentication",
@@ -38,6 +40,7 @@ const pricingTiers = [
     description: "Enterprise-grade solutions with advanced features, security, and scalability.",
     priceLabel: "TAILORED",
     price: "Custom",
+    serviceId: "full-scale",
     features: [
       "Complex feature sets",
       "API integrations",
@@ -82,10 +85,16 @@ const Services = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative rounded-2xl p-8 ${
+              whileHover={{ 
+                scale: 1.02, 
+                boxShadow: tier.highlighted 
+                  ? "0 25px 50px -12px rgba(0, 0, 0, 0.4)" 
+                  : "0 25px 50px -12px rgba(0, 0, 0, 0.15)" 
+              }}
+              className={`relative rounded-2xl p-8 cursor-pointer transition-all duration-300 ${
                 tier.highlighted
                   ? "bg-foreground text-background"
-                  : "bg-card border border-border"
+                  : "bg-card border border-border hover:border-primary/30"
               }`}
             >
               {/* Badge */}
@@ -141,7 +150,7 @@ const Services = () => {
 
               {/* CTA Button */}
               <a
-                href="#contact"
+                href={`#contact?service=${tier.serviceId}`}
                 className={`mt-8 block text-center py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
                   tier.highlighted
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"
