@@ -2,56 +2,13 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 const Hero = () => {
   return <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background">
-      {/* Animated Background Elements */}
+      {/* Subtle Grid Pattern Only */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `linear-gradient(hsl(var(--kinet-text)) 1px, transparent 1px),
-                              linear-gradient(90deg, hsl(var(--kinet-text)) 1px, transparent 1px)`,
-        backgroundSize: '60px 60px'
-      }} />
-        
-        {/* Floating Orbs */}
-        <motion.div animate={{
-        y: [0, -30, 0],
-        opacity: [0.3, 0.5, 0.3]
-      }} transition={{
-        duration: 8,
-        repeat: Infinity,
-        ease: 'easeInOut'
-      }} className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full" style={{
-        background: 'radial-gradient(circle, hsl(var(--kinet-indigo) / 0.15) 0%, transparent 70%)',
-        filter: 'blur(60px)'
-      }} />
-        <motion.div animate={{
-        y: [0, 20, 0],
-        opacity: [0.2, 0.4, 0.2]
-      }} transition={{
-        duration: 10,
-        repeat: Infinity,
-        ease: 'easeInOut',
-        delay: 2
-      }} className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full" style={{
-        background: 'radial-gradient(circle, hsl(var(--kinet-indigo) / 0.12) 0%, transparent 70%)',
-        filter: 'blur(80px)'
-      }} />
-
-        {/* Data Stream Lines */}
-        {[...Array(5)].map((_, i) => <motion.div key={i} initial={{
-        opacity: 0,
-        x: '-100%'
-      }} animate={{
-        opacity: [0, 0.3, 0],
-        x: '200%'
-      }} transition={{
-        duration: 8,
-        repeat: Infinity,
-        delay: i * 1.5,
-        ease: 'linear'
-      }} className="absolute h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" style={{
-        top: `${20 + i * 15}%`,
-        width: '60%'
-      }} />)}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
+                            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }} />
       </div>
 
       {/* Content */}
