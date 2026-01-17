@@ -73,21 +73,9 @@ const technologies = [
 ];
 
 const aiTools = [
-  {
-    name: 'Cursor AI',
-    description: 'Intelligent code generation & refactoring for accelerated development workflows',
-    logo: cursorLogo,
-  },
-  {
-    name: 'Lovable',
-    description: 'Lightning-fast UI prototyping & iteration for rapid design-to-code pipelines',
-    logo: lovableLogo,
-  },
-  {
-    name: 'OpenCode',
-    description: 'Open-source terminal AI assistant for seamless coding workflows',
-    logo: opencodeLogo,
-  },
+  { name: 'Cursor AI', logo: cursorLogo },
+  { name: 'Lovable', logo: lovableLogo },
+  { name: 'OpenCode', logo: opencodeLogo },
 ];
 
 const TechStack = () => {
@@ -146,29 +134,21 @@ const TechStack = () => {
           <h3 className="text-center text-sm font-semibold text-primary uppercase tracking-wider mb-8">
             Powered by Advanced AI
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto">
             {aiTools.map((tool, index) => (
               <motion.div
                 key={tool.name}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                className="card-glass relative overflow-hidden group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.5 + index * 0.05 }}
+                className="card-glass flex flex-col items-center justify-center py-6 px-4 group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative z-10 flex items-start gap-4">
-                  <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-                    <img src={tool.logo} alt={tool.name} className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-display font-semibold text-foreground mb-2">
-                      {tool.name}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {tool.description}
-                    </p>
-                  </div>
+                <div className="group-hover:scale-110 transform transition-transform">
+                  <img src={tool.logo} alt={tool.name} className="w-10 h-10" />
                 </div>
+                <span className="mt-3 text-sm font-medium text-foreground">
+                  {tool.name}
+                </span>
               </motion.div>
             ))}
           </div>
