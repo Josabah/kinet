@@ -35,7 +35,7 @@ const Process = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="process" className="py-24 md:py-32 bg-card/30 relative overflow-hidden">
+    <section id="process" className="py-24 md:py-32 bg-muted relative overflow-hidden">
       {/* Background Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.02]"

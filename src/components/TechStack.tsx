@@ -59,7 +59,7 @@ const TechStack = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="tech" className="py-24 md:py-32 bg-background relative overflow-hidden">
+    <section id="tech" className="py-24 md:py-32 bg-muted relative overflow-hidden">
       {/* Subtle Background Gradient */}
       <div 
         className="absolute inset-0 opacity-50"
