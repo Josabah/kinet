@@ -10,7 +10,7 @@ const comparisons = [
   },
   {
     traditional: "£50,000+ for a basic MVP",
-    kinet: "Fixed pricing starting at £950"
+    kinet: "Fixed pricing starting at $997"
   },
   {
     traditional: "Hiring 3-5 developers at £100k+/year each",
