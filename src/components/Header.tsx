@@ -21,7 +21,7 @@ const Header = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="sticky top-0 bg-kinet-nav py-[8px] z-50"
+        className="fixed top-0 left-0 right-0 bg-kinet-nav py-[8px] z-50"
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
