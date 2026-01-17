@@ -1,32 +1,51 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code2, Brain, Rocket, Gauge } from "lucide-react";
+import { Check } from "lucide-react";
 
-const services = [
+const pricingTiers = [
   {
-    title: "Custom Web & SaaS Development",
-    description:
-      "From complex B2B platforms to engaging consumer applications. We architect and build scalable solutions that drive business growth.",
-    icon: Code2,
+    title: "Branding & Marketing Sites",
+    description: "High-converting websites that establish your digital presence and drive results.",
+    priceLabel: "STARTING AT",
+    price: "$2,497",
+    features: [
+      "Custom design & branding",
+      "Responsive landing pages",
+      "SEO optimization",
+      "Analytics integration",
+      "CMS integration",
+    ],
+    highlighted: false,
   },
   {
-    title: "AI Integration & Automation",
-    description:
-      "Embedding intelligent features and optimizing workflows with cutting-edge AI. Transform your operations with smart automation.",
-    icon: Brain,
+    title: "MVPs & Startups",
+    description: "Launch your product fast with a fully functional MVP built for growth.",
+    priceLabel: "STARTING AT",
+    price: "$5,997",
+    features: [
+      "3-4 core features",
+      "User authentication",
+      "Database integration",
+      "Payment processing",
+      "Admin dashboard",
+    ],
+    highlighted: true,
+    badge: "Most Popular",
   },
   {
-    title: "MVP & Product Launch",
-    description:
-      "Rapid development of market-ready Minimum Viable Products. Get your startup from idea to launch in record time.",
-    icon: Rocket,
-  },
-  {
-    title: "Performance Optimization",
-    description:
-      "Enhancing speed, security, and scalability for existing platforms. Make your application faster and more reliable.",
-    icon: Gauge,
+    title: "Full-Scale Applications",
+    description: "Enterprise-grade solutions with advanced features, security, and scalability.",
+    priceLabel: "TAILORED",
+    price: "Custom",
+    features: [
+      "Complex feature sets",
+      "API integrations",
+      "Real-time functionality",
+      "Custom infrastructure",
+      "Ongoing support",
+    ],
+    highlighted: false,
   },
 ];
 
@@ -36,7 +55,6 @@ const Services = () => {
 
   return (
     <section id="services" className="py-16 md:py-20 bg-background relative overflow-hidden">
-
       <div ref={ref} className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -56,42 +74,82 @@ const Services = () => {
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {services.map((service, index) => (
+        {/* Pricing Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {pricingTiers.map((tier, index) => (
             <motion.div
-              key={service.title}
+              key={tier.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="card-glass group relative overflow-hidden"
+              className={`relative rounded-2xl p-8 ${
+                tier.highlighted
+                  ? "bg-foreground text-background"
+                  : "bg-card border border-border"
+              }`}
             >
-              {/* Hover Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="relative z-10">
-                {/* Icon */}
-                <div className="inline-flex p-4 rounded-xl bg-primary/10 border border-primary/20 mb-6 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-105">
-                  <service.icon className="w-7 h-7 text-primary" />
+              {/* Badge */}
+              {tier.badge && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground px-4 py-1.5 rounded-full text-sm font-medium">
+                    {tier.badge}
+                  </span>
                 </div>
+              )}
 
-                {/* Content */}
-                <h3 className="text-xl font-display font-semibold text-foreground mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              {/* Title & Description */}
+              <h3 className={`text-2xl font-display font-bold mb-2 ${
+                tier.highlighted ? "text-background" : "text-foreground"
+              }`}>
+                {tier.title}
+              </h3>
+              <p className={`text-sm mb-6 ${
+                tier.highlighted ? "text-background/70" : "text-muted-foreground"
+              }`}>
+                {tier.description}
+              </p>
 
-                {/* Arrow indicator */}
-                <div className="mt-6 flex items-center gap-2 text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span>Learn more</span>
-                  <svg
-                    className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+              {/* Price */}
+              <div className="mb-6">
+                <span className={`text-xs font-semibold tracking-wider ${
+                  tier.highlighted ? "text-background/60" : "text-muted-foreground"
+                }`}>
+                  {tier.priceLabel}
+                </span>
+                <div className={`text-4xl font-display font-bold ${
+                  tier.highlighted ? "text-background" : "text-foreground"
+                }`}>
+                  {tier.price}
                 </div>
               </div>
+
+              {/* Features */}
+              <ul className="space-y-3">
+                {tier.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-3">
+                    <Check className={`w-5 h-5 flex-shrink-0 ${
+                      tier.highlighted ? "text-primary" : "text-primary"
+                    }`} />
+                    <span className={`text-sm ${
+                      tier.highlighted ? "text-background/90" : "text-foreground"
+                    }`}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA Button */}
+              <a
+                href="#contact"
+                className={`mt-8 block text-center py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
+                  tier.highlighted
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                    : "bg-foreground text-background hover:bg-foreground/90"
+                }`}
+              >
+                Get Started
+              </a>
             </motion.div>
           ))}
         </div>
