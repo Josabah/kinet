@@ -112,11 +112,10 @@ const Contact = () => {
                   backgroundSize: '1rem',
                 }}
               >
-                <option value="">Select a project type</option>
-                <option value="web-app">Web Application</option>
-                <option value="ai-integration">AI Integration</option>
-                <option value="mvp">MVP Development</option>
-                <option value="other">Other</option>
+                <option value="">Select a service</option>
+                <option value="branding-marketing">Branding & Marketing Sites</option>
+                <option value="mvp-startup">MVPs & Startups</option>
+                <option value="full-scale">Full-Scale Applications</option>
               </select>
             </div>
 
