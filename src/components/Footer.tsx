@@ -10,6 +10,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
+    { icon: Mail, href: 'mailto:yosefabay03@gmail.com', label: 'Email' },
     { icon: XLogo, href: 'https://x.com/yosefbabay', label: 'X' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/yoseph-abay', label: 'LinkedIn' },
     { icon: Github, href: 'https://github.com/josabah', label: 'GitHub' },
@@ -29,13 +30,6 @@ const Footer = () => {
             <span className="text-xl font-display font-bold text-white">
               Kinet
             </span>
-            <a 
-              href="mailto:yosefabay03@gmail.com" 
-              className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-              yosefabay03@gmail.com
-            </a>
             <p className="text-sm text-white/60">
               © {currentYear} Kinet. All rights reserved.
             </p>
