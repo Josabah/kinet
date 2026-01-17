@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 const Hero = () => {
-  return <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden gradient-hero">
+  return <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Grid Pattern */}
