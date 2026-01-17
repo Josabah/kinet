@@ -6,23 +6,52 @@ import { Button } from '@/components/ui/button';
 
 const plans = [
   {
-    name: 'Branding & Marketing',
+    name: 'Branding & Marketing Sites',
+    description: 'High-converting websites that establish your digital presence and drive results.',
     price: '$2,497',
     priceNote: 'starting at',
-    features: ['Custom design', 'Landing pages', 'SEO & Analytics', '2-week delivery'],
+    popular: false,
+    features: [
+      'Custom design & branding',
+      'Responsive landing pages',
+      'SEO optimization',
+      'Analytics integration',
+      'CMS integration',
+      '2-week delivery',
+    ],
+    stacks: ['Framer', 'Webflow', 'Figma', 'WordPress'],
   },
   {
     name: 'MVPs & Startups',
+    description: 'Launch your product fast with a fully functional MVP built for growth.',
     price: '$5,997',
     priceNote: 'starting at',
     popular: true,
-    features: ['Core features', 'Auth & Database', 'Payments', '3-4 weeks'],
+    features: [
+      '3-4 core features',
+      'User authentication',
+      'Database integration',
+      'Payment processing',
+      'Admin dashboard',
+      '3-4 week delivery',
+    ],
+    stacks: ['React', 'Next.js', 'Supabase', 'Stripe'],
   },
   {
-    name: 'Full-Scale Apps',
+    name: 'Full-Scale Applications',
+    description: 'Enterprise-grade solutions built for scale, security, and long-term success.',
     price: 'Custom',
-    priceNote: 'tailored',
-    features: ['Custom architecture', 'Integrations', 'Ongoing support', 'Dedicated team'],
+    priceNote: 'tailored pricing',
+    popular: false,
+    features: [
+      'Custom architecture',
+      'Advanced integrations',
+      'Real-time features',
+      'CI/CD pipelines',
+      'Ongoing support',
+      'Dedicated team',
+    ],
+    stacks: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
   },
 ];
 
@@ -39,6 +68,7 @@ const Services = () => {
 
   return (
     <section id="services" className="py-24 md:py-32 bg-muted relative overflow-hidden">
+      {/* Subtle Background */}
       <div 
         className="absolute inset-0"
         style={{
@@ -47,11 +77,12 @@ const Services = () => {
       />
 
       <div ref={ref} className="container mx-auto px-6 relative z-10">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
             Solutions That Scale
@@ -59,54 +90,70 @@ const Services = () => {
             <span className="text-primary">With Your Ambition</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Choose the path that matches your vision and budget.
+            From stunning marketing sites to enterprise applications—choose the path 
+            that matches your vision and budget.
           </p>
         </motion.div>
 
-        {/* Compact Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative rounded-xl p-5 flex flex-col ${
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className={`relative rounded-2xl p-8 flex flex-col ${
                 plan.popular 
-                  ? 'bg-kinet-nav text-white ring-2 ring-primary' 
+                  ? 'bg-kinet-nav text-white ring-2 ring-primary shadow-2xl shadow-primary/20 lg:scale-105' 
                   : 'bg-card border border-border'
               }`}
             >
+              {/* Popular Badge */}
               {plan.popular && (
-                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                  Popular
-                </span>
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
+                    Most Popular
+                  </span>
+                </div>
               )}
 
-              <h3 className={`text-base font-display font-semibold mb-1 ${
-                plan.popular ? 'text-white' : 'text-foreground'
-              }`}>
-                {plan.name}
-              </h3>
+              {/* Plan Header */}
+              <div className="mb-6">
+                <h3 className={`text-xl font-display font-semibold mb-2 ${
+                  plan.popular ? 'text-white' : 'text-foreground'
+                }`}>
+                  {plan.name}
+                </h3>
+                <p className={`text-sm leading-relaxed ${
+                  plan.popular ? 'text-white/70' : 'text-muted-foreground'
+                }`}>
+                  {plan.description}
+                </p>
+              </div>
 
-              <div className="mb-4">
-                <span className={`text-[10px] uppercase tracking-wider ${
+              {/* Price */}
+              <div className="mb-6">
+                <span className={`text-xs uppercase tracking-wider ${
                   plan.popular ? 'text-white/50' : 'text-muted-foreground'
                 }`}>
                   {plan.priceNote}
                 </span>
-                <div className={`text-2xl font-display font-bold ${
+                <div className={`text-4xl font-display font-bold ${
                   plan.popular ? 'text-white' : 'text-foreground'
                 }`}>
                   {plan.price}
                 </div>
               </div>
 
-              <ul className="space-y-2 mb-4 flex-grow">
+              {/* Features */}
+              <ul className="space-y-3 mb-6 flex-grow">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 flex-shrink-0 text-primary" />
-                    <span className={`text-xs ${
+                  <li key={feature} className="flex items-start gap-3">
+                    <Check className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                      plan.popular ? 'text-primary' : 'text-primary'
+                    }`} />
+                    <span className={`text-sm ${
                       plan.popular ? 'text-white/90' : 'text-foreground'
                     }`}>
                       {feature}
@@ -115,21 +162,57 @@ const Services = () => {
                 ))}
               </ul>
 
+              {/* Tech Stack */}
+              <div className={`mb-6 pt-4 border-t ${
+                plan.popular ? 'border-white/10' : 'border-border'
+              }`}>
+                <span className={`text-xs uppercase tracking-wider mb-3 block ${
+                  plan.popular ? 'text-white/50' : 'text-muted-foreground'
+                }`}>
+                  Tech Stack
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {plan.stacks.map((stack) => (
+                    <span
+                      key={stack}
+                      className={`text-xs px-3 py-1.5 rounded-full font-medium ${
+                        plan.popular 
+                          ? 'bg-white/10 text-white/90' 
+                          : 'bg-muted text-muted-foreground'
+                      }`}
+                    >
+                      {stack}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Button */}
               <Button
                 onClick={scrollToContact}
-                size="sm"
                 className={`w-full group ${
                   plan.popular 
                     ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
                     : 'bg-kinet-nav hover:bg-kinet-nav/90 text-white'
                 }`}
+                size="lg"
               >
                 Get Started
-                <ArrowRight className="w-3 h-3 ml-1.5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom Note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center text-sm text-muted-foreground mt-12"
+        >
+          All plans include dedicated project management and post-launch support.
+        </motion.p>
       </div>
     </section>
   );
