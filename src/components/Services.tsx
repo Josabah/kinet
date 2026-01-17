@@ -8,7 +8,7 @@ const pricingTiers = [
     title: "Branding & Marketing Sites",
     description: "High-converting websites that establish your digital presence and drive results.",
     priceLabel: "STARTING AT",
-    price: "$2,497",
+    price: "$997",
     serviceId: "branding-marketing",
     features: [
       "Custom design & branding",
@@ -23,7 +23,7 @@ const pricingTiers = [
     title: "MVPs & Startups",
     description: "Launch your product fast with a fully functional MVP built for growth.",
     priceLabel: "STARTING AT",
-    price: "$5,997",
+    price: "$4,497",
     serviceId: "mvp-startup",
     features: [
       "3-4 core features",
@@ -38,8 +38,8 @@ const pricingTiers = [
   {
     title: "Full-Scale Applications",
     description: "Enterprise-grade solutions with advanced features, security, and scalability.",
-    priceLabel: "TAILORED",
-    price: "Custom",
+    priceLabel: "STARTING AT",
+    price: "$9,997",
     serviceId: "full-scale",
     features: [
       "Complex feature sets",
@@ -119,15 +119,15 @@ const Services = () => {
                 {tier.description}
               </p>
 
-              {/* Price */}
-              <div className="mb-6">
-                <span className={`text-xs font-semibold tracking-wider ${
-                  tier.highlighted ? "text-background/60" : "text-muted-foreground"
+              {/* Price - De-emphasized */}
+              <div className="mb-6 pt-2 border-t border-border/30">
+                <span className={`text-xs tracking-wider ${
+                  tier.highlighted ? "text-background/50" : "text-muted-foreground/70"
                 }`}>
                   {tier.priceLabel}
                 </span>
-                <div className={`text-4xl font-display font-bold ${
-                  tier.highlighted ? "text-background" : "text-foreground"
+                <div className={`text-xl font-normal ${
+                  tier.highlighted ? "text-background/70" : "text-muted-foreground"
                 }`}>
                   {tier.price}
                 </div>
