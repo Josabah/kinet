@@ -65,7 +65,7 @@ const Footer = () => {
 
         {/* Bottom text */}
         <div className="mt-8 pt-8 border-t border-white/10 text-center">
-          <p className="text-xs text-white/40 font-mono">
+          <p className="text-xs text-white/60 font-mono">
             Engineered by Kinet
           </p>
         </div>
