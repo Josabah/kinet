@@ -100,7 +100,7 @@ const TechStack = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="tech" className="py-16 md:py-20 relative overflow-hidden bg-background">
+    <section id="tech" className="py-16 md:py-20 relative overflow-hidden">
 
       <div ref={ref} className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
