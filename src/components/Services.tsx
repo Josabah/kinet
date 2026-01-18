@@ -30,7 +30,7 @@ const pricingTiers = [
       "User authentication",
       "Database integration",
       "Payment processing",
-      "Admin dashboard",
+      "Free emergency fixes for 6 months",
     ],
     highlighted: true,
     badge: "Most Popular",
