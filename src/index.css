@@ -7,22 +7,22 @@
 @layer base {
   :root {
     /* Kinet Light Theme */
-    --background: 60 7% 94%; /* #EFEFEE */
-    --foreground: 231 44% 11%;
+    --background: 240 33% 100%; /* #fefeff */
+    --foreground: 231 44% 12%; /* #131628 */
     
     /* Section backgrounds */
     --section-alt: 240 20% 96%;
     
     --card: 0 0% 100%;
-    --card-foreground: 231 44% 11%;
+    --card-foreground: 231 44% 12%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 231 44% 11%;
+    --popover-foreground: 231 44% 12%;
     
     --primary: 234 60% 46%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 231 44% 11%;
+    --secondary: 231 44% 12%;
     --secondary-foreground: 0 0% 100%;
     
     --muted: 240 20% 96%;
@@ -41,11 +41,11 @@
     --radius: 0.75rem;
     
     /* Custom Kinet tokens */
-    --kinet-deep: 240 33% 99%;
-    --kinet-midnight: 231 44% 11%;
+    --kinet-deep: 240 33% 100%;
+    --kinet-midnight: 231 44% 12%; /* #131628 */
     --kinet-indigo: 234 60% 46%;
     --kinet-text: 0 0% 100%;
-    --kinet-nav: 231 44% 11%;
+    --kinet-nav: 231 44% 12%; /* #131628 */
     --kinet-border: 231 30% 85%;
     --kinet-glow: 234 60% 46% / 0.3;
   }
