@@ -16,10 +16,10 @@ const Index = () => {
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: `
-            linear-gradient(to right, hsl(var(--foreground) / 0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--foreground) / 0.03) 1px, transparent 1px)
+            linear-gradient(to right, hsl(var(--foreground) / 0.015) 1px, transparent 1px),
+            linear-gradient(to bottom, hsl(var(--foreground) / 0.015) 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px'
+          backgroundSize: '32px 32px'
         }}
       />
       <Header />
