@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 const Hero = () => {
   return (
-    <section className="pt-24 md:pt-28 pb-16 md:pb-20 bg-background relative overflow-hidden">
+    <section className="pt-24 md:pt-28 pb-16 md:pb-20 relative overflow-hidden">
 
       {/* Content */}
       <div className="container mx-auto px-6 relative z-10">
