@@ -11,19 +11,19 @@ import Footer from '@/components/Footer';
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-      {/* Subtle grid background */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, hsl(var(--foreground) / 0.015) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--foreground) / 0.015) 1px, transparent 1px)
-          `,
-          backgroundSize: '32px 32px'
-        }}
-      />
       <Header />
-      <main>
+      <main className="relative">
+        {/* Subtle grid background */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, hsl(var(--foreground) / 0.015) 1px, transparent 1px),
+              linear-gradient(to bottom, hsl(var(--foreground) / 0.015) 1px, transparent 1px)
+            `,
+            backgroundSize: '32px 32px'
+          }}
+        />
         <Hero />
         <Services />
         <WhyKinet />
