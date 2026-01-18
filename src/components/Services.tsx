@@ -26,7 +26,7 @@ const pricingTiers = [
     price: "$4,497",
     serviceId: "mvp-startup",
     features: [
-      "3-4 core features",
+      "End-to-end functionality",
       "User authentication",
       "Database integration",
       "Payment processing",
@@ -49,6 +49,7 @@ const pricingTiers = [
       "Ongoing support",
     ],
     highlighted: false,
+    badge: "Premium",
   },
 ];
 
