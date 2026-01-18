@@ -33,7 +33,7 @@ const pricingTiers = [
       "Free emergency fixes for 6 months",
     ],
     highlighted: true,
-    badge: "Most Popular",
+    badge: "Popular",
   },
   {
     title: "Full-Scale Applications",
