@@ -2,14 +2,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import cursorLogo from '@/assets/cursor-logo.ico';
+import lovableLogo from '@/assets/lovable-logo.ico';
 import opencodeLogo from '@/assets/opencode-logo.ico';
-
-const LovableLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-10 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" rx="20" fill="#1a1a2e"/>
-    <path d="M50 75 C50 75 20 55 20 35 C20 25 28 18 38 20 C43 21 47 24 50 28 C53 24 57 21 62 20 C72 18 80 25 80 35 C80 55 50 75 50 75Z" fill="#ff4785"/>
-  </svg>
-);
 
 // Technology logos as simple SVG components
 const ReactLogo = () => (
@@ -96,9 +90,9 @@ const technologies = [
 ];
 
 const aiTools = [
-  { name: 'Cursor AI', logo: cursorLogo, isImg: true },
-  { name: 'Lovable', logo: null, isImg: false, Logo: LovableLogo },
-  { name: 'OpenCode', logo: opencodeLogo, isImg: true },
+  { name: 'Cursor AI', logo: cursorLogo },
+  { name: 'Lovable', logo: lovableLogo },
+  { name: 'OpenCode', logo: opencodeLogo },
 ];
 
 const TechStack = () => {
@@ -167,10 +161,7 @@ const TechStack = () => {
                 className="card-glass flex flex-col items-center justify-center py-6 px-4 group"
               >
                 <div className="group-hover:scale-110 transform transition-transform">
-                  {tool.isImg
-                    ? <img src={tool.logo!} alt={tool.name} className="w-10 h-10" />
-                    : tool.Logo && <tool.Logo />
-                  }
+                  <img src={tool.logo} alt={tool.name} className="w-10 h-10" />
                 </div>
                 <span className="mt-3 text-sm font-medium text-foreground">
                   {tool.name}
