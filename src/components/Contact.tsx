@@ -10,6 +10,7 @@ interface FormData {
   company: string;
   projectType: string;
   message: string;
+  website: string;
 }
 
 interface FormErrors {
@@ -30,6 +31,7 @@ const Contact = () => {
     company: '',
     projectType: '',
     message: '',
+    website: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -105,19 +107,42 @@ const Contact = () => {
     if (!validateForm()) return;
     
     setIsSubmitting(true);
-    
-    // Simulate submission delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
-    
-    // Reset form after success
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', company: '', projectType: '', message: '' });
-      setTouched({});
-    }, 4000);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result?.success) {
+        throw new Error('Failed to send');
+      }
+
+      setSubmitted(true);
+
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          projectType: '',
+          message: '',
+          website: '',
+        });
+        setTouched({});
+      }, 4000);
+    } catch (error) {
+      console.error('Submission failed:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -156,6 +181,14 @@ const Contact = () => {
           className="max-w-xl mx-auto"
         >
           <form onSubmit={handleSubmit} className="space-y-5">
+            <input
+              type="text"
+              name="website"
+              style={{ display: 'none' }}
+              onChange={(e) => handleChange('website', e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
             {/* Name & Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
