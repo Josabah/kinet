@@ -47,7 +47,7 @@ const Contact = () => {
         }
       }
     };
-    
+
     updateService();
     window.addEventListener('hashchange', updateService);
     return () => window.removeEventListener('hashchange', updateService);
@@ -59,29 +59,29 @@ const Contact = () => {
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!validateEmail(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
-    
+
     if (!formData.projectType) {
       newErrors.projectType = 'Please select a project type';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -100,12 +100,12 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Mark all fields as touched
     setTouched({ name: true, email: true, projectType: true, message: true });
-    
+
     if (!validateForm()) return;
-    
+
     setIsSubmitting(true);
 
     try {
@@ -148,7 +148,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-16 md:py-20 relative overflow-hidden">
       {/* Background Elements */}
-      <div 
+      <div
         className="absolute inset-0"
         style={{
           background: 'radial-gradient(ellipse 50% 80% at 80% 20%, hsl(var(--kinet-indigo) / 0.06), transparent)',
@@ -298,9 +298,8 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting || submitted}
-              className={`btn-primary w-full flex items-center justify-center gap-2 transition-all duration-300 ${
-                submitted ? 'bg-green-600 border-green-600' : ''
-              } ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
+              className={`btn-primary w-full flex items-center justify-center gap-2 transition-all duration-300 ${submitted ? 'bg-green-600 border-green-600' : ''
+                } ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
             >
               {submitted ? (
                 <>
