@@ -98,6 +98,19 @@ const Contact = () => {
     }
   };
 
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      company: '',
+      projectType: '',
+      message: '',
+      website: '',
+    });
+    setTouched({});
+    setErrors({});
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -124,18 +137,10 @@ const Contact = () => {
       }
 
       setSubmitted(true);
+      resetForm();
 
       setTimeout(() => {
         setSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          projectType: '',
-          message: '',
-          website: '',
-        });
-        setTouched({});
       }, 4000);
     } catch (error) {
       console.error('Submission failed:', error);
@@ -315,6 +320,20 @@ const Contact = () => {
                 'Send Message'
               )}
             </button>
+            {submitted && (
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground mb-3">
+                  Thanks for reaching out. Want to send another message?
+                </p>
+                <button
+                  type="button"
+                  className="text-sm font-medium text-primary hover:text-primary/80 transition"
+                  onClick={() => setSubmitted(false)}
+                >
+                  Send another message
+                </button>
+              </div>
+            )}
           </form>
         </motion.div>
       </div>
