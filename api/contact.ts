@@ -28,7 +28,10 @@ export default async function handler(
         const to = process.env.CONTACT_EMAIL_TO;
         if (!to) {
             console.error('CONTACT_EMAIL_TO is not set');
-            return res.status(500).json({ success: false });
+            return res.status(500).json({
+                success: false,
+                message: 'Something went wrong on our end. Please try again later.',
+            });
         }
 
         await resend.emails.send({
@@ -50,7 +53,10 @@ export default async function handler(
         return res.status(200).json({ success: true });
 
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ success: false });
+        console.error('Contact API error:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong on our end. Please try again later.',
+        });
     }
 }

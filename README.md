@@ -30,13 +30,23 @@ npm run preview
 ## Project Structure
 
 ```
-src/
-├── components/     # UI components
-├── pages/          # Page components
-├── hooks/          # Custom React hooks
-├── lib/            # Utility functions
-├── assets/         # Static assets
-└── index.css       # Global styles
+├── api/
+│   └── contact.ts          # Vercel serverless handler (contact form)
+├── public/                 # Static assets (sitemap, robots, favicon)
+├── src/
+│   ├── components/         # Feature components (Header, Hero, Services, etc.)
+│   │   └── ui/             # shadcn/ui primitives
+│   ├── pages/              # Route pages (Index, NotFound)
+│   ├── hooks/              # React hooks (use-toast, use-mobile)
+│   ├── lib/                # Utilities (e.g. cn)
+│   ├── assets/             # Images and static assets
+│   ├── test/               # Vitest setup
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css           # Global styles
+├── index.html
+├── vercel.json             # SPA rewrites for client-side routing
+└── .env.example            # Env var template (copy to .env)
 ```
 
 ## Environment Variables
@@ -50,6 +60,8 @@ The contact form uses a serverless API (e.g. Vercel) and [Resend](https://resend
 | `CONTACT_EMAIL_FROM` | No | Sender address (default: `contact@kinetsolutions.dev`) |
 
 Copy `.env.example` to `.env` and fill in the values. Never commit `.env`.
+
+To test the contact form locally, run `vercel dev` instead of `npm run dev` so the `/api/contact` serverless function is available. With `npm run dev` only, the form will show a connection error because the API is not running.
 
 ## Deployment
 
