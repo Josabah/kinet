@@ -38,20 +38,12 @@ const Contact = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const updateService = () => {
-      const hash = window.location.hash;
-      if (hash.includes('service=')) {
-        const service = hash.split('service=')[1];
-        if (service) {
-          setFormData(prev => ({ ...prev, projectType: service }));
-        }
-      }
-    };
-
-    updateService();
-    window.addEventListener('hashchange', updateService);
-    return () => window.removeEventListener('hashchange', updateService);
-  }, [location.hash]);
+    const params = new URLSearchParams(location.search);
+    const service = params.get('service');
+    if (service) {
+      setFormData(prev => ({ ...prev, projectType: service }));
+    }
+  }, [location.search]);
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

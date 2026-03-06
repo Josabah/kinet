@@ -24,9 +24,16 @@ export default async function handler(
             return res.status(400).json({ success: false });
         }
 
+        const from = process.env.CONTACT_EMAIL_FROM ?? 'contact@kinetsolutions.dev';
+        const to = process.env.CONTACT_EMAIL_TO;
+        if (!to) {
+            console.error('CONTACT_EMAIL_TO is not set');
+            return res.status(500).json({ success: false });
+        }
+
         await resend.emails.send({
-            from: 'contact@kinetsolutions.dev',
-            to: 'amareytesfa@gmail.com',
+            from,
+            to,
             replyTo: email,
             subject: `New Inquiry - ${projectType}`,
             html: `

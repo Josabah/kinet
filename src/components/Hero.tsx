@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 const Hero = () => {
@@ -83,13 +84,13 @@ const Hero = () => {
             }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#contact" className="btn-primary inline-flex items-center gap-2 group">
+            <Link to="/contact" className="btn-primary inline-flex items-center gap-2 group">
               Get Started
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a href="#process" className="btn-outline">
+            </Link>
+            <Link to="/process" className="btn-outline">
               See Our Process
-            </a>
+            </Link>
           </motion.div>
         </div>
 

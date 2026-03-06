@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -151,19 +152,8 @@ const Services = () => {
               </ul>
 
               {/* CTA Button */}
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                    // Update URL hash with service parameter
-                    window.history.pushState(null, '', `#contact?service=${tier.serviceId}`);
-                    // Dispatch a hashchange event so Contact component picks it up
-                    window.dispatchEvent(new HashChangeEvent('hashchange'));
-                  }
-                }}
+              <Link
+                to={`/contact?service=${tier.serviceId}`}
                 className={`mt-8 block text-center py-3 px-6 rounded-lg font-medium transition-all duration-150 ${
                   tier.highlighted
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -171,7 +161,7 @@ const Services = () => {
                 }`}
               >
                 Get Started
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>

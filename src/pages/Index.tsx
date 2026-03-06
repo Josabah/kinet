@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
@@ -8,7 +10,27 @@ import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
+const PATH_TO_SECTION_ID: Record<string, string> = {
+  '/services': 'services',
+  '/process': 'process',
+  '/tech': 'tech',
+  '/why-kinet': 'why-kinet',
+  '/contact': 'contact',
+};
+
 const Index = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const sectionId = PATH_TO_SECTION_ID[pathname];
+    if (sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
       <Header />

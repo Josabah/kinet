@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -6,9 +7,9 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'Solutions', href: '#services' },
-    { label: 'Process', href: '#process' },
-    { label: 'Tech Stack', href: '#tech' },
+    { label: 'Solutions', to: '/services' },
+    { label: 'Process', to: '/process' },
+    { label: 'Tech Stack', to: '/tech' },
   ];
 
   const handleLinkClick = () => {
@@ -25,35 +26,35 @@ const Header = () => {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="text-2xl font-display font-bold text-white tracking-tight">
+          <Link to="/" className="text-2xl font-display font-bold text-white tracking-tight">
             Kinet
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.to}
                 className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="#why-kinet"
+            <Link
+              to="/why-kinet"
               className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200"
             >
               Why Us
-            </a>
-            <a href="#contact" className="btn-primary text-sm">
+            </Link>
+            <Link to="/contact" className="btn-primary text-sm">
               Start Your Vision
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -79,38 +80,47 @@ const Header = () => {
           >
             <nav className="flex flex-col items-center justify-center h-full gap-8 px-6">
               {navLinks.map((link, index) => (
-                <motion.a
+                <motion.div
                   key={link.label}
-                  href={link.href}
-                  onClick={handleLinkClick}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="text-2xl font-display font-semibold text-white hover:text-primary transition-colors"
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    to={link.to}
+                    onClick={handleLinkClick}
+                    className="text-2xl font-display font-semibold text-white hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
-              <motion.a
-                href="#why-kinet"
-                onClick={handleLinkClick}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: navLinks.length * 0.1 }}
-                className="text-2xl font-display font-semibold text-white hover:text-primary transition-colors"
               >
-                Why Us
-              </motion.a>
-              <motion.a
-                href="#contact"
-                onClick={handleLinkClick}
+                <Link
+                  to="/why-kinet"
+                  onClick={handleLinkClick}
+                  className="text-2xl font-display font-semibold text-white hover:text-primary transition-colors"
+                >
+                  Why Us
+                </Link>
+              </motion.div>
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: (navLinks.length + 1) * 0.1 }}
-                className="btn-primary text-lg mt-4"
               >
-                Start Your Vision
-              </motion.a>
+                <Link
+                  to="/contact"
+                  onClick={handleLinkClick}
+                  className="btn-primary text-lg mt-4"
+                >
+                  Start Your Vision
+                </Link>
+              </motion.div>
             </nav>
           </motion.div>
         )}
