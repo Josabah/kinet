@@ -10,16 +10,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Mail, href: 'mailto:yosefabay03@gmail.com', label: 'Email' },
+    { icon: Mail, href: 'mailto:contact@kinetsolutions.dev', label: 'Email' },
     { icon: XLogo, href: 'https://x.com/yosefbabay', label: 'X' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/yoseph-abay', label: 'LinkedIn' },
     { icon: Github, href: 'https://github.com/josabah', label: 'GitHub' },
   ];
 
-  const footerLinks = [
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Terms of Service', href: '/terms' },
-  ];
+  const footerLinks = [{ label: 'Contact us', href: '/contact' }];
 
   return (
     <footer className="py-12 bg-kinet-nav">

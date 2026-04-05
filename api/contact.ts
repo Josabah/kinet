@@ -24,9 +24,12 @@ export default async function handler(
             return res.status(400).json({ success: false });
         }
 
+        const from = process.env.CONTACT_EMAIL_FROM ?? 'contact@kinetsolutions.dev';
+        const to = process.env.CONTACT_EMAIL_TO ?? 'contact@kinetsolutions.dev';
+
         await resend.emails.send({
-            from: 'contact@kinetsolutions.dev',
-            to: 'amareytesfa@gmail.com',
+            from,
+            to,
             replyTo: email,
             subject: `New Inquiry - ${projectType}`,
             html: `
@@ -43,7 +46,10 @@ export default async function handler(
         return res.status(200).json({ success: true });
 
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ success: false });
+        console.error('Contact API error:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong on our end. Please try again later.',
+        });
     }
 }

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { CheckCircle, Loader2 } from 'lucide-react';
+import { Loader2, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -36,23 +36,16 @@ const Contact = () => {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
   const location = useLocation();
 
   useEffect(() => {
-    const updateService = () => {
-      const hash = window.location.hash;
-      if (hash.includes('service=')) {
-        const service = hash.split('service=')[1];
-        if (service) {
-          setFormData(prev => ({ ...prev, projectType: service }));
-        }
-      }
-    };
-
-    updateService();
-    window.addEventListener('hashchange', updateService);
-    return () => window.removeEventListener('hashchange', updateService);
-  }, [location.hash]);
+    const params = new URLSearchParams(location.search);
+    const service = params.get('service');
+    if (service) {
+      setFormData(prev => ({ ...prev, projectType: service }));
+    }
+  }, [location.search]);
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -114,6 +107,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmissionError(null);
 
     // Mark all fields as touched
     setTouched({ name: true, email: true, projectType: true, message: true });
@@ -131,21 +125,32 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      let result: { success?: boolean; message?: string } = {};
+      try {
+        result = await response.json();
+      } catch {
+        // Non-JSON response (e.g. gateway error page)
+        result = { success: false, message: 'Something went wrong on our end. Please try again later.' };
+      }
 
       if (!response.ok || !result?.success) {
-        throw new Error('Failed to send');
+        const serverMessage =
+          typeof result?.message === 'string' && result.message.trim()
+            ? result.message.trim()
+            : 'Something went wrong on our end. Please try again later.';
+        setSubmissionError(serverMessage);
+        toast.error(serverMessage);
+        return;
       }
 
       setSubmitted(true);
       resetForm();
-
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 4000);
     } catch (error) {
+      // Network error (no response: fetch failed, CORS, or no API running e.g. local dev without vercel dev)
       console.error('Submission failed:', error);
-      toast.error('Something went wrong. Please try again.');
+      const message = "We couldn't send your message. Please check your connection and try again.";
+      setSubmissionError(message);
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -179,25 +184,76 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        {/* Contact Form */}
+        {/* Contact Form / Thank-you view */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-xl mx-auto"
         >
-          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-            <div className="hidden" aria-hidden="true">
-              <input
-                type="text"
-                id="website"
-                name="website"
-                onChange={(e) => handleChange('website', e.target.value)}
-                tabIndex={-1}
-                autoComplete="off"
-              />
-            </div>
-            {/* Name & Email Row */}
+          <AnimatePresence mode="wait">
+            {submitted ? (
+              <motion.div
+                key="thank-you"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.3 }}
+                className="rounded-2xl border border-border bg-card p-8 md:p-10 text-center"
+                aria-live="polite"
+                role="status"
+              >
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-3">
+                  Message received
+                </h3>
+                <p className="text-muted-foreground mb-8">
+                  We've received your message and will get back to you within 24–48 hours.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="text-sm font-medium text-primary hover:text-primary/80 transition underline underline-offset-4"
+                >
+                  Send another message
+                </button>
+              </motion.div>
+            ) : (
+              <motion.form
+                key="form"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.3 }}
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+                {submissionError && (
+                  <div
+                    className="flex items-start gap-3 rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                    role="alert"
+                    aria-live="polite"
+                  >
+                    <p className="flex-1">{submissionError}</p>
+                    <button
+                      type="button"
+                      onClick={() => setSubmissionError(null)}
+                      className="shrink-0 p-1 rounded hover:bg-destructive/20 transition-colors"
+                      aria-label="Dismiss"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+                <fieldset disabled={isSubmitting} className="space-y-5 border-0 p-0 m-0 min-w-0">
+                  <input
+                    type="text"
+                    name="website"
+                    style={{ display: 'none' }}
+                    onChange={(e) => handleChange('website', e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                  {/* Name & Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -211,14 +267,10 @@ const Contact = () => {
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
                   onBlur={() => handleBlur('name')}
-                  aria-invalid={touched.name && !!errors.name}
-                  aria-describedby={touched.name && errors.name ? 'name-error' : undefined}
                   className={`input-dark ${touched.name && errors.name ? 'border-red-500 focus:border-red-500' : ''}`}
                 />
                 {touched.name && errors.name && (
-                  <p id="name-error" className="text-red-500 text-sm mt-1" role="alert">
-                    {errors.name}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
                 )}
               </div>
               <div>
@@ -233,14 +285,10 @@ const Contact = () => {
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
                   onBlur={() => handleBlur('email')}
-                  aria-invalid={touched.email && !!errors.email}
-                  aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
                   className={`input-dark ${touched.email && errors.email ? 'border-red-500 focus:border-red-500' : ''}`}
                 />
                 {touched.email && errors.email && (
-                  <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
-                    {errors.email}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                 )}
               </div>
             </div>
@@ -272,11 +320,9 @@ const Contact = () => {
                 value={formData.projectType}
                 onChange={(e) => handleChange('projectType', e.target.value)}
                 onBlur={() => handleBlur('projectType')}
-                aria-invalid={touched.projectType && !!errors.projectType}
-                aria-describedby={touched.projectType && errors.projectType ? 'projectType-error' : undefined}
                 className={`input-dark appearance-none cursor-pointer ${touched.projectType && errors.projectType ? 'border-red-500 focus:border-red-500' : ''}`}
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23131628'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23efefee'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 1rem center',
                   backgroundSize: '1rem',
@@ -288,9 +334,7 @@ const Contact = () => {
                 <option value="full-scale">Full-Scale Applications</option>
               </select>
               {touched.projectType && errors.projectType && (
-                <p id="projectType-error" className="text-red-500 text-sm mt-1" role="alert">
-                  {errors.projectType}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>
               )}
             </div>
 
@@ -307,54 +351,32 @@ const Contact = () => {
                 value={formData.message}
                 onChange={(e) => handleChange('message', e.target.value)}
                 onBlur={() => handleBlur('message')}
-                aria-invalid={touched.message && !!errors.message}
-                aria-describedby={touched.message && errors.message ? 'message-error' : undefined}
                 className={`input-dark resize-none ${touched.message && errors.message ? 'border-red-500 focus:border-red-500' : ''}`}
               />
               {touched.message && errors.message && (
-                <p id="message-error" className="text-red-500 text-sm mt-1" role="alert">
-                  {errors.message}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
               )}
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting || submitted}
-              aria-busy={isSubmitting}
-              className={`btn-primary w-full min-h-[48px] flex items-center justify-center gap-2 transition-all duration-300 ${submitted ? 'bg-green-600 border-green-600' : ''
-                } ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
-            >
-              {submitted ? (
-                <>
-                  <CheckCircle className="w-5 h-5" />
-                  Message Sent!
-                </>
-              ) : isSubmitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                'Send Message'
-              )}
-            </button>
-            {submitted && (
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-3">
-                  Thanks for reaching out. Want to send another message?
-                </p>
-                <button
-                  type="button"
-                  className="text-sm font-medium text-primary hover:text-primary/80 transition"
-                  onClick={() => setSubmitted(false)}
-                >
-                  Send another message
-                </button>
-              </div>
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`btn-primary w-full flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message'
+                    )}
+                  </button>
+                </fieldset>
+              </motion.form>
             )}
-          </form>
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>

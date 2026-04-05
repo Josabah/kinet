@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
@@ -10,7 +12,28 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SeoJsonLd from '@/components/SeoJsonLd';
 
+const PATH_TO_SECTION_ID: Record<string, string> = {
+  '/services': 'services',
+  '/process': 'process',
+  '/tech': 'tech',
+  '/why-kinet': 'why-kinet',
+  '/faq': 'faq',
+  '/contact': 'contact',
+};
+
 const Index = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const sectionId = PATH_TO_SECTION_ID[pathname];
+    if (sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
       <a href="#main-content" className="skip-link">
