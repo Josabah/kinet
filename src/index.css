@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+/* Fonts: loaded from index.html (preconnect + stylesheet) to avoid render-blocking @import */
 
 @tailwind base;
 @tailwind components;
@@ -6,48 +6,91 @@
 
 @layer base {
   :root {
-    /* Kinet Light Theme */
-    --background: 60 7% 94%; /* #EFEFEE */
-    --foreground: 231 44% 11%;
-    
-    /* Section backgrounds */
-    --section-alt: 240 20% 96%;
-    
+    /*
+     * Brand palette (hex):
+     * Surface light: #eeeeee  |  Ink / chrome: #131628  |  Accent: #2f39ba
+     * Cards and high-contrast text use #000 / #fff where it helps readability.
+     */
+    --background: 0 0% 93.3%;
+    /* #eeeeee */
+    --foreground: 231 36% 12%;
+    /* #131628 */
+
+    /* Section backgrounds, slightly separated from page bg for hierarchy */
+    --section-alt: 231 12% 90%;
+
     --card: 0 0% 100%;
-    --card-foreground: 231 44% 11%;
-    
+    --card-foreground: 231 36% 12%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 231 44% 11%;
-    
-    --primary: 234 60% 46%;
+    --popover-foreground: 231 36% 12%;
+
+    --primary: 235 60% 46%;
+    /* #2f39ba */
     --primary-foreground: 0 0% 100%;
-    
-    --secondary: 231 44% 11%;
+
+    --secondary: 231 36% 12%;
     --secondary-foreground: 0 0% 100%;
-    
-    --muted: 240 20% 96%;
-    --muted-foreground: 231 20% 40%;
-    
-    --accent: 234 60% 46%;
+
+    --muted: 231 12% 92%;
+    --muted-foreground: 231 22% 38%;
+
+    --accent: 235 60% 46%;
     --accent-foreground: 0 0% 100%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
-    --border: 231 30% 85%;
-    --input: 231 30% 90%;
-    --ring: 234 60% 46%;
-    
+
+    --border: 231 18% 82%;
+    --input: 231 14% 88%;
+    --ring: 235 60% 46%;
+
     --radius: 0.75rem;
-    
+
     /* Custom Kinet tokens */
-    --kinet-deep: 240 33% 99%;
-    --kinet-midnight: 231 44% 11%;
-    --kinet-indigo: 234 60% 46%;
-    --kinet-text: 0 0% 100%;
-    --kinet-nav: 231 44% 11%;
-    --kinet-border: 231 30% 85%;
-    --kinet-glow: 234 60% 46% / 0.3;
+    --kinet-deep: 0 0% 93.3%;
+    /* #eeeeee: hero / gradient bases */
+    --kinet-midnight: 231 36% 12%;
+    /* #131628 */
+    --kinet-indigo: 235 60% 46%;
+    /* #2f39ba */
+    --kinet-text: 231 36% 12%;
+    /* aligns with ink; subtle patterns use opacity in components */
+    --kinet-nav: 231 36% 12%;
+    --kinet-border: 231 18% 82%;
+    --kinet-glow: 235 60% 46% / 0.35;
+  }
+
+  /* Class-based dark variant (Tailwind `dark:`): site is light-first; tokens mirror :root until a real dark theme ships */
+  .dark {
+    --background: 0 0% 93.3%;
+    --foreground: 231 36% 12%;
+    --section-alt: 231 12% 90%;
+    --card: 0 0% 100%;
+    --card-foreground: 231 36% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 231 36% 12%;
+    --primary: 235 60% 46%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 231 36% 12%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 231 12% 92%;
+    --muted-foreground: 231 22% 38%;
+    --accent: 235 60% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 231 18% 82%;
+    --input: 231 14% 88%;
+    --ring: 235 60% 46%;
+    --radius: 0.75rem;
+    --kinet-deep: 0 0% 93.3%;
+    --kinet-midnight: 231 36% 12%;
+    --kinet-indigo: 235 60% 46%;
+    --kinet-text: 231 36% 12%;
+    --kinet-nav: 231 36% 12%;
+    --kinet-border: 231 18% 82%;
+    --kinet-glow: 235 60% 46% / 0.35;
   }
 }
 
@@ -55,65 +98,67 @@
   * {
     @apply border-border;
   }
-  
+
   html {
     scroll-behavior: auto;
   }
-  
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: -0.02em;
   }
-  
-  code, pre {
+
+  code,
+  pre {
     font-family: 'JetBrains Mono', monospace;
   }
 }
 
 @layer components {
+  .skip-link {
+    @apply absolute left-4 top-0 z-[100] -translate-y-[calc(100%+0.5rem)] rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-md outline-none transition-transform focus:translate-y-4 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
   .glass {
     @apply bg-card/80 backdrop-blur-md border border-border;
   }
-  
+
   .glass-strong {
     @apply bg-card/90 backdrop-blur-lg border border-border;
   }
-  
+
   .btn-primary {
-    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold
-           border border-primary/80 transition-all duration-300
-           hover:shadow-[0_0_20px_hsl(var(--kinet-glow))] hover:scale-[1.02];
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold border border-primary/80 transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--kinet-glow))] hover:scale-[1.02];
   }
-  
+
   .btn-outline {
-    @apply bg-transparent text-foreground px-6 py-3 rounded-xl font-semibold
-           border border-border transition-all duration-300
-           hover:bg-primary/10 hover:border-primary/80;
+    @apply bg-transparent text-foreground px-6 py-3 rounded-xl font-semibold border border-border transition-all duration-300 hover:bg-primary/10 hover:border-primary/80;
   }
-  
+
   .card-glass {
-    @apply bg-card/60 backdrop-blur-md border border-border rounded-xl p-6
-           transition-all duration-300 hover:border-primary/60 hover:bg-card/80;
+    @apply bg-card/60 backdrop-blur-md border border-border rounded-xl p-6 transition-all duration-300 hover:border-primary/60 hover:bg-card/80;
   }
-  
+
   .input-dark {
-    @apply bg-background border border-border rounded-xl px-4 py-3 w-full
-           text-foreground placeholder:text-muted-foreground/60
-           focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50
-           transition-all duration-200;
+    @apply bg-background border border-border rounded-xl px-4 py-3 w-full text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-200;
   }
-  
+
   .gradient-radial {
     background: radial-gradient(ellipse at center, hsl(var(--kinet-midnight)) 0%, hsl(var(--kinet-deep)) 70%);
   }
-  
+
   .gradient-hero {
-    background: 
+    background:
       radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--kinet-indigo) / 0.15), transparent),
       radial-gradient(ellipse 60% 40% at 80% 60%, hsl(var(--kinet-indigo) / 0.08), transparent),
       hsl(var(--kinet-deep));
@@ -124,26 +169,47 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-  
+
   .animate-pulse-slow {
     animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-  
+
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
   }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 20px hsl(var(--kinet-indigo) / 0.2); }
-  to { box-shadow: 0 0 40px hsl(var(--kinet-indigo) / 0.4); }
+  from {
+    box-shadow: 0 0 20px hsl(var(--kinet-indigo) / 0.2);
+  }
+
+  to {
+    box-shadow: 0 0 40px hsl(var(--kinet-indigo) / 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-float,
+  .animate-pulse-slow,
+  .animate-glow {
+    animation: none !important;
+  }
 }

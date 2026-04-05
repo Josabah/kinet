@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Lightbulb, Cpu, RefreshCw, Rocket } from 'lucide-react';
+import { Lightbulb, Cpu, RefreshCw, Rocket, ShieldCheck } from 'lucide-react';
 
 const steps = [
   {
@@ -13,7 +13,8 @@ const steps = [
   {
     number: '02',
     title: 'AI-Augmented Development',
-    description: 'Rapid prototyping with Lovable, smart code generation and optimization with Cursor AI for accelerated delivery.',
+    description:
+      'Fast, review-driven delivery with AI-assisted workflows and human oversight on architecture, security, and quality at every step.',
     icon: Cpu,
   },
   {
@@ -28,6 +29,13 @@ const steps = [
     description: 'Seamless deployment to global edge networks, ensuring peak performance and infinite scalability.',
     icon: Rocket,
   },
+  {
+    number: '05',
+    title: 'Free emergency fix (3 months)',
+    description:
+      'After go-live, we include three months of priority help for urgent breakages and critical issues, so you are not left on your own when something goes wrong.',
+    icon: ShieldCheck,
+  },
 ];
 
 const Process = () => {
@@ -37,10 +45,10 @@ const Process = () => {
   return (
     <section id="process" className="py-16 md:py-20 relative overflow-hidden">
       {/* Background Pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `radial-gradient(hsl(var(--kinet-text)) 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)`,
           backgroundSize: '40px 40px',
         }}
       />
@@ -75,16 +83,14 @@ const Process = () => {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                } ${index !== 0 ? 'md:mt-16' : ''}`}
+                className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  } ${index !== 0 ? 'md:mt-16' : ''}`}
               >
                 {/* Content Card */}
                 <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                   <div className="card-glass inline-block max-w-md">
-                    <div className={`flex items-center gap-4 mb-4 ${
-                      index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                    }`}>
+                    <div className={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                      }`}>
                       <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
                         <step.icon className="w-5 h-5 text-primary" />
                       </div>

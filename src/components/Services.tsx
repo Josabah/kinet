@@ -86,17 +86,14 @@ const Services = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ 
-                scale: 1.02, 
-                boxShadow: tier.highlighted 
-                  ? "0 25px 50px -12px rgba(0, 0, 0, 0.4)" 
-                  : "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
-                transition: { duration: 0.15 }
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.15 },
               }}
-              className={`relative rounded-2xl p-8 cursor-pointer ${
+              className={`relative rounded-2xl p-8 cursor-pointer transition-shadow duration-150 ${
                 tier.highlighted
-                  ? "bg-foreground text-background"
-                  : "bg-card border border-border hover:border-primary/30"
+                  ? "bg-foreground text-background shadow-lg hover:shadow-2xl hover:shadow-black/40"
+                  : "bg-card border border-border hover:border-primary/30 shadow-sm hover:shadow-xl"
               }`}
             >
               {/* Badge */}

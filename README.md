@@ -39,13 +39,22 @@ src/
 └── index.css       # Global styles
 ```
 
-## Deployment
+## Deployment (Vercel + GitHub)
 
-Build the project and deploy the `dist` folder to any static hosting service.
+This app is built with **Vite** and deployed on **Vercel** from the GitHub repository.
+
+- **Build**: `npm run build` outputs to `dist` (Vercel detects Vite by default).
+- **SPA routing**: [`vercel.json`](vercel.json) rewrites unknown paths to `index.html` so client routes like `/privacy` and `/terms` work on refresh and deep links.
+- **Contact API**: [`api/contact.ts`](api/contact.ts) is a Vercel serverless function. In the Vercel project settings, add **`RESEND_API_KEY`** (and ensure your Resend domain and sender address are verified).
+
+To exercise the contact form **locally** with the API, use the Vercel CLI so `/api/contact` is available (plain `npm run dev` serves only the frontend):
 
 ```sh
-npm run build
+npm run build   # optional sanity check
+vercel dev
 ```
+
+After pushing to GitHub, Vercel redeploys the connected branch automatically.
 
 ## License
 

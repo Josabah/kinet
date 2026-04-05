@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { CheckCircle, Loader2 } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'sonner';
 
 interface FormData {
   name: string;
@@ -144,7 +145,7 @@ const Contact = () => {
       }, 4000);
     } catch (error) {
       console.error('Submission failed:', error);
-      alert('Something went wrong. Please try again.');
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -185,15 +186,17 @@ const Contact = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-xl mx-auto"
         >
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <input
-              type="text"
-              name="website"
-              style={{ display: 'none' }}
-              onChange={(e) => handleChange('website', e.target.value)}
-              tabIndex={-1}
-              autoComplete="off"
-            />
+          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+            <div className="hidden" aria-hidden="true">
+              <input
+                type="text"
+                id="website"
+                name="website"
+                onChange={(e) => handleChange('website', e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             {/* Name & Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
@@ -208,10 +211,14 @@ const Contact = () => {
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
                   onBlur={() => handleBlur('name')}
+                  aria-invalid={touched.name && !!errors.name}
+                  aria-describedby={touched.name && errors.name ? 'name-error' : undefined}
                   className={`input-dark ${touched.name && errors.name ? 'border-red-500 focus:border-red-500' : ''}`}
                 />
                 {touched.name && errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  <p id="name-error" className="text-red-500 text-sm mt-1" role="alert">
+                    {errors.name}
+                  </p>
                 )}
               </div>
               <div>
@@ -226,10 +233,14 @@ const Contact = () => {
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
                   onBlur={() => handleBlur('email')}
+                  aria-invalid={touched.email && !!errors.email}
+                  aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
                   className={`input-dark ${touched.email && errors.email ? 'border-red-500 focus:border-red-500' : ''}`}
                 />
                 {touched.email && errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+                    {errors.email}
+                  </p>
                 )}
               </div>
             </div>
@@ -261,9 +272,11 @@ const Contact = () => {
                 value={formData.projectType}
                 onChange={(e) => handleChange('projectType', e.target.value)}
                 onBlur={() => handleBlur('projectType')}
+                aria-invalid={touched.projectType && !!errors.projectType}
+                aria-describedby={touched.projectType && errors.projectType ? 'projectType-error' : undefined}
                 className={`input-dark appearance-none cursor-pointer ${touched.projectType && errors.projectType ? 'border-red-500 focus:border-red-500' : ''}`}
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23efefee'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23131628'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 1rem center',
                   backgroundSize: '1rem',
@@ -275,7 +288,9 @@ const Contact = () => {
                 <option value="full-scale">Full-Scale Applications</option>
               </select>
               {touched.projectType && errors.projectType && (
-                <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>
+                <p id="projectType-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {errors.projectType}
+                </p>
               )}
             </div>
 
@@ -292,10 +307,14 @@ const Contact = () => {
                 value={formData.message}
                 onChange={(e) => handleChange('message', e.target.value)}
                 onBlur={() => handleBlur('message')}
+                aria-invalid={touched.message && !!errors.message}
+                aria-describedby={touched.message && errors.message ? 'message-error' : undefined}
                 className={`input-dark resize-none ${touched.message && errors.message ? 'border-red-500 focus:border-red-500' : ''}`}
               />
               {touched.message && errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                <p id="message-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {errors.message}
+                </p>
               )}
             </div>
 
@@ -303,7 +322,8 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting || submitted}
-              className={`btn-primary w-full flex items-center justify-center gap-2 transition-all duration-300 ${submitted ? 'bg-green-600 border-green-600' : ''
+              aria-busy={isSubmitting}
+              className={`btn-primary w-full min-h-[48px] flex items-center justify-center gap-2 transition-all duration-300 ${submitted ? 'bg-green-600 border-green-600' : ''
                 } ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
             >
               {submitted ? (

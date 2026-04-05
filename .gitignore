@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Agent skills and local skill metadata (not tracked)
+.agents/
+skills-lock.json
+
+# Accidental nested project copy (never commit)
+kinet/
