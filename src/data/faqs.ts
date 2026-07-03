@@ -5,43 +5,43 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    question: "What services does Kinet offer?",
+    question: 'How much does a project typically cost?',
     answer:
-      "We offer three core services: Branding & Marketing Sites for businesses needing a strong digital presence, MVPs & Startup Solutions for founders ready to validate their ideas quickly, and Full-Scale Applications for enterprises requiring robust, scalable platforms. Check out our Services section above for full details and pricing.",
+      "Every product is different. After a discovery call, we'll give you a clear proposal with scope, timeline, and pricing—no surprises.",
   },
   {
-    question: "How long does a typical project take?",
+    question: 'How long does a project take?',
     answer:
-      "Timelines depend on the service: Branding & Marketing Sites typically take about 1 week. MVPs & Startup projects range from 2-4 weeks depending on complexity and scope. Full-Scale Applications require a custom timeline based on project requirements. We'll provide a detailed schedule during our discovery phase.",
+      "Most projects take between 6–16 weeks, depending on complexity. We'll define milestones before development begins.",
   },
   {
-    question: "What is your development process?",
+    question: 'Can you work with our existing team?',
     answer:
-      "We follow an agile methodology with four key phases: Discovery (understanding your goals), Design (creating wireframes and prototypes), Development (building your solution with regular check-ins), and Launch (deployment and ongoing support). You'll have visibility throughout the entire process.",
+      'Yes. We often collaborate with founders, in-house teams, and external designers instead of replacing them.',
   },
   {
-    question: "Do you offer ongoing support after launch?",
+    question: 'Do you only work with startups?',
     answer:
-      "Absolutely! We offer comprehensive maintenance and support packages to ensure your application stays up-to-date, secure, and performing optimally. This includes bug fixes, security updates, performance monitoring, and feature enhancements.",
+      'No. We work with startups, growing businesses, and established companies that need reliable product engineering.',
   },
   {
-    question: "What technologies do you work with?",
+    question: 'What happens after launch?',
     answer:
-      "We work with modern, industry-leading technologies including React, Next.js, TypeScript, Node.js, PostgreSQL, MongoDB, and cloud platforms like Vercel and Cloudflare. We also leverage AI-powered development tools to accelerate delivery and improve quality.",
+      "Launch is the beginning, not the end. We stay available for improvements, maintenance, and future iterations as your product evolves.",
   },
   {
-    question: "How do you handle project pricing?",
+    question: 'Can you work with our existing technology?',
     answer:
-      "The prices listed in our Services section reflect typical ranges for each tier. However, we understand every project is unique, so pricing can go up or down based on your specific requirements, timeline, and scope. After our initial consultation, we'll provide a transparent proposal tailored to your needs.",
+      "Usually, yes. We prefer modern technologies, but we're comfortable joining existing products when it makes sense.",
   },
   {
-    question: "Can you work with our existing team?",
+    question: 'Do you sign NDAs?',
     answer:
-      "Yes! We frequently collaborate with in-house teams, whether it's augmenting your development capacity, providing specialized expertise, or handling specific project components. We adapt to your workflow and communication preferences.",
+      "Absolutely. If your project requires one, we're happy to sign before discussing the details.",
   },
   {
-    question: "What makes Kinet different from other agencies?",
+    question: 'How do we get started?',
     answer:
-      "We combine technical excellence with AI-augmented workflows, enabling faster delivery without compromising quality. Our small, senior team means you work directly with experts who understand both technology and business strategy.",
+      "Book a discovery call. We'll understand your product, discuss goals, and recommend the best path forward.",
   },
 ];

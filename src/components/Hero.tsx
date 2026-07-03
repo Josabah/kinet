@@ -1,32 +1,13 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
 const Hero = () => {
   return (
-    <section id="hero" className="pt-24 md:pt-28 pb-16 md:pb-20 relative overflow-hidden">
-
-      {/* Content */}
-      <div className="container mx-auto px-6 relative z-10">
+    <section
+      id="hero"
+      className="relative overflow-hidden min-h-[calc(100dvh-3.5rem)] flex items-center py-16 md:py-20"
+    >
+      <div className="container mx-auto px-6 relative z-10 w-full pt-8 md:pt-12">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">AI-Driven Product Studio</span>
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             initial={{
@@ -41,11 +22,9 @@ const Hero = () => {
               duration: 0.7,
               delay: 0.1,
             }}
-            className="text-5xl md:text-7xl font-display font-bold text-foreground leading-tight mb-6"
+            className="text-5xl md:text-7xl font-display font-bold text-heading leading-tight mb-6 text-balance"
           >
-            Accelerate Innovation.
-            <br />
-            <span className="text-primary">Deliver Impeccable Software.</span>
+            Products Founders Rely On
           </motion.h1>
 
           {/* Subheadline */}
@@ -62,13 +41,12 @@ const Hero = () => {
               duration: 0.7,
               delay: 0.2,
             }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Kinet engineers transformative web applications and AI-powered solutions, propelling your vision from
-            concept to market at unparalleled speed.
+            Design and engineering for founders who care about getting it right the first time.
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTA */}
           <motion.div
             initial={{
               opacity: 0,
@@ -82,14 +60,13 @@ const Hero = () => {
               duration: 0.7,
               delay: 0.3,
             }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex justify-center"
           >
-            <Link to="/contact" className="btn-primary inline-flex items-center gap-2 group">
-              Get Started
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link to="/process" className="btn-outline">
-              See Our Process
+            <Link
+              to="/contact"
+              className="btn-primary btn-shimmer inline-flex items-center justify-center min-w-[280px] px-10 py-3.5 text-base"
+            >
+              Discuss your product
             </Link>
           </motion.div>
         </div>

@@ -3,19 +3,18 @@ import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Services from '@/components/Services';
 import WhyKinet from '@/components/WhyKinet';
 import Process from '@/components/Process';
-import TechStack from '@/components/TechStack';
+import Capabilities from '@/components/Capabilities';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SeoJsonLd from '@/components/SeoJsonLd';
 
 const PATH_TO_SECTION_ID: Record<string, string> = {
-  '/services': 'services',
   '/process': 'process',
-  '/tech': 'tech',
+  '/capabilities': 'capabilities',
+  '/tech': 'capabilities',
   '/why-kinet': 'why-kinet',
   '/faq': 'faq',
   '/contact': 'contact',
@@ -35,7 +34,7 @@ const Index = () => {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+    <div className="min-h-screen bg-background text-foreground relative">
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
@@ -63,10 +62,9 @@ const Index = () => {
           }}
         />
         <Hero />
-        <Services />
         <WhyKinet />
         <Process />
-        <TechStack />
+        <Capabilities />
         <FAQ />
         <Contact />
       </main>

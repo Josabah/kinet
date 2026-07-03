@@ -18,6 +18,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Index />} />
           <Route path="/process" element={<Index />} />
+          <Route path="/capabilities" element={<Index />} />
           <Route path="/tech" element={<Index />} />
           <Route path="/why-kinet" element={<Index />} />
           <Route path="/faq" element={<Index />} />

@@ -1,4 +1,11 @@
-/* Fonts: loaded from index.html (preconnect + stylesheet) to avoid render-blocking @import */
+/* Geist Sans (replaces Inter) — bundled from `geist` package */
+@font-face {
+  font-family: "Geist Sans";
+  src: url("../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -8,89 +15,90 @@
   :root {
     /*
      * Brand palette (hex):
-     * Surface light: #eeeeee  |  Ink / chrome: #131628  |  Accent: #2f39ba
-     * Cards and high-contrast text use #000 / #fff where it helps readability.
+     * bg: #FBFBFC  |  head: #101828  |  body: #475467
+     * btn: #111827  |  accent: #2f39ba rgb(47, 57, 186)
      */
-    --background: 0 0% 93.3%;
-    /* #eeeeee */
-    --foreground: 231 36% 12%;
-    /* #131628 */
+    --background: 251 251 252;
+    /* #FBFBFC */
+    --foreground: 71 84 103;
+    /* #475467 body */
+    --heading: 16 24 40;
+    /* #101828 */
 
-    /* Section backgrounds, slightly separated from page bg for hierarchy */
-    --section-alt: 231 12% 90%;
+    --section-alt: 242 244 247;
 
-    --card: 0 0% 100%;
-    --card-foreground: 231 36% 12%;
+    --card: 255 255 255;
+    --card-foreground: 16 24 40;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 231 36% 12%;
+    --popover: 255 255 255;
+    --popover-foreground: 16 24 40;
 
-    --primary: 235 60% 46%;
-    /* #2f39ba */
-    --primary-foreground: 0 0% 100%;
+    --primary: 47 57 186;
+    /* rgb(47, 57, 186) #2f39ba accent */
+    --primary-foreground: 255 255 255;
 
-    --secondary: 231 36% 12%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 16 24 40;
+    --secondary-foreground: 255 255 255;
 
-    --muted: 231 12% 92%;
-    --muted-foreground: 231 22% 38%;
+    --muted: 242 244 247;
+    --muted-foreground: 102 112 133;
 
-    --accent: 235 60% 46%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 47 57 186;
+    --accent-foreground: 255 255 255;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 231 18% 82%;
-    --input: 231 14% 88%;
-    --ring: 235 60% 46%;
+    --border: 228 231 236;
+    --input: 242 244 247;
+    --ring: 47 57 186;
 
     --radius: 0.75rem;
 
-    /* Custom Kinet tokens */
-    --kinet-deep: 0 0% 93.3%;
-    /* #eeeeee: hero / gradient bases */
-    --kinet-midnight: 231 36% 12%;
-    /* #131628 */
-    --kinet-indigo: 235 60% 46%;
-    /* #2f39ba */
-    --kinet-text: 231 36% 12%;
-    /* aligns with ink; subtle patterns use opacity in components */
-    --kinet-nav: 231 36% 12%;
-    --kinet-border: 231 18% 82%;
-    --kinet-glow: 235 60% 46% / 0.35;
+    --kinet-deep: 251 251 252;
+    --kinet-midnight: 16 24 40;
+    --kinet-indigo: 47 57 186;
+    --kinet-text: 71 84 103;
+    --kinet-nav: 16 24 40;
+    --kinet-border: 228 231 236;
+    --kinet-glow: 47 57 186 / 0.25;
+
+    --btn: 17 24 39;
+    /* #111827 */
   }
 
   /* Class-based dark variant (Tailwind `dark:`): site is light-first; tokens mirror :root until a real dark theme ships */
   .dark {
-    --background: 0 0% 93.3%;
-    --foreground: 231 36% 12%;
-    --section-alt: 231 12% 90%;
-    --card: 0 0% 100%;
-    --card-foreground: 231 36% 12%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 231 36% 12%;
-    --primary: 235 60% 46%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 231 36% 12%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 231 12% 92%;
-    --muted-foreground: 231 22% 38%;
-    --accent: 235 60% 46%;
-    --accent-foreground: 0 0% 100%;
+    --background: 251 251 252;
+    --foreground: 71 84 103;
+    --heading: 16 24 40;
+    --section-alt: 242 244 247;
+    --card: 255 255 255;
+    --card-foreground: 16 24 40;
+    --popover: 255 255 255;
+    --popover-foreground: 16 24 40;
+    --primary: 47 57 186;
+    --primary-foreground: 255 255 255;
+    --secondary: 16 24 40;
+    --secondary-foreground: 255 255 255;
+    --muted: 242 244 247;
+    --muted-foreground: 102 112 133;
+    --accent: 47 57 186;
+    --accent-foreground: 255 255 255;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 231 18% 82%;
-    --input: 231 14% 88%;
-    --ring: 235 60% 46%;
+    --border: 228 231 236;
+    --input: 242 244 247;
+    --ring: 47 57 186;
     --radius: 0.75rem;
-    --kinet-deep: 0 0% 93.3%;
-    --kinet-midnight: 231 36% 12%;
-    --kinet-indigo: 235 60% 46%;
-    --kinet-text: 231 36% 12%;
-    --kinet-nav: 231 36% 12%;
-    --kinet-border: 231 18% 82%;
-    --kinet-glow: 235 60% 46% / 0.35;
+    --kinet-deep: 251 251 252;
+    --kinet-midnight: 16 24 40;
+    --kinet-indigo: 47 57 186;
+    --kinet-text: 71 84 103;
+    --kinet-nav: 16 24 40;
+    --kinet-border: 228 231 236;
+    --kinet-glow: 47 57 186 / 0.25;
+    --btn: 17 24 39;
   }
 }
 
@@ -101,11 +109,12 @@
 
   html {
     scroll-behavior: auto;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: "Geist Sans", sans-serif;
   }
 
   h1,
@@ -116,6 +125,7 @@
   h6 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: -0.02em;
+    @apply text-heading;
   }
 
   code,
@@ -138,7 +148,43 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold border border-primary/80 transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--kinet-glow))] hover:scale-[1.02];
+    --btn-color: var(--btn);
+    background-color: rgb(var(--btn-color));
+    color: rgb(255 255 255);
+    border-color: rgb(var(--btn-color) / 0.85);
+    @apply px-6 py-3 rounded-xl font-semibold border transition-all duration-300 hover:scale-[1.02];
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 20px rgb(var(--btn-color) / 0.25);
+  }
+
+  .btn-shimmer {
+    @apply relative overflow-hidden isolate;
+  }
+
+  .btn-shimmer > * {
+    @apply relative z-[1];
+  }
+
+  .btn-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 130%;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      rgb(255 255 255 / 0) 22%,
+      rgb(255 255 255 / 0.05) 38%,
+      rgb(255 255 255 / 0.12) 50%,
+      rgb(255 255 255 / 0.05) 62%,
+      rgb(255 255 255 / 0) 78%,
+      transparent 100%
+    );
+    transform: translateX(-130%);
+    animation: btn-shimmer 6.5s linear infinite;
+    pointer-events: none;
   }
 
   .btn-outline {
@@ -149,19 +195,52 @@
     @apply bg-card/60 backdrop-blur-md border border-border rounded-xl p-6 transition-all duration-300 hover:border-primary/60 hover:bg-card/80;
   }
 
+  .design-pill {
+    @apply relative inline-flex rounded-full p-px overflow-hidden isolate;
+    background: rgb(var(--border));
+    transition: background-color 0.2s ease;
+  }
+
+  .design-pill::before {
+    content: "";
+    position: absolute;
+    inset: -120%;
+    background: conic-gradient(
+      from 0deg,
+      rgb(var(--border)) 0deg,
+      rgb(var(--primary) / 0.15) 60deg,
+      rgb(var(--primary) / 0.85) 120deg,
+      rgb(var(--primary) / 0.2) 180deg,
+      rgb(var(--border)) 240deg,
+      rgb(var(--primary) / 0.15) 300deg,
+      rgb(var(--border)) 360deg
+    );
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .design-pill:hover::before {
+    opacity: 1;
+    animation: design-pill-border-spin 2.5s linear infinite;
+  }
+
+  .design-pill-inner {
+    @apply relative z-[1] inline-flex rounded-full bg-white font-medium text-foreground/75;
+  }
+
   .input-dark {
     @apply bg-background border border-border rounded-xl px-4 py-3 w-full text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-200;
   }
 
   .gradient-radial {
-    background: radial-gradient(ellipse at center, hsl(var(--kinet-midnight)) 0%, hsl(var(--kinet-deep)) 70%);
+    background: radial-gradient(ellipse at center, rgb(var(--kinet-midnight)) 0%, rgb(var(--kinet-deep)) 70%);
   }
 
   .gradient-hero {
     background:
-      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--kinet-indigo) / 0.15), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 60%, hsl(var(--kinet-indigo) / 0.08), transparent),
-      hsl(var(--kinet-deep));
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgb(var(--kinet-indigo) / 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 60%, rgb(var(--kinet-indigo) / 0.08), transparent),
+      rgb(var(--kinet-deep));
   }
 }
 
@@ -197,11 +276,27 @@
 
 @keyframes glow {
   from {
-    box-shadow: 0 0 20px hsl(var(--kinet-indigo) / 0.2);
+    box-shadow: 0 0 20px rgb(var(--kinet-indigo) / 0.2);
   }
 
   to {
-    box-shadow: 0 0 40px hsl(var(--kinet-indigo) / 0.4);
+    box-shadow: 0 0 40px rgb(var(--kinet-indigo) / 0.4);
+  }
+}
+
+@keyframes btn-shimmer {
+  0% {
+    transform: translateX(-130%);
+  }
+
+  100% {
+    transform: translateX(110%);
+  }
+}
+
+@keyframes design-pill-border-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -209,7 +304,9 @@
 
   .animate-float,
   .animate-pulse-slow,
-  .animate-glow {
+  .animate-glow,
+  .btn-shimmer::after,
+  .design-pill::before {
     animation: none !important;
   }
 }

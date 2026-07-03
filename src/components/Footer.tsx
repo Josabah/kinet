@@ -21,9 +21,9 @@ const Footer = () => {
   return (
     <footer className="py-12 bg-kinet-nav">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col items-center justify-center gap-6 text-center">
           {/* Logo & Copyright */}
-          <div className="flex flex-col items-center md:items-start gap-2">
+          <div className="flex flex-col items-center gap-2">
             <a href="/" className="text-xl font-display font-bold text-white min-h-[44px] inline-flex items-center hover:text-white/90 transition-colors">
               Kinet
             </a>

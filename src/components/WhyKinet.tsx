@@ -1,110 +1,103 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { X, Check } from 'lucide-react';
-const comparisons = [{
-  traditional: "6-12 months of development time",
-  kinet: "MVP ready in 2-4 weeks"
-}, {
-  traditional: "$50,000+ for a basic MVP",
-  kinet: "Fixed pricing starting at $997"
-}, {
-  traditional: "Hiring 3-5 developers at $100k+/year each",
-  kinet: "Senior experts handle everything"
-}, {
-  traditional: "Endless meetings and slow progress",
-  kinet: "48-hour updates and rapid iterations"
-}, {
-  traditional: "Outdated tech and technical debt",
-  kinet: "AI-augmented workflows, future-proof stack"
-}, {
-  traditional: "Devs who don't understand business goals",
-  kinet: "Experts in both technology and business strategy"
-}];
+import { cn } from '@/lib/utils';
+
+const comparisons = [
+  {
+    common: 'Build what\u2019s requested',
+    kinet: 'Challenge ideas before writing code',
+  },
+  {
+    common: 'Focus on shipping',
+    kinet: 'Focus on building the right product',
+  },
+  {
+    common: 'Deliver projects',
+    kinet: 'Stay invested after launch',
+  },
+  {
+    common: 'Optimize for deadlines',
+    kinet: 'Optimize for long-term maintainability',
+  },
+  {
+    common: 'Treat development as tasks',
+    kinet: 'Take ownership of outcomes',
+  },
+  {
+    common: 'Build to meet the requirements',
+    kinet: 'Build to support the business behind them',
+  },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const WhyKinet = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: '-100px'
-  });
-  return <section id="why-kinet" className="py-20 md:py-28 relative overflow-hidden">
-      <div ref={ref} className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} animate={isInView ? {
-        opacity: 1,
-        y: 0
-      } : {}} transition={{
-        duration: 0.6
-      }} className="text-center max-w-3xl mx-auto mb-16">
-          
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground">
-            Why <span className="text-primary">Kinet</span>?
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
+
+  return (
+    <section id="why-kinet" className="py-20 md:py-28 lg:py-36 relative">
+      <div ref={ref} className="container mx-auto px-6 relative z-10 max-w-5xl">
+        <motion.header
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="max-w-2xl mx-auto text-center mb-10 md:mb-14"
+        >
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-heading leading-[1.1] tracking-tight mb-5">
+            A different way to build products.
           </h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            Building software is straightforward. Building products people can rely on requires a different mindset.
+          </p>
+        </motion.header>
+
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.06 }}
+          className="grid grid-cols-2 gap-2 md:gap-3 mb-3 md:mb-4 text-center"
+        >
+          <p className="text-xs sm:text-sm font-medium text-foreground/60 tracking-wide">Typical approach</p>
+          <p className="text-xs sm:text-sm font-semibold text-heading tracking-wide">The Kinet approach</p>
         </motion.div>
 
-        {/* Comparison Table */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} animate={isInView ? {
-        opacity: 1,
-        y: 0
-      } : {}} transition={{
-        duration: 0.6,
-        delay: 0.2
-      }} className="max-w-5xl mx-auto">
-          {/* Table Header */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 mb-8">
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground">
-                Traditional Approach
-              </h3>
-            </div>
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-primary">
-                With Kinet
-              </h3>
-            </div>
-          </div>
+        <div className="space-y-2 md:space-y-2.5 max-w-4xl mx-auto">
+          {comparisons.map((item, index) => (
+            <motion.div
+              key={item.common}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              variants={fadeUp}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 + index * 0.05 }}
+              className="grid grid-cols-2 gap-2 md:gap-3"
+            >
+              <div className="flex items-center justify-center rounded-xl md:rounded-2xl border border-border bg-muted/60 px-3.5 py-3.5 sm:px-5 sm:py-4 md:px-6 md:py-5 text-center">
+                <p className="text-[13px] sm:text-sm md:text-base text-foreground/75 leading-snug">{item.common}</p>
+              </div>
 
-          {/* Comparison Rows */}
-          <div className="space-y-6">
-            {comparisons.map((item, index) => <motion.div key={index} initial={{
-            opacity: 0,
-            y: 20
-          }} animate={isInView ? {
-            opacity: 1,
-            y: 0
-          } : {}} transition={{
-            duration: 0.5,
-            delay: 0.1 * index + 0.3
-          }} className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
-                {/* Traditional */}
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-destructive/5 border border-destructive/10">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center">
-                    <X className="w-5 h-5 text-destructive" />
-                  </div>
-                  <p className="text-muted-foreground text-base md:text-lg">
-                    {item.traditional}
-                  </p>
-                </div>
-
-                {/* Kinet */}
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-accent/30 border border-accent/20">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-                    <Check className="w-5 h-5 text-accent-foreground" />
-                  </div>
-                  <p className="text-foreground font-medium text-base md:text-lg">
-                    {item.kinet}
-                  </p>
-                </div>
-              </motion.div>)}
-          </div>
-        </motion.div>
+              <div
+                className={cn(
+                  'flex items-center justify-center rounded-xl md:rounded-2xl border border-border bg-card px-3.5 py-3.5 sm:px-5 sm:py-4 md:px-6 md:py-5 text-center',
+                  'border-l-2 border-l-primary/35',
+                  'transition-colors duration-200 hover:bg-primary/[0.02]',
+                )}
+              >
+                <p className="text-[13px] sm:text-sm md:text-base text-heading font-semibold leading-snug">
+                  {item.kinet}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default WhyKinet;

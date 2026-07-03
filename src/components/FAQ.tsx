@@ -23,7 +23,7 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-heading mb-6">
             Frequently Asked
             <br />
             <span className="text-primary">Questions</span>
@@ -53,10 +53,10 @@ const FAQ = () => {
                   value={`item-${index}`} 
                   className="card-glass border-none px-6 rounded-xl overflow-hidden"
                 >
-                  <AccordionTrigger className="text-left text-foreground hover:text-primary hover:no-underline py-5 text-base md:text-lg font-medium">
+                  <AccordionTrigger className="text-center justify-center text-foreground hover:text-primary hover:no-underline py-5 text-base md:text-lg font-medium [&>svg]:ml-2">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 text-sm md:text-base leading-relaxed">
+                  <AccordionContent className="text-center text-muted-foreground pb-5 text-sm md:text-base leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
