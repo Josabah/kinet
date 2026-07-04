@@ -110,10 +110,11 @@
   html {
     scroll-behavior: auto;
     overflow-x: clip;
+    scrollbar-gutter: stable;
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-body text-foreground antialiased;
     font-family: "Geist Sans", sans-serif;
   }
 
@@ -124,8 +125,31 @@
   h5,
   h6 {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: -0.02em;
     @apply text-heading;
+  }
+
+  h1 {
+    @apply text-h1;
+  }
+
+  h2 {
+    @apply text-h2;
+  }
+
+  h3 {
+    @apply text-h3;
+  }
+
+  h4 {
+    @apply text-h4;
+  }
+
+  h5 {
+    @apply text-h5;
+  }
+
+  h6 {
+    @apply text-h6;
   }
 
   code,
@@ -135,8 +159,20 @@
 }
 
 @layer components {
-  .skip-link {
-    @apply absolute left-4 top-0 z-[100] -translate-y-[calc(100%+0.5rem)] rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-md outline-none transition-transform focus:translate-y-4 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  .section-padding {
+    @apply py-24 md:py-32;
+  }
+
+  .section-header {
+    @apply mb-12 md:mb-16;
+  }
+
+  .section-title {
+    @apply font-display font-bold text-heading text-balance mb-6;
+  }
+
+  .section-lead {
+    @apply text-body text-muted-foreground max-w-prose mx-auto;
   }
 
   .glass {
@@ -152,7 +188,7 @@
     background-color: rgb(var(--btn-color));
     color: rgb(255 255 255);
     border-color: rgb(var(--btn-color) / 0.85);
-    @apply px-6 py-3 rounded-xl font-semibold border transition-all duration-300 hover:scale-[1.02];
+    @apply inline-flex items-center justify-center min-h-12 px-6 text-body font-semibold rounded-xl border transition-all duration-300 hover:scale-[1.02];
   }
 
   .btn-primary:hover {
@@ -188,7 +224,7 @@
   }
 
   .btn-outline {
-    @apply bg-transparent text-foreground px-6 py-3 rounded-xl font-semibold border border-border transition-all duration-300 hover:bg-primary/10 hover:border-primary/80;
+    @apply inline-flex items-center justify-center min-h-12 px-6 text-body font-semibold bg-transparent text-foreground rounded-xl border border-border transition-all duration-300 hover:bg-primary/10 hover:border-primary/80;
   }
 
   .card-glass {

@@ -5,11 +5,6 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    question: 'How much does a project typically cost?',
-    answer:
-      "Every product is different. After a discovery call, we'll give you a clear proposal with scope, timeline, and pricing—no surprises.",
-  },
-  {
     question: 'How long does a project take?',
     answer:
       "Most projects take between 6–16 weeks, depending on complexity. We'll define milestones before development begins.",
@@ -18,6 +13,11 @@ export const faqs: FaqItem[] = [
     question: 'Can you work with our existing team?',
     answer:
       'Yes. We often collaborate with founders, in-house teams, and external designers instead of replacing them.',
+  },
+  {
+    question: 'How much does a project typically cost?',
+    answer:
+      "Every product is different. After a discovery call, we'll give you a clear proposal with scope, timeline, and pricing—no surprises.",
   },
   {
     question: 'Do you only work with startups?',

@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import { cn } from '@/lib/utils';
 
 type BrandIconProps = { className?: string };
 
@@ -13,123 +14,64 @@ export const StripeIcon = ({ className }: BrandIconProps) => (
   </svg>
 );
 
-/** REST — client ↔ server request/response */
-export const RestApiIcon = ({ className }: BrandIconProps) => {
-  const uid = useId().replace(/:/g, '');
+/** REST API — cloud + gear mark */
+export const RestApiIcon = ({ className }: BrandIconProps) => (
+  <img
+    src="/icons/rest-api.png"
+    alt=""
+    className={cn(className, 'object-contain')}
+    aria-hidden
+    draggable={false}
+  />
+);
 
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker
-          id={`rest-req-${uid}`}
-          viewBox="0 0 6 6"
-          refX="5"
-          refY="3"
-          markerWidth="3.5"
-          markerHeight="3.5"
-          orient="auto"
-        >
-          <path d="M0 0 L6 3 L0 6 Z" fill="#475467" />
-        </marker>
-        <marker
-          id={`rest-res-${uid}`}
-          viewBox="0 0 6 6"
-          refX="5"
-          refY="3"
-          markerWidth="3.5"
-          markerHeight="3.5"
-          orient="auto"
-        >
-          <path d="M0 0 L6 3 L0 6 Z" fill="#475467" />
-        </marker>
-      </defs>
-      <rect x="3" y="7.5" width="5.5" height="9" rx="1.25" fill="none" stroke="#475467" strokeWidth="1.25" />
-      <rect x="15.5" y="7.5" width="5.5" height="9" rx="1.25" fill="none" stroke="#475467" strokeWidth="1.25" />
-      <line x1="6.75" y1="10.5" x2="10.5" y2="10.5" stroke="#475467" strokeWidth="1.1" strokeLinecap="round" />
-      <line x1="6.75" y1="13.5" x2="10.5" y2="13.5" stroke="#475467" strokeWidth="1.1" strokeLinecap="round" />
-      <line x1="13.5" y1="10.5" x2="17.25" y2="10.5" stroke="#475467" strokeWidth="1.1" strokeLinecap="round" />
-      <line x1="13.5" y1="13.5" x2="17.25" y2="13.5" stroke="#475467" strokeWidth="1.1" strokeLinecap="round" />
-      <path
-        d="M9.25 11.25 H14.75"
-        fill="none"
-        stroke="#475467"
-        strokeWidth="1.25"
-        strokeLinecap="round"
-        markerEnd={`url(#rest-req-${uid})`}
-      />
-      <path
-        d="M14.75 12.75 H9.25"
-        fill="none"
-        stroke="#475467"
-        strokeWidth="1.25"
-        strokeLinecap="round"
-        strokeDasharray="2 1.75"
-        markerEnd={`url(#rest-res-${uid})`}
-      />
-    </svg>
-  );
-};
+/** CI/CD — interlocking infinity loops with CI / CD labels (monochrome, thin stroke) */
+export const CiCdIcon = ({ className }: BrandIconProps) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden xmlns="http://www.w3.org/2000/svg">
+    {/* Left loop — CI */}
+    <path
+      d="M 12 12 C 12 5.1, 3.9 5.1, 3.9 12 C 3.9 18.9, 12 18.9, 12 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
 
-/** CI/CD — minimalist infinity loop with CI left, CD right */
-export const CiCdIcon = ({ className }: BrandIconProps) => {
-  const uid = useId().replace(/:/g, '');
+    {/* Right loop — CD */}
+    <path
+      d="M 12 12 C 12 18.9, 20.1 18.9, 20.1 12 C 20.1 5.1, 12 5.1, 12 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
 
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker
-          id={`cicd-arrow-${uid}`}
-          viewBox="0 0 6 6"
-          refX="5"
-          refY="3"
-          markerWidth="3.5"
-          markerHeight="3.5"
-          orient="auto"
-        >
-          <path d="M0 0 L6 3 L0 6 Z" fill="#475467" />
-        </marker>
-      </defs>
-      <path
-        d="M12 12 C12 10.2 10.6 8.4 8.4 7.9 C6.1 7.4 4.2 8.8 4.2 11.2 C4.2 13.4 5.8 15.1 8.1 15.1 C10.1 15.1 11.6 13.8 12 12"
-        fill="none"
-        stroke="#475467"
-        strokeWidth="1.35"
-        strokeLinecap="round"
-        markerEnd={`url(#cicd-arrow-${uid})`}
-      />
-      <path
-        d="M12 12 C12 10.2 13.4 8.4 15.6 7.9 C17.9 7.4 19.8 8.8 19.8 11.2 C19.8 13.4 18.2 15.1 15.9 15.1 C13.9 15.1 12.4 13.8 12 12"
-        fill="none"
-        stroke="#475467"
-        strokeWidth="1.35"
-        strokeLinecap="round"
-        markerEnd={`url(#cicd-arrow-${uid})`}
-      />
-      <text
-        x="8.1"
-        y="12.6"
-        textAnchor="middle"
-        fontSize="3.4"
-        fontWeight="600"
-        fill="#475467"
-        fontFamily="Geist Sans, system-ui, sans-serif"
-      >
-        CI
-      </text>
-      <text
-        x="15.9"
-        y="12.6"
-        textAnchor="middle"
-        fontSize="3.4"
-        fontWeight="600"
-        fill="#475467"
-        fontFamily="Geist Sans, system-ui, sans-serif"
-      >
-        CD
-      </text>
-    </svg>
-  );
-};
+    <text
+      x="8.05"
+      y="12.45"
+      textAnchor="middle"
+      fontSize="3"
+      fontWeight="600"
+      fill="currentColor"
+      fontFamily="system-ui, -apple-system, sans-serif"
+    >
+      CI
+    </text>
+    <text
+      x="15.95"
+      y="12.45"
+      textAnchor="middle"
+      fontSize="3"
+      fontWeight="600"
+      fill="currentColor"
+      fontFamily="system-ui, -apple-system, sans-serif"
+    >
+      CD
+    </text>
+  </svg>
+);
 
 export const CloudflareIcon = ({ className }: BrandIconProps) => (
   <svg viewBox="0 0 32 32" className={className} aria-hidden xmlns="http://www.w3.org/2000/svg">

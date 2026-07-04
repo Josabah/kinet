@@ -46,27 +46,27 @@ const TIMELINE_LINE_LEFT = TIMELINE_RAIL_WIDTH / 2;
 
 const LeftPanelContent = () => (
   <>
-    <h2 className="text-5xl md:text-6xl font-display font-bold text-heading mb-6 text-balance leading-[1.1]">
+    <h2 className="text-h2 md:text-h1 font-display font-bold text-heading text-balance mb-6">
       How We Work
     </h2>
-    <p className="text-xl md:text-2xl text-heading font-medium mb-5 leading-snug">
+    <p className="text-lead text-heading font-medium mb-4">
       Thoughtful by design. Reliable by engineering.
     </p>
-    <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-lg">
+    <p className="text-body text-muted-foreground max-w-prose-sm">
       Every product is different, but our approach stays the same.
     </p>
   </>
 );
 
 const MobileIntroHeader = () => (
-  <div className="text-center max-w-md mx-auto space-y-2">
-    <h2 className="text-3xl sm:text-4xl font-display font-bold text-heading leading-tight text-balance">
+  <div className="text-center max-w-prose-sm mx-auto space-y-4">
+    <h2 className="text-h3 sm:text-h2 font-display font-bold text-heading text-balance">
       How We Work
     </h2>
-    <p className="text-base sm:text-lg text-heading font-medium leading-snug">
+    <p className="text-body sm:text-lead text-heading font-medium">
       Thoughtful by design. Reliable by engineering.
     </p>
-    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+    <p className="text-body text-muted-foreground">
       Every product is different, but our approach stays the same.
     </p>
   </div>
@@ -201,15 +201,15 @@ const Process = () => {
   }, [updateLayout]);
 
   return (
-    <section id="process" ref={sectionRef} className="py-12 md:py-20 lg:py-32 relative">
+    <section id="process" ref={sectionRef} className="section-padding relative">
       <div className="container mx-auto px-6 relative z-10">
         {/* Mobile only — sticky intro stays below site header while steps scroll */}
-        <div className="lg:hidden sticky top-14 z-20 -mx-6 px-6 py-5 mb-6 bg-background/95 backdrop-blur-sm border-b border-border/40">
+        <div className="lg:hidden sticky top-16 z-20 -mx-6 px-6 py-6 mb-8 bg-background/95 backdrop-blur-sm border-b border-border/40">
           <MobileIntroHeader />
         </div>
 
         <div className="mx-auto w-full max-w-5xl xl:max-w-6xl lg:px-8 xl:px-12">
-          <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-12 xl:gap-20 lg:items-stretch">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-12 xl:gap-16 lg:items-stretch">
           <div ref={leftSlotRef} className="relative max-w-2xl self-stretch hidden lg:block">
             <div className="invisible pointer-events-none select-none" aria-hidden="true">
               <div className="max-w-2xl">
@@ -275,20 +275,20 @@ const Process = () => {
 
                       <div
                         className={cn(
-                          'max-w-2xl rounded-3xl bg-[#FAF7F5] p-6 sm:p-8 md:p-10 lg:p-12 transition-all duration-500 ease-out will-change-[filter,opacity,transform]',
-                          index === 0 ? 'mb-2' : 'my-3',
+                          'max-w-2xl rounded-3xl bg-[#FAF7F5] p-6 sm:p-8 lg:p-12 transition-all duration-500 ease-out will-change-[filter,opacity,transform]',
+                          index === 0 ? 'mb-2' : 'my-4',
                           !reduceMotion && !isActive && 'opacity-40 blur-[3px] scale-[0.99]',
                           !reduceMotion && isActive && 'opacity-100 blur-0 scale-100',
                           reduceMotion && 'opacity-100 blur-0',
                         )}
                       >
-                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-heading mb-3 md:mb-5 leading-tight">
-                          <span className="text-muted-foreground/80 font-medium mr-3 sm:mr-4 text-xl sm:text-2xl md:text-3xl">
+                        <h3 className="text-h4 sm:text-h3 font-display font-bold text-heading mb-4">
+                          <span className="text-muted-foreground/80 font-medium mr-4 text-h5 sm:text-h4">
                             {step.number}
                           </span>
                           {step.title}
                         </h3>
-                        <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
+                        <p className="text-body sm:text-lead text-muted-foreground max-w-prose-sm">
                           {step.description}
                         </p>
                       </div>

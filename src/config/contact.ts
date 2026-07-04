@@ -1,9 +1,10 @@
 /** Direct contact channels — update URLs as needed */
 export const CONTACT_DIRECT = {
-  email: 'hello@kinet.so',
+  email: 'contact@kinetsolutions.dev',
+  phone: '+251994819513',
   whatsapp:
     import.meta.env.VITE_WHATSAPP_URL ??
-    "https://api.whatsapp.com/send?text=Hi%20Kinet%2C%20I'd%20like%20to%20discuss%20a%20project.",
+    "https://wa.me/251994819513?text=Hi%20Kinet%2C%20I'd%20like%20to%20discuss%20a%20project.",
   calendar: import.meta.env.VITE_CALENDAR_URL ?? 'https://cal.com/kinet/discovery',
 } as const;
 

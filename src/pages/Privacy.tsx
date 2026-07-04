@@ -5,9 +5,6 @@ import Footer from '@/components/Footer';
 
 const Privacy = () => (
   <div className="min-h-screen bg-background text-foreground relative">
-    <a href="#main-content" className="skip-link">
-      Skip to main content
-    </a>
     <Helmet>
       <title>Privacy | Kinet</title>
       <meta

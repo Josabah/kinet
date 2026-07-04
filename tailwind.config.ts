@@ -8,7 +8,7 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
         "2xl": "1400px",
       },
@@ -18,6 +18,21 @@ export default {
         sans: ['"Geist Sans"', 'sans-serif'],
         display: ['Plus Jakarta Sans', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+      },
+      fontSize: {
+        body: ['1rem', { lineHeight: '1.5', letterSpacing: '0' }],
+        lead: ['1.25rem', { lineHeight: '1.5', letterSpacing: '0' }],
+        h6: ['1.25rem', { lineHeight: '1.3', letterSpacing: '-0.005em' }],
+        h5: ['1.5625rem', { lineHeight: '1.3', letterSpacing: '-0.005em' }],
+        h4: ['1.9375rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+        h3: ['2.4375rem', { lineHeight: '1.2', letterSpacing: '-0.015em' }],
+        h2: ['3.0625rem', { lineHeight: '1.1', letterSpacing: '-0.018em' }],
+        h1: ['3.8125rem', { lineHeight: '1', letterSpacing: '-0.02em' }],
+      },
+      maxWidth: {
+        hero: '38.75rem',
+        prose: '42.5rem',
+        'prose-sm': '37.5rem',
       },
       colors: {
         border: "rgb(var(--border) / <alpha-value>)",

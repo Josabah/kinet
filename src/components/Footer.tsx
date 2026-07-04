@@ -19,26 +19,26 @@ const Footer = () => {
   const footerLinks = [{ label: 'Contact us', href: '/contact' }];
 
   return (
-    <footer className="py-12 bg-kinet-nav">
+    <footer className="py-16 bg-kinet-nav">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center justify-center gap-6 text-center">
+        <div className="flex flex-col items-center justify-center gap-8 text-center">
           {/* Logo & Copyright */}
-          <div className="flex flex-col items-center gap-2">
-            <a href="/" className="text-xl font-display font-bold text-white min-h-[44px] inline-flex items-center hover:text-white/90 transition-colors">
+          <div className="flex flex-col items-center gap-4">
+            <a href="/" className="text-h5 font-display font-bold text-white min-h-12 inline-flex items-center hover:text-white/90 transition-colors">
               Kinet
             </a>
-            <p className="text-sm text-white/60">
+            <p className="text-body text-white/60">
               © {currentYear} Kinet. All rights reserved.
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-8">
             {footerLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm text-white/60 hover:text-white transition-colors min-h-[44px] inline-flex items-center px-1"
+                className="text-body text-white/60 hover:text-white transition-colors min-h-12 inline-flex items-center px-1"
               >
                 {link.label}
               </a>
@@ -52,19 +52,12 @@ const Footer = () => {
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-all"
+                className="min-h-12 min-w-12 inline-flex items-center justify-center rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-all"
               >
                 <social.icon className="w-5 h-5" aria-hidden />
               </a>
             ))}
           </div>
-        </div>
-
-        {/* Bottom text */}
-        <div className="mt-8 pt-8 border-t border-white/10 text-center">
-          <p className="text-xs text-white/40 font-mono">
-            Engineered by Kinet
-          </p>
         </div>
       </div>
     </footer>

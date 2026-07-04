@@ -175,7 +175,7 @@ export const TechStackRow = ({
     )}
   >
     <TechIconRow technologies={technologies} className={className} />
-    {pills.length > 0 ? <TechPillRow items={pills} compact className={className} /> : null}
+    {pills.length > 0 ? <TechPillRow items={pills} compact animated className={className} /> : null}
   </div>
 );
 

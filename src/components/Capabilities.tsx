@@ -274,18 +274,18 @@ const Capabilities = () => {
   const active = capabilities.find((capability) => capability.id === activeId) ?? capabilities[0];
 
   return (
-    <section id="capabilities" className="py-24 md:py-32 lg:py-40 relative">
+    <section id="capabilities" className="section-padding relative">
       <div ref={ref} className="container mx-auto px-6 relative z-10 max-w-6xl">
         <motion.header
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="max-w-2xl mx-auto text-center mb-14 md:mb-20"
+          className="max-w-prose mx-auto text-center section-header"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-display font-bold text-heading leading-[1.08] tracking-tight mb-6">
+          <h2 className="section-title text-h3 sm:text-h2">
             Built on modern foundations.
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+          <p className="section-lead">
             The right technology matters. Choosing it well matters even more.
           </p>
         </motion.header>
@@ -298,7 +298,7 @@ const Capabilities = () => {
           role="tablist"
           aria-label="Capabilities"
         >
-          <div className="flex flex-wrap justify-center gap-2.5 md:gap-3">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
             {capabilities.map((capability) => {
               const isActive = capability.id === activeId;
 
@@ -312,7 +312,7 @@ const Capabilities = () => {
                   aria-controls={`capability-panel-${capability.id}`}
                   onClick={() => setActiveId(capability.id)}
                   className={cn(
-                    'rounded-full border px-5 py-2.5 md:px-6 md:py-3 text-sm md:text-[15px] font-medium',
+                    'rounded-full border px-6 py-3 text-body font-medium min-h-12',
                     'transition-all duration-200 ease-out',
                     isActive
                       ? 'border-[#111827] bg-[#111827] text-white scale-[1.02]'
@@ -326,12 +326,12 @@ const Capabilities = () => {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-14 xl:gap-16 items-start md:items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start md:items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${active.id}-illustration`}
               {...contentMotion}
-              className="order-1 md:order-2 flex items-center justify-center md:justify-start md:sticky md:top-28"
+              className="order-1 md:order-2 flex items-center justify-center md:justify-start md:sticky md:top-24"
               aria-hidden
             >
               <div className="w-full max-w-sm sm:max-w-md md:max-w-none mx-auto md:mx-0">{active.illustration}</div>
@@ -347,16 +347,15 @@ const Capabilities = () => {
               aria-labelledby={`capability-tab-${active.id}`}
               className="order-2 md:order-1 text-center md:text-left"
             >
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-display font-bold text-heading leading-snug tracking-tight mb-3 md:mb-4 max-w-lg mx-auto md:mx-0">
+              <h3 className="text-h4 sm:text-h3 font-display font-bold text-heading mb-4 max-w-lg mx-auto md:mx-0">
                 {active.title}
               </h3>
 
-              <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8 max-w-md mx-auto md:mx-0">
+              <p className="text-body text-muted-foreground mb-8 max-w-prose-sm mx-auto md:mx-0">
                 {active.description}
               </p>
 
               <div className="max-w-lg mx-auto md:mx-0 overflow-visible">
-                <p className="text-xs text-muted-foreground/80 tracking-wide mb-3">Built with</p>
                 <div className="flex justify-center md:justify-start overflow-visible">
                   {active.usePills ? (
                     <TechPillRow items={active.technologies} animated className="md:justify-start" />
