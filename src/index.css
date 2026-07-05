@@ -14,16 +14,14 @@
 @layer base {
   :root {
     /*
-     * Brand palette (hex):
-     * bg: #FBFBFC  |  head: #101828  |  body: #475467
-     * btn: #111827  |  accent: #2f39ba rgb(47, 57, 186)
+     * Brand palette:
+     * bg: lab(99 -0.39 1.42)  |  head: #101828  |  body: #475467
+     * btn: #111827  |  accent: #2f39ba
      */
-    --background: 251 251 252;
-    /* #FBFBFC */
+    --background: lab(99 -0.39 1.42);
+    --background-rgb: 253 252 249;
     --foreground: 71 84 103;
-    /* #475467 body */
     --heading: 16 24 40;
-    /* #101828 */
 
     --section-alt: 242 244 247;
 
@@ -34,7 +32,6 @@
     --popover-foreground: 16 24 40;
 
     --primary: 47 57 186;
-    /* rgb(47, 57, 186) #2f39ba accent */
     --primary-foreground: 255 255 255;
 
     --secondary: 16 24 40;
@@ -55,7 +52,7 @@
 
     --radius: 0.75rem;
 
-    --kinet-deep: 251 251 252;
+    --kinet-deep: 253 252 249;
     --kinet-midnight: 16 24 40;
     --kinet-indigo: 47 57 186;
     --kinet-text: 71 84 103;
@@ -69,7 +66,8 @@
 
   /* Class-based dark variant (Tailwind `dark:`): site is light-first; tokens mirror :root until a real dark theme ships */
   .dark {
-    --background: 251 251 252;
+    --background: lab(99 -0.39 1.42);
+    --background-rgb: 253 252 249;
     --foreground: 71 84 103;
     --heading: 16 24 40;
     --section-alt: 242 244 247;
@@ -91,7 +89,7 @@
     --input: 242 244 247;
     --ring: 47 57 186;
     --radius: 0.75rem;
-    --kinet-deep: 251 251 252;
+    --kinet-deep: 253 252 249;
     --kinet-midnight: 16 24 40;
     --kinet-indigo: 47 57 186;
     --kinet-text: 71 84 103;
@@ -114,7 +112,8 @@
   }
 
   body {
-    @apply bg-background text-body text-foreground antialiased;
+    background-color: var(--background);
+    @apply text-body text-foreground antialiased;
     font-family: "Geist Sans", sans-serif;
   }
 
@@ -175,12 +174,44 @@
     @apply text-body text-muted-foreground max-w-prose mx-auto;
   }
 
-  .glass {
-    @apply bg-card/80 backdrop-blur-md border border-border;
+  .service-tablist {
+    @apply flex flex-nowrap items-center justify-center gap-2 md:gap-3 overflow-x-auto px-1;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
-  .glass-strong {
-    @apply bg-card/90 backdrop-blur-lg border border-border;
+  .service-tablist::-webkit-scrollbar {
+    display: none;
+  }
+
+  .service-tab {
+    @apply shrink-0 rounded-full border border-border bg-white px-3.5 py-2.5 text-sm font-medium min-h-10 whitespace-nowrap text-foreground/70 transition-all duration-200 ease-out hover:border-foreground/20 hover:text-heading md:px-4 md:text-body md:min-h-11;
+  }
+
+  .service-tab-active {
+    @apply border-[#111827] bg-[#111827] text-white scale-[1.02] hover:border-[#111827] hover:text-white;
+  }
+
+  /* Dashed row divider — matches portrait.so FAQ pattern */
+  .bg-border-dashed {
+    @apply relative border-none;
+  }
+
+  .bg-border-dashed::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgb(var(--border)),
+      rgb(var(--border)) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    pointer-events: none;
   }
 
   .btn-primary {
@@ -223,14 +254,6 @@
     pointer-events: none;
   }
 
-  .btn-outline {
-    @apply inline-flex items-center justify-center min-h-12 px-6 text-body font-semibold bg-transparent text-foreground rounded-xl border border-border transition-all duration-300 hover:bg-primary/10 hover:border-primary/80;
-  }
-
-  .card-glass {
-    @apply bg-card/60 backdrop-blur-md border border-border rounded-xl p-6 transition-all duration-300 hover:border-primary/60 hover:bg-card/80;
-  }
-
   .design-pill {
     @apply relative inline-flex rounded-full p-px overflow-hidden isolate;
     background: rgb(var(--border));
@@ -263,21 +286,6 @@
   .design-pill-inner {
     @apply relative z-[1] inline-flex rounded-full bg-white font-medium text-foreground/75;
   }
-
-  .input-dark {
-    @apply bg-background border border-border rounded-xl px-4 py-3 w-full text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-200;
-  }
-
-  .gradient-radial {
-    background: radial-gradient(ellipse at center, rgb(var(--kinet-midnight)) 0%, rgb(var(--kinet-deep)) 70%);
-  }
-
-  .gradient-hero {
-    background:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgb(var(--kinet-indigo) / 0.15), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 60%, rgb(var(--kinet-indigo) / 0.08), transparent),
-      rgb(var(--kinet-deep));
-  }
 }
 
 @layer utilities {
@@ -285,38 +293,12 @@
     text-wrap: balance;
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  .work-marquee-track {
+    animation: work-marquee 50s linear infinite;
   }
 
-  .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 20px rgb(var(--kinet-indigo) / 0.2);
-  }
-
-  to {
-    box-shadow: 0 0 40px rgb(var(--kinet-indigo) / 0.4);
+  .work-marquee-track:hover {
+    animation-play-state: paused;
   }
 }
 
@@ -336,13 +318,21 @@
   }
 }
 
+@keyframes work-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
-  .animate-float,
-  .animate-pulse-slow,
-  .animate-glow,
   .btn-shimmer::after,
-  .design-pill::before {
+  .design-pill::before,
+  .work-marquee-track {
     animation: none !important;
   }
 }

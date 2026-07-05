@@ -9,7 +9,7 @@ const MUTED = '#98A2B3';
 const LINE = '#E4E7EC';
 const FILL = '#F9FAFB';
 
-type Capability = {
+type Service = {
   id: string;
   label: string;
   title: string;
@@ -190,10 +190,10 @@ const DesignIllustration = () => (
   </svg>
 );
 
-const capabilities: Capability[] = [
+const services: Service[] = [
   {
     id: 'web',
-    label: 'Web Applications',
+    label: 'Web Apps',
     title: 'Web applications',
     description: 'Build products that grow with your business.',
     technologies: [
@@ -257,7 +257,7 @@ const capabilities: Capability[] = [
   },
   {
     id: 'design',
-    label: 'Product Design',
+    label: 'Design',
     title: 'Product Design',
     description: 'Thoughtful products start before development.',
     technologies: ['UXUI', 'Wireframes', 'Prototypes', 'Design Systems', 'Accessibility'],
@@ -266,15 +266,15 @@ const capabilities: Capability[] = [
   },
 ];
 
-const Capabilities = () => {
+const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
-  const [activeId, setActiveId] = useState(capabilities[0].id);
+  const [activeId, setActiveId] = useState(services[0].id);
 
-  const active = capabilities.find((capability) => capability.id === activeId) ?? capabilities[0];
+  const active = services.find((service) => service.id === activeId) ?? services[0];
 
   return (
-    <section id="capabilities" className="section-padding relative">
+    <section id="services" className="section-padding relative">
       <div ref={ref} className="container mx-auto px-6 relative z-10 max-w-6xl">
         <motion.header
           initial={{ opacity: 0, y: 12 }}
@@ -296,30 +296,27 @@ const Capabilities = () => {
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.05 }}
           className="mb-12 md:mb-16"
           role="tablist"
-          aria-label="Capabilities"
+          aria-label="Services"
         >
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
-            {capabilities.map((capability) => {
-              const isActive = capability.id === activeId;
+          <div className="service-tablist mx-auto max-w-5xl">
+            {services.map((service) => {
+              const isActive = service.id === activeId;
 
               return (
                 <button
-                  key={capability.id}
+                  key={service.id}
                   type="button"
-                  id={`capability-tab-${capability.id}`}
+                  id={`service-tab-${service.id}`}
                   role="tab"
                   aria-selected={isActive}
-                  aria-controls={`capability-panel-${capability.id}`}
-                  onClick={() => setActiveId(capability.id)}
+                  aria-controls={`service-panel-${service.id}`}
+                  onClick={() => setActiveId(service.id)}
                   className={cn(
-                    'rounded-full border px-6 py-3 text-body font-medium min-h-12',
-                    'transition-all duration-200 ease-out',
-                    isActive
-                      ? 'border-[#111827] bg-[#111827] text-white scale-[1.02]'
-                      : 'border-border bg-white text-foreground/70 hover:text-heading hover:border-foreground/20',
+                    'service-tab',
+                    isActive && 'service-tab-active',
                   )}
                 >
-                  {capability.label}
+                  {service.label}
                 </button>
               );
             })}
@@ -342,9 +339,9 @@ const Capabilities = () => {
             <motion.div
               key={active.id}
               {...contentMotion}
-              id={`capability-panel-${active.id}`}
+              id={`service-panel-${active.id}`}
               role="tabpanel"
-              aria-labelledby={`capability-tab-${active.id}`}
+              aria-labelledby={`service-tab-${active.id}`}
               className="order-2 md:order-1 text-center md:text-left"
             >
               <h3 className="text-h4 sm:text-h3 font-display font-bold text-heading mb-4 max-w-lg mx-auto md:mx-0">
@@ -376,4 +373,4 @@ const Capabilities = () => {
   );
 };
 
-export default Capabilities;
+export default Services;

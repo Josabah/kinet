@@ -38,7 +38,7 @@ export default {
         border: "rgb(var(--border) / <alpha-value>)",
         input: "rgb(var(--input) / <alpha-value>)",
         ring: "rgb(var(--ring) / <alpha-value>)",
-        background: "rgb(var(--background) / <alpha-value>)",
+        background: "rgb(var(--background-rgb) / <alpha-value>)",
         foreground: "rgb(var(--foreground) / <alpha-value>)",
         heading: "rgb(var(--heading) / <alpha-value>)",
         primary: {
@@ -57,6 +57,7 @@ export default {
           DEFAULT: "rgb(var(--muted) / <alpha-value>)",
           foreground: "rgb(var(--muted-foreground) / <alpha-value>)",
         },
+        "section-alt": "rgb(var(--section-alt) / <alpha-value>)",
         accent: {
           DEFAULT: "rgb(var(--accent) / <alpha-value>)",
           foreground: "rgb(var(--accent-foreground) / <alpha-value>)",

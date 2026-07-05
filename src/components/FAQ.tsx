@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import {
   Accordion,
@@ -14,47 +13,35 @@ const FAQ = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="faq" className="section-padding relative overflow-hidden bg-muted/30">
-      <div ref={ref} className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
+    <section id="faq" className="section-padding relative overflow-hidden bg-background">
+      <div className="container mx-auto px-6 md:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          ref={ref}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-prose mx-auto section-header"
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mx-auto w-full max-w-xl"
         >
-          <h2 className="section-title text-h3 sm:text-h2">
-            Frequently Asked Questions
-          </h2>
-        </motion.div>
+          <div className="section-header text-center">
+            <h2 className="section-title text-h3 sm:text-h2">
+              Frequently Asked Questions
+            </h2>
+          </div>
 
-        {/* FAQ Accordion */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-prose mx-auto"
-        >
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
+              <AccordionItem
+                key={faq.question}
+                value={`item-${index}`}
+                className="w-full border-none bg-border-dashed"
               >
-                <AccordionItem 
-                  value={`item-${index}`} 
-                  className="card-glass border-none px-6 rounded-xl overflow-hidden"
-                >
-                  <AccordionTrigger className="text-center justify-center text-foreground hover:text-primary hover:no-underline py-6 text-body font-medium [&>svg]:ml-2">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-center text-muted-foreground pb-6 text-body">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </motion.div>
+                <AccordionTrigger className="w-full text-left text-foreground hover:text-foreground">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-left text-base leading-6 text-muted-foreground">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
             ))}
           </Accordion>
         </motion.div>

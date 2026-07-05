@@ -59,7 +59,7 @@ const inputClass = (hasError: boolean) =>
     'w-full rounded-xl border bg-white px-4 py-4 text-body text-heading',
     'placeholder:text-muted-foreground/50',
     'transition-colors duration-150',
-    'focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15',
+    'focus:outline-none focus:border-heading focus:ring-[3px] focus:ring-heading/10',
     hasError ? 'border-red-400 focus:border-red-400 focus:ring-red-400/15' : 'border-border',
   );
 
@@ -328,10 +328,10 @@ const Contact = () => {
                   }}
                   className={cn(
                     'w-full rounded-xl border px-4 py-4 text-left text-body transition-colors duration-150',
-                    'focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-primary/15',
+                    'focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-heading/10',
                     selected
-                      ? 'border-primary bg-primary/5 font-medium text-heading'
-                      : 'border-border bg-white text-heading hover:border-primary/40 hover:bg-muted/30',
+                      ? 'border-heading bg-muted font-medium text-heading'
+                      : 'border-border bg-white text-heading hover:border-heading/25 hover:bg-muted/30',
                   )}
                 >
                   {option.label}
@@ -389,8 +389,8 @@ const Contact = () => {
                 aria-label={channel.tooltip}
                 className={cn(
                   'inline-flex size-12 items-center justify-center rounded-xl border border-border bg-white',
-                  'text-heading transition-colors duration-150 hover:border-primary/30 hover:bg-muted/40',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 focus-visible:ring-offset-2',
+                  'text-heading transition-colors duration-150 hover:border-heading/25 hover:bg-muted/40',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heading/15 focus-visible:ring-offset-2',
                 )}
               >
                 {channel.icon === WhatsAppIcon ? (
@@ -417,7 +417,7 @@ const Contact = () => {
   );
 
   return (
-    <section id="contact" className="relative border-t border-border bg-background section-padding">
+    <section id="contact" className="relative bg-background section-padding">
       <div ref={ref} className="container mx-auto px-6">
         <div className="mx-auto max-w-xl text-center">
           <motion.div
@@ -446,7 +446,7 @@ const Contact = () => {
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="mt-8 text-body font-medium text-primary transition-colors hover:text-primary/80"
+                className="mt-8 text-body font-medium text-heading transition-colors hover:text-heading/70"
               >
                 Send another inquiry
               </button>
@@ -468,7 +468,7 @@ const Contact = () => {
                     </div>
                     <div className="h-1 overflow-hidden rounded-full bg-border">
                       <motion.div
-                        className="h-full rounded-full bg-primary"
+                        className="h-full rounded-full bg-heading"
                         initial={false}
                         animate={{ width: `${progress}%` }}
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -545,7 +545,7 @@ const Contact = () => {
                         className={cn(
                           'inline-flex items-center gap-2 min-h-12 rounded-xl border border-border bg-white px-6',
                           'text-body font-medium text-heading transition-colors hover:bg-muted/40',
-                          'focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-primary/15',
+                          'focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-heading/10',
                           isSubmitting && 'pointer-events-none opacity-50',
                         )}
                       >

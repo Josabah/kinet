@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { CONTACT_DIRECT } from '@/config/contact';
+import { primaryNavLinks } from '@/config/navigation';
+import { useSectionNav } from '@/hooks/useSectionNav';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,16 +13,13 @@ const Header = () => {
   const mobileNavRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
 
-  const navLinks = [
-    { label: 'Process', to: '/process' },
-    { label: 'Services', to: '/capabilities' },
-    { label: 'Why Us', to: '/why-kinet' },
-    { label: 'FAQ', to: '/faq' },
-  ];
+  const navLinks = primaryNavLinks;
 
   const handleLinkClick = () => {
     setIsMobileMenuOpen(false);
   };
+
+  const handleSectionNav = useSectionNav(handleLinkClick);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -114,23 +113,27 @@ const Header = () => {
         className="fixed top-0 left-0 right-0 h-16 bg-background/95 backdrop-blur-sm border-b border-border z-50"
       >
         <div className="container mx-auto px-6 h-full">
-          <div className="grid h-full grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center">
+          <div className="grid h-full grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4">
+            {/* Group 1 — logo */}
             <Link
               to="/"
-              className="col-start-1 row-start-1 justify-self-start text-h5 font-display font-bold text-heading min-h-12 min-w-12 flex items-center md:[padding-left:clamp(0rem,4vw,3rem)]"
+              onClick={() => handleSectionNav('/')}
+              className="justify-self-start text-h5 font-display font-bold text-heading min-h-12 min-w-12 flex items-center shrink-0"
             >
               Kinet
             </Link>
 
+            {/* Group 2 — navigation cluster */}
             <nav
-              className="col-start-2 row-start-1 hidden md:flex items-center gap-8 justify-self-center"
+              className="hidden md:flex items-center justify-center gap-5 lg:gap-7 justify-self-center"
               aria-label="Primary"
             >
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.to}
-                  className="text-body font-medium text-muted-foreground hover:text-heading transition-colors duration-200 relative group"
+                  onClick={() => handleSectionNav(link.to)}
+                  className="text-body font-medium text-muted-foreground hover:text-heading transition-colors duration-200 relative group whitespace-nowrap"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-heading transition-all duration-300 group-hover:w-full" />
@@ -138,22 +141,21 @@ const Header = () => {
               ))}
             </nav>
 
-            <div className="col-start-3 row-start-1 justify-self-end flex items-center md:[padding-right:clamp(0rem,4vw,3rem)]">
-              <div className="hidden md:flex items-center">
-                <a
-                  href={CONTACT_DIRECT.calendar}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-body px-6"
-                >
-                  Book A Meeting
-                </a>
-              </div>
+            {/* Group 3 — book a meeting */}
+            <div className="justify-self-end flex items-center shrink-0 md:col-start-3">
+              <a
+                href={CONTACT_DIRECT.calendar}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary hidden md:inline-flex text-sm min-h-10 px-4 whitespace-nowrap"
+              >
+                Book A Meeting
+              </a>
 
               <button
                 ref={menuButtonRef}
                 type="button"
-                className="md:hidden text-heading min-h-12 min-w-12 inline-flex items-center justify-center rounded-lg z-50"
+                className="md:hidden text-heading min-h-12 min-w-12 inline-flex items-center justify-center rounded-lg"
                 onClick={() => setIsMobileMenuOpen((open) => !open)}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-nav"
@@ -191,7 +193,7 @@ const Header = () => {
                 >
                   <Link
                     to={link.to}
-                    onClick={handleLinkClick}
+                    onClick={() => handleSectionNav(link.to)}
                     className="text-h4 font-display font-semibold text-heading hover:text-primary transition-colors"
                   >
                     {link.label}

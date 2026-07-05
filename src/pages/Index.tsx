@@ -1,15 +1,27 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import FeaturedWork from '@/components/FeaturedWork';
 import WhyKinet from '@/components/WhyKinet';
 import Process from '@/components/Process';
-import Capabilities from '@/components/Capabilities';
+import Services from '@/components/Services';
+import HomeProjects from '@/components/HomeProjects';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import PageGridBackground from '@/components/PageGridBackground';
 import SeoJsonLd from '@/components/SeoJsonLd';
+import { scrollToPath } from '@/lib/sectionNavigation';
 
 const Index = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    scrollToPath(pathname, 'smooth');
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-background text-foreground relative">
       <Helmet>
@@ -24,21 +36,13 @@ const Index = () => {
       <SeoJsonLd />
       <Header />
       <main id="main-content" className="relative" tabIndex={-1}>
-        {/* Subtle grid background */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            backgroundImage: `
-            linear-gradient(to right, hsl(var(--foreground) / 0.008) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--foreground) / 0.008) 1px, transparent 1px)
-          `,
-            backgroundSize: '32px 32px'
-          }}
-        />
+        <PageGridBackground />
         <Hero />
+        <FeaturedWork />
+        <Services />
         <Process />
-        <Capabilities />
         <WhyKinet />
+        <HomeProjects />
         <FAQ />
         <Contact />
       </main>

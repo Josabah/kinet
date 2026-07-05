@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { scrollToPath } from "@/lib/sectionNavigation";
+
 const Hero = () => {
+  const { pathname } = useLocation();
+
   return (
     <section
       id="hero"
@@ -64,6 +68,11 @@ const Hero = () => {
           >
             <Link
               to="/contact"
+              onClick={() => {
+                if (pathname === '/contact') {
+                  scrollToPath('/contact', 'smooth');
+                }
+              }}
               className="btn-primary btn-shimmer min-w-[280px] px-8"
             >
               Discuss your product
