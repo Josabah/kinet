@@ -189,12 +189,12 @@ const Header = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="text-h4 font-display font-semibold text-heading hover:text-primary transition-colors min-h-12 min-w-[min(100%,280px)] flex items-center justify-center px-4"
+                  className="text-h4 font-display font-semibold text-heading hover:text-heading/70 transition-colors min-h-12 min-w-[min(100%,280px)] flex items-center justify-center px-4"
                 >
                   <Link
                     to={link.to}
                     onClick={() => handleSectionNav(link.to)}
-                    className="text-h4 font-display font-semibold text-heading hover:text-primary transition-colors"
+                    className="text-h4 font-display font-semibold text-heading hover:text-heading/70 transition-colors"
                   >
                     {link.label}
                   </Link>

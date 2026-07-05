@@ -6,10 +6,7 @@ export const primaryNavLinks = [
   { label: 'FAQ', to: '/faq' },
 ] as const;
 
-export const footerNavLinks = [
-  ...primaryNavLinks,
-  { label: 'Contact us', to: '/contact' },
-] as const;
+export const footerNavLinks = [...primaryNavLinks] as const;
 
 export const legalNavLinks = [
   { label: 'Privacy', to: '/privacy' },

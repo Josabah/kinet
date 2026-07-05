@@ -229,7 +229,7 @@ const Process = () => {
               aria-hidden="true"
             />
             <div
-              className="absolute w-px -translate-x-1/2 bg-primary"
+              className="absolute w-px -translate-x-1/2 bg-heading"
               style={{ left: TIMELINE_LINE_LEFT, top: progressLine.fillTop, height: progressLine.fillHeight }}
               aria-hidden="true"
             />
@@ -248,8 +248,8 @@ const Process = () => {
                       className={cn(
                         'grid grid-cols-[14px_minmax(0,1fr)] gap-x-6 sm:gap-x-8 lg:gap-x-12',
                         index === 0
-                          ? 'items-start pb-8 lg:pb-24 max-lg:min-h-[45vh] max-lg:items-center'
-                          : 'min-h-[45vh] md:min-h-[52vh] lg:min-h-[56vh] items-center',
+                          ? 'items-start pb-6 lg:pb-16 max-lg:min-h-[38vh] max-lg:items-center'
+                          : 'min-h-[38vh] md:min-h-[44vh] lg:min-h-[48vh] items-center',
                       )}
                       aria-current={isActive ? 'step' : undefined}
                     >
@@ -265,8 +265,8 @@ const Process = () => {
                           }}
                           className={cn(
                             'relative z-10 shrink-0 rounded-full border border-[#FAF7F5] transition-all duration-300 ease-out',
-                            isActive && 'size-2.5 bg-primary shadow-[0_0_0_4px_rgb(var(--primary)/0.15)]',
-                            !isActive && isReached && 'size-2 bg-primary',
+                            isActive && 'size-2.5 bg-heading shadow-[0_0_0_4px_rgb(var(--heading)/0.12)]',
+                            !isActive && isReached && 'size-2 bg-heading',
                             !isActive && !isReached && 'size-1.5 bg-border',
                           )}
                           aria-hidden="true"

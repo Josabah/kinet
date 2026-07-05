@@ -294,7 +294,7 @@ const Services = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.05 }}
-          className="mb-12 md:mb-16"
+          className="section-header"
           role="tablist"
           aria-label="Services"
         >

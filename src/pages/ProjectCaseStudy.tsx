@@ -64,7 +64,7 @@ const ProjectCaseStudy = () => {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-heading hover:text-heading/70 transition-colors"
             >
               Visit live site
               <ArrowUpRight className="h-4 w-4" aria-hidden />

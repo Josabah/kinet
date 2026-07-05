@@ -14,14 +14,14 @@ const ProjectShowcaseCard = ({ project, variant = 'grid' }: ProjectShowcaseCardP
     <Link
       to={`/projects/${project.slug}`}
       className={cn(
-        'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-3xl',
+        'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heading/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-3xl',
         isMarquee && 'w-[min(88vw,420px)] shrink-0 snap-start',
       )}
     >
       <article
         className={cn(
           'overflow-hidden rounded-3xl border border-border bg-card/40 transition-all duration-300',
-          'hover:border-primary/30 hover:shadow-[0_24px_48px_-24px_rgba(16,24,40,0.18)]',
+          'hover:border-heading/15 hover:shadow-[0_24px_48px_-24px_rgba(16,24,40,0.18)]',
         )}
       >
         <div className="overflow-hidden border-b border-border/60 bg-muted/20">
@@ -40,7 +40,7 @@ const ProjectShowcaseCard = ({ project, variant = 'grid' }: ProjectShowcaseCardP
           </span>
           <h3 className="mt-4 font-display text-h5 font-bold text-heading">{project.name}</h3>
           <p className="mt-2 text-body text-muted-foreground">{project.category}</p>
-          <p className="mt-4 text-sm font-medium text-primary transition-colors group-hover:text-primary/80">
+          <p className="mt-4 text-sm font-medium text-heading/70 transition-colors group-hover:text-heading">
             View case study →
           </p>
         </div>

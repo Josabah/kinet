@@ -84,8 +84,8 @@ const WhyKinet = () => {
               <div
                 className={cn(
                   'flex items-center justify-center rounded-xl md:rounded-2xl border border-border bg-card px-4 py-4 sm:px-6 sm:py-6 text-center',
-                  'border-l-2 border-l-primary/35',
-                  'transition-colors duration-200 hover:bg-primary/[0.02]',
+                  'border-l-2 border-l-heading/20',
+                  'transition-colors duration-200 hover:bg-heading/[0.02]',
                 )}
               >
                 <p className="text-body text-heading font-semibold">

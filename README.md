@@ -1,6 +1,6 @@
-# Kinet - AI-Driven Product Studio
+# Kinet
 
-An AI-driven product studio that builds MVPs, full-scale applications, and custom AI solutions.
+Design and engineering for founders who care about getting it right the first time.
 
 ## Tech Stack
 

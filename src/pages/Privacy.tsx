@@ -23,15 +23,15 @@ const Privacy = () => (
       </p>
       <p className="text-muted-foreground mb-4 leading-relaxed">
         If you have questions about privacy or want to request access or deletion of your data, email us at{' '}
-        <a className="text-primary underline-offset-4 hover:underline" href="mailto:yosefabay03@gmail.com">
-          yosefabay03@gmail.com
+        <a className="text-heading underline-offset-4 hover:underline" href="mailto:contact@kinetsolutions.dev">
+          contact@kinetsolutions.dev
         </a>
         .
       </p>
       <p className="text-sm text-muted-foreground/80 mb-8">
         Last updated: April 5, 2026
       </p>
-      <Link to="/" className="text-primary font-medium hover:underline">
+      <Link to="/" className="text-heading font-medium hover:underline">
         ← Back to home
       </Link>
     </main>

@@ -159,11 +159,11 @@
 
 @layer components {
   .section-padding {
-    @apply py-24 md:py-32;
+    @apply py-16 md:py-20;
   }
 
   .section-header {
-    @apply mb-12 md:mb-16;
+    @apply mb-8 md:mb-10;
   }
 
   .section-title {

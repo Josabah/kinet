@@ -42,9 +42,9 @@ const HomeProjects = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
-          className="mt-12 md:mt-16 text-center"
+          className="mt-8 md:mt-10 text-center"
         >
-          <Link to="/projects" className="text-sm font-semibold text-primary transition-colors hover:text-primary/80">
+          <Link to="/projects" className="text-sm font-semibold text-heading transition-colors hover:text-heading/70">
             View all projects →
           </Link>
         </motion.div>
