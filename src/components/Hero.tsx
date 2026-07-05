@@ -8,9 +8,9 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden min-h-[calc(100dvh-4rem)] flex items-center py-16 md:py-24"
+      className="relative overflow-hidden flex items-center pt-24 pb-10 sm:pt-28 sm:pb-12 md:min-h-[calc(100dvh-4rem)] md:py-24"
     >
-      <div className="container mx-auto px-6 relative z-10 w-full pt-8 md:pt-12">
+      <div className="container mx-auto px-6 relative z-10 w-full">
         <div className="max-w-4xl mx-auto text-center">
           {/* Headline */}
           <motion.h1
@@ -26,7 +26,7 @@ const Hero = () => {
               duration: 0.7,
               delay: 0.1,
             }}
-            className="text-h3 sm:text-h2 md:text-h1 font-display font-bold text-heading text-balance mb-6"
+            className="text-h3 sm:text-h2 md:text-h1 font-display font-bold text-heading text-balance mb-4 md:mb-6"
           >
             Products Founders Rely On
           </motion.h1>
@@ -45,7 +45,7 @@ const Hero = () => {
               duration: 0.7,
               delay: 0.2,
             }}
-            className="text-lead text-muted-foreground max-w-hero mx-auto mb-12"
+            className="text-lead text-muted-foreground max-w-hero mx-auto mb-8 md:mb-12"
           >
             Design and engineering for founders who care about getting it right the first time.
           </motion.p>
@@ -70,7 +70,7 @@ const Hero = () => {
               to="/contact"
               onClick={() => {
                 if (pathname === '/contact') {
-                  scrollToPath('/contact', 'smooth');
+                  scrollToPath('/contact');
                 }
               }}
               className="btn-primary btn-shimmer min-w-[280px] px-8"

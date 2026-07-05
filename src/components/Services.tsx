@@ -266,12 +266,37 @@ const services: Service[] = [
   },
 ];
 
+const MOBILE_SERVICE_TAB_ROWS = [
+  ['web', 'mobile', 'ai'],
+  ['backend', 'design'],
+] as const;
+
 const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [activeId, setActiveId] = useState(services[0].id);
 
   const active = services.find((service) => service.id === activeId) ?? services[0];
+
+  const renderServiceTab = (service: (typeof services)[number], mobile = false) => {
+    const isActive = service.id === activeId;
+    const label = mobile && service.id === 'design' ? 'Product Design' : service.label;
+
+    return (
+      <button
+        key={service.id}
+        type="button"
+        id={`service-tab-${service.id}`}
+        role="tab"
+        aria-selected={isActive}
+        aria-controls={`service-panel-${service.id}`}
+        onClick={() => setActiveId(service.id)}
+        className={cn('service-tab', isActive && 'service-tab-active')}
+      >
+        {label}
+      </button>
+    );
+  };
 
   return (
     <section id="services" className="section-padding relative">
@@ -298,40 +323,32 @@ const Services = () => {
           role="tablist"
           aria-label="Services"
         >
-          <div className="service-tablist mx-auto max-w-5xl">
-            {services.map((service) => {
-              const isActive = service.id === activeId;
-
-              return (
-                <button
-                  key={service.id}
-                  type="button"
-                  id={`service-tab-${service.id}`}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls={`service-panel-${service.id}`}
-                  onClick={() => setActiveId(service.id)}
-                  className={cn(
-                    'service-tab',
-                    isActive && 'service-tab-active',
-                  )}
-                >
-                  {service.label}
-                </button>
-              );
-            })}
+          <div className="mx-auto max-w-5xl">
+            <div className="flex flex-col items-center gap-2 md:hidden">
+              {MOBILE_SERVICE_TAB_ROWS.map((row) => (
+                <div key={row.join('-')} className="flex flex-wrap items-center justify-center gap-2">
+                  {row.map((id) => {
+                    const service = services.find((item) => item.id === id);
+                    return service ? renderServiceTab(service, true) : null;
+                  })}
+                </div>
+              ))}
+            </div>
+            <div className="service-tablist hidden md:flex">{services.map(renderServiceTab)}</div>
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start md:items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${active.id}-illustration`}
               {...contentMotion}
-              className="order-1 md:order-2 flex items-center justify-center md:justify-start md:sticky md:top-24"
+              className="order-1 md:order-2 flex items-center justify-center md:justify-end min-w-0"
               aria-hidden
             >
-              <div className="w-full max-w-sm sm:max-w-md md:max-w-none mx-auto md:mx-0">{active.illustration}</div>
+              <div className="w-full max-w-sm sm:max-w-md md:max-w-none mx-auto md:mx-0">
+                {active.illustration}
+              </div>
             </motion.div>
           </AnimatePresence>
 
@@ -342,7 +359,7 @@ const Services = () => {
               id={`service-panel-${active.id}`}
               role="tabpanel"
               aria-labelledby={`service-tab-${active.id}`}
-              className="order-2 md:order-1 text-center md:text-left"
+              className="order-2 md:order-1 min-w-0 text-center md:text-left"
             >
               <h3 className="text-h4 sm:text-h3 font-display font-bold text-heading mb-4 max-w-lg mx-auto md:mx-0">
                 {active.title}
@@ -352,8 +369,8 @@ const Services = () => {
                 {active.description}
               </p>
 
-              <div className="max-w-lg mx-auto md:mx-0 overflow-visible">
-                <div className="flex justify-center md:justify-start overflow-visible">
+              <div className="max-w-lg mx-auto md:mx-0">
+                <div className="flex justify-center md:justify-start">
                   {active.usePills ? (
                     <TechPillRow items={active.technologies} animated className="md:justify-start" />
                   ) : (

@@ -84,9 +84,9 @@ const directChannels = [
   },
   {
     icon: Calendar,
-    tooltip: `Book Discovery Call: ${CONTACT_DIRECT.phone}`,
-    href: `tel:${CONTACT_DIRECT.phone}`,
-    external: false,
+    tooltip: 'Book a discovery call',
+    href: CONTACT_DIRECT.calendar,
+    external: true,
   },
 ] as const;
 
@@ -128,11 +128,13 @@ const Contact = () => {
   }, [location.search]);
 
   useEffect(() => {
+    if (location.pathname !== '/contact') return;
+
     const focusable = stepRef.current?.querySelector<HTMLElement>(
       'input:not([type="hidden"]), textarea, button[data-choice]',
     );
-    focusable?.focus();
-  }, [stepIndex]);
+    focusable?.focus({ preventScroll: true });
+  }, [stepIndex, location.pathname]);
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 

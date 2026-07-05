@@ -10,7 +10,7 @@ export function useSectionNav(onNavigate?: () => void) {
     (path: string) => {
       onNavigate?.();
       if (pathname === path) {
-        scrollToPath(path, 'smooth');
+        scrollToPath(path);
       }
     },
     [onNavigate, pathname],

@@ -15,7 +15,7 @@ const ProjectShowcaseCard = ({ project, variant = 'grid' }: ProjectShowcaseCardP
       to={`/projects/${project.slug}`}
       className={cn(
         'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heading/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-3xl',
-        isMarquee && 'w-[min(88vw,420px)] shrink-0 snap-start',
+        isMarquee && 'w-[min(68vw,240px)] sm:w-[min(72vw,300px)] md:w-[min(88vw,420px)] shrink-0 snap-start',
       )}
     >
       <article
@@ -24,23 +24,34 @@ const ProjectShowcaseCard = ({ project, variant = 'grid' }: ProjectShowcaseCardP
           'hover:border-heading/15 hover:shadow-[0_24px_48px_-24px_rgba(16,24,40,0.18)]',
         )}
       >
-        <div className="overflow-hidden border-b border-border/60 bg-muted/20">
+        <div className={cn('overflow-hidden border-b border-border/60 bg-muted/20', isMarquee && 'max-h-[140px] sm:max-h-none')}>
           <img
             src={project.heroImage}
             alt={`${project.name} homepage screenshot`}
-            className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.01]"
+            className={cn(
+              'block w-full h-auto transition-transform duration-500 group-hover:scale-[1.01]',
+              isMarquee && 'max-h-[140px] sm:max-h-none object-cover object-top sm:object-center',
+            )}
             loading="lazy"
             decoding="async"
           />
         </div>
 
-        <div className="p-6 sm:p-7">
-          <span className="inline-flex rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
+        <div className={cn(isMarquee ? 'p-3 sm:p-4' : 'p-6 sm:p-7')}>
+          <span className="inline-flex rounded-full border border-border bg-background px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-medium text-muted-foreground">
             {project.serviceTag}
           </span>
-          <h3 className="mt-4 font-display text-h5 font-bold text-heading">{project.name}</h3>
-          <p className="mt-2 text-body text-muted-foreground">{project.category}</p>
-          <p className="mt-4 text-sm font-medium text-heading/70 transition-colors group-hover:text-heading">
+          <h3 className={cn(
+            'font-display font-bold text-heading',
+            isMarquee ? 'mt-1.5 text-sm sm:text-base' : 'mt-4 text-h5',
+          )}>
+            {project.name}
+          </h3>
+          {!isMarquee && <p className="mt-2 text-body text-muted-foreground">{project.category}</p>}
+          <p className={cn(
+            'font-medium text-heading/70 transition-colors group-hover:text-heading',
+            isMarquee ? 'mt-2 text-xs sm:text-sm' : 'mt-4 text-sm',
+          )}>
             View case study →
           </p>
         </div>
