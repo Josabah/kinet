@@ -26,6 +26,11 @@ type FormStep = {
 
 const FORM_STEPS: FormStep[] = [
   {
+    field: 'projectType',
+    question: 'What type of product do you need?',
+    required: true,
+  },
+  {
     field: 'name',
     question: "What's your name?",
     required: true,
@@ -33,11 +38,6 @@ const FORM_STEPS: FormStep[] = [
   {
     field: 'email',
     question: "What's your email?",
-    required: true,
-  },
-  {
-    field: 'projectType',
-    question: 'What are you building?',
     required: true,
   },
   {
@@ -118,6 +118,7 @@ const Contact = () => {
 
   const currentStep = FORM_STEPS[stepIndex];
   const isLastStep = stepIndex === FORM_STEPS.length - 1;
+  const showProgress = formData.projectType.trim().length > 0;
   const progress = ((stepIndex + 1) / FORM_STEPS.length) * 100;
 
   useEffect(() => {
@@ -314,7 +315,7 @@ const Contact = () => {
         );
       case 'projectType':
         return (
-          <div className="flex flex-col gap-2" role="listbox" aria-label="What are you building?">
+          <div className="flex flex-col gap-2" role="listbox" aria-label="What type of product do you need?">
             {PROJECT_TYPE_OPTIONS.map((option) => {
               const selected = formData.projectType === option.value;
               return (
@@ -429,8 +430,13 @@ const Contact = () => {
             className="section-header"
           >
             <h2 className="section-title text-h3 sm:text-h2">
-              Tell us what you&apos;re building.
+              {stepIndex === 0 ? 'What type of product do you need?' : 'Get in touch'}
             </h2>
+            <p className="section-lead mt-4">
+              {stepIndex === 0
+                ? 'Choose the option that best matches what you have in mind.'
+                : 'A few more details and we’ll take it from here.'}
+            </p>
           </motion.div>
 
           {submitted ? (
@@ -460,23 +466,24 @@ const Contact = () => {
               transition={{ duration: 0.5, delay: 0.08 }}
               className="text-left"
             >
-                  {/* Progress bar */}
-                  <div className="mb-8">
-                    <div className="mb-2 flex items-center justify-between text-body text-muted-foreground">
-                      <span>
-                        Step {stepIndex + 1} of {FORM_STEPS.length}
-                      </span>
-                      <span>{Math.round(progress)}%</span>
+                  {showProgress && (
+                    <div className="mb-8">
+                      <div className="mb-2 flex items-center justify-between text-body text-muted-foreground">
+                        <span>
+                          Step {stepIndex + 1} of {FORM_STEPS.length}
+                        </span>
+                        <span>{Math.round(progress)}%</span>
+                      </div>
+                      <div className="h-1 overflow-hidden rounded-full bg-border">
+                        <motion.div
+                          className="h-full rounded-full bg-heading"
+                          initial={false}
+                          animate={{ width: `${progress}%` }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        />
+                      </div>
                     </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-border">
-                      <motion.div
-                        className="h-full rounded-full bg-heading"
-                        initial={false}
-                        animate={{ width: `${progress}%` }}
-                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      />
-                    </div>
-                  </div>
+                  )}
 
                   {submissionError && (
                     <div
@@ -516,14 +523,16 @@ const Contact = () => {
                         className="space-y-4"
                       >
                         <div>
-                          <h3 className="font-sans text-lead font-semibold text-heading">
-                            {currentStep.question}
-                            {!currentStep.required && (
-                              <span className="ml-2 text-body font-normal text-muted-foreground/60">
-                                (optional)
-                              </span>
-                            )}
-                          </h3>
+                          {stepIndex > 0 && (
+                            <h3 className="font-sans text-lead font-semibold text-heading">
+                              {currentStep.question}
+                              {!currentStep.required && (
+                                <span className="ml-2 text-body font-normal text-muted-foreground/60">
+                                  (optional)
+                                </span>
+                              )}
+                            </h3>
+                          )}
                         </div>
 
                         <div>{renderStepField()}</div>

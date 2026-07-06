@@ -2,7 +2,6 @@ export const primaryNavLinks = [
   { label: 'Projects', to: '/projects' },
   { label: 'Services', to: '/services' },
   { label: 'Process', to: '/process' },
-  { label: 'Why Us', to: '/why-kinet' },
   { label: 'FAQ', to: '/faq' },
 ] as const;
 

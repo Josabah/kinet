@@ -4,7 +4,6 @@ const PATH_TO_SECTION_ID: Record<string, string> = {
   '/services': 'services',
   '/capabilities': 'services',
   '/tech': 'services',
-  '/why-kinet': 'why-kinet',
   '/faq': 'faq',
   '/contact': 'contact',
 };

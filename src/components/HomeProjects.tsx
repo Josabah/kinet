@@ -17,9 +17,6 @@ const HomeProjects = () => {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="max-w-prose mx-auto text-center section-header"
         >
-          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Selected work
-          </p>
           <h2 className="section-title text-h3 sm:text-h2">Projects</h2>
           <p className="section-lead">
             Production builds for communities, marketplaces, and founders, focused on outcomes staff and users can rely

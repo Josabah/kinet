@@ -26,7 +26,7 @@ const App = () => (
           <Route path="/capabilities" element={<Navigate to="/services" replace />} />
           <Route path="/tech" element={<Navigate to="/services" replace />} />
           <Route path="/process" element={<Index />} />
-          <Route path="/why-kinet" element={<Index />} />
+          <Route path="/why-kinet" element={<Navigate to="/" replace />} />
           <Route path="/faq" element={<Index />} />
           <Route path="/contact" element={<Index />} />
           <Route path="/projects" element={<Projects />} />
