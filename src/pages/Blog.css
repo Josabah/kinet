@@ -1,12 +1,24 @@
+.blog-article {
+  --blog-measure: 42.5rem;
+  width: min(100%, var(--blog-measure));
+}
+
+.blog-article-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(var(--border));
+  background: rgb(var(--muted) / 0.45);
+}
+
 .blog-prose {
-  --blog-measure: 40.5rem;
   font-size: 1.0625rem;
   line-height: 1.7;
   color: rgb(var(--foreground));
 }
 
 .blog-prose > * {
-  max-width: var(--blog-measure);
+  max-width: 100%;
 }
 
 .blog-prose > h2,
@@ -32,7 +44,7 @@
 }
 
 .blog-prose > p {
-  margin: 0 0 1.25rem;
+  margin-block: 0 1.25rem;
 }
 
 .blog-prose > p + p {
@@ -53,7 +65,7 @@
 
 .blog-prose ul,
 .blog-prose ol {
-  margin: 0 0 1.35rem;
+  margin-block: 0 1.35rem;
   padding-left: 1.2rem;
 }
 
@@ -66,7 +78,7 @@
 }
 
 .blog-prose blockquote {
-  margin: 1.75rem 0 2rem;
+  margin-block: 1.75rem 2rem;
   padding: 0.15rem 0 0.15rem 1.15rem;
   border-left: 2px solid rgb(var(--heading));
   color: rgb(var(--heading));
@@ -81,8 +93,7 @@
 .blog-prose hr {
   border: 0;
   height: 1px;
-  margin: 2.5rem 0;
-  max-width: var(--blog-measure);
+  margin-block: 2.5rem;
   background: rgb(var(--border));
 }
 
@@ -96,13 +107,11 @@
 }
 
 .blog-prose pre {
-  margin: 1.75rem 0 2rem;
+  margin-block: 1.75rem 2rem;
   padding: 1.15rem 1.2rem;
   background: rgb(var(--heading));
   color: rgb(253 252 249);
-  border-radius: 1rem;
   overflow-x: auto;
-  max-width: min(100%, 46rem);
 }
 
 .blog-prose pre code {
@@ -114,8 +123,7 @@
 }
 
 .blog-prose figure {
-  margin: 2rem 0 2.25rem;
-  max-width: min(100%, 48rem);
+  margin-block: 2rem 2.25rem;
 }
 
 .blog-prose figure img {
@@ -123,7 +131,6 @@
   width: 100%;
   height: auto;
   border: 1px solid rgb(var(--border));
-  border-radius: 1rem;
   background: rgb(var(--muted) / 0.45);
 }
 
@@ -136,8 +143,7 @@
 
 .blog-prose table {
   width: 100%;
-  max-width: min(100%, 46rem);
-  margin: 1.5rem 0 2rem;
+  margin-block: 1.5rem 2rem;
   border-collapse: collapse;
   font-size: 0.95rem;
 }
@@ -176,12 +182,6 @@
   .blog-prose {
     font-size: 1rem;
     line-height: 1.65;
-  }
-
-  .blog-prose pre,
-  .blog-prose figure,
-  .blog-prose table {
-    max-width: 100%;
   }
 }
 

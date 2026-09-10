@@ -1,7 +1,10 @@
+import { useRef, useState } from "react";
 import {
   ArrowUpRight,
   Cpu,
+  Download,
 } from "lucide-react";
+import { toPng } from "html-to-image";
 import SeoHead from "@/components/SeoHead";
 import { pageSeo } from "@/config/seo";
 import "./Story.css";
@@ -16,7 +19,39 @@ const MobilePhoneIcon = () => (
   </svg>
 );
 
-const Story = () => (
+const Story = () => {
+  const canvasRef = useRef<HTMLElement>(null);
+  const [downloading, setDownloading] = useState(false);
+
+  const downloadImage = async () => {
+    const node = canvasRef.current;
+    if (!node || downloading) {
+      return;
+    }
+
+    setDownloading(true);
+
+    try {
+      const images = [...node.querySelectorAll("img")];
+      await Promise.all(images.map((image) => image.decode().catch(() => undefined)));
+
+      const scale = Math.max(2, 1080 / node.offsetWidth);
+      const dataUrl = await toPng(node, {
+        cacheBust: true,
+        pixelRatio: scale,
+        backgroundColor: "#fafaf8",
+      });
+
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = "kinet-solutions-story.png";
+      link.click();
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  return (
   <>
     <SeoHead
       title={pageSeo.story.title}
@@ -26,7 +61,22 @@ const Story = () => (
     />
 
     <main className="story-preview">
-      <article className="story-canvas" aria-label="Kinet Solutions social story graphic">
+      <button
+        type="button"
+        className="story-download"
+        onClick={() => {
+          void downloadImage();
+        }}
+        disabled={downloading}
+      >
+        <Download aria-hidden="true" />
+        <span>{downloading ? "Preparing…" : "Download image"}</span>
+      </button>
+      <article
+        ref={canvasRef}
+        className="story-canvas"
+        aria-label="Kinet Solutions social story graphic"
+      >
         <div className="story-grid" aria-hidden="true" />
         <div className="story-safe">
         <header className="story-identity">
@@ -153,6 +203,7 @@ const Story = () => (
       </article>
     </main>
   </>
-);
+  );
+};
 
 export default Story;

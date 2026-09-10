@@ -20,13 +20,13 @@ const Projects = () => (
     <main id="main-content" className="relative pt-24 md:pt-28" tabIndex={-1}>
       <PageGridBackground />
 
-      <div className="container relative z-10 mx-auto px-6 section-padding">
-        <header className="section-header max-w-prose">
+      <div className="container relative z-10 mx-auto max-w-6xl px-6 section-padding">
+        <header className="section-header mx-auto max-w-prose text-center">
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
             Selected work
           </p>
           <h1 className="section-title text-h2 md:text-h1">Projects</h1>
-          <p className="section-lead mx-0 text-left">
+          <p className="section-lead">
             Production builds for education, communities, marketplaces, and founders, focused on outcomes staff and
             users can rely on after launch.
           </p>

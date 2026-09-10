@@ -36,20 +36,20 @@ const Blog = () => {
             animate="visible"
             variants={fadeUp}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="section-header max-w-prose"
+            className="section-header mx-auto max-w-prose text-center"
           >
             <h1 className="section-title text-h2 md:text-h1">Blogs</h1>
-            <p className="section-lead mx-0 text-left">
+            <p className="section-lead">
               Practical notes on product, engineering, and the work of getting software right.
             </p>
           </motion.header>
 
           {posts.length === 0 ? (
-            <p className="max-w-prose text-body text-muted-foreground">
+            <p className="mx-auto max-w-prose text-center text-body text-muted-foreground">
               No posts published yet. Add a markdown file to <code className="font-mono text-heading">content/blog</code>.
             </p>
           ) : (
-            <div className="max-w-5xl">
+            <div className="mx-auto max-w-5xl">
               {featured && (
                 <motion.article
                   initial="hidden"
@@ -74,7 +74,7 @@ const Blog = () => {
                       <p className="text-body text-muted-foreground max-w-prose">{featured.description}</p>
                     </div>
                     {featured.cover && (
-                      <figure className="blog-entry-cover mt-6 overflow-hidden rounded-2xl border border-border bg-muted/30">
+                      <figure className="blog-entry-cover mt-6 overflow-hidden border border-border bg-muted/30">
                         <img
                           src={featured.cover}
                           alt={featured.coverAlt ?? ''}
@@ -116,7 +116,7 @@ const Blog = () => {
                           <p className="text-body text-muted-foreground max-w-prose">{post.description}</p>
                         </div>
                         {post.cover && (
-                          <figure className="order-first overflow-hidden rounded-xl border border-border bg-muted/30 sm:order-none">
+                          <figure className="order-first overflow-hidden border border-border bg-muted/30 sm:order-none">
                             <img
                               src={post.cover}
                               alt={post.coverAlt ?? ''}
