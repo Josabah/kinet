@@ -20,6 +20,43 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: 'uatmodel',
+    name: 'UAT Model',
+    category: 'Exam Simulation Platform',
+    serviceTag: 'Web & App Development',
+    url: 'https://uatmodel.com',
+    heroImage: '/projects/uatmodel/hero.png',
+    stack: ['Laravel', 'PHP', 'MySQL', 'Vite', 'Tailwind CSS'],
+    problem:
+      'Students sitting Addis Ababa University\'s Undergraduate Admission Test were preparing from paper packs and chat-group PDFs. None of that trains the computer-based hall: the clock, the navigation, or a 150-minute sitting split into English and quantitative sections.',
+    built:
+      'A full exam-simulation platform at uatmodel.com. Students sit model UATs in a computer-based interface that mirrors official exam conditions, then get scoring, review, and ranking. The same system now carries GAT/NGAT, EUEE, freshman, EXIT, and COC tracks, with student, family, school, and NGO accounts and an admin for packages, questions, and orders.',
+    outcome:
+      '8,535 registered accounts since June 2025, including 8,401 students, 52 schools, and 11 NGOs. 1,806 approved UAT Simulation orders. 6,094 completed sittings across 2,529 questions.',
+    screenshots: [
+      {
+        src: '/projects/uatmodel/hero.png',
+        alt: 'UAT Model homepage',
+        caption: 'Public homepage for UAT Tutorial Official on uatmodel.com.',
+      },
+      {
+        src: '/projects/uatmodel/packages.png',
+        alt: 'UAT Model simulation package catalogue',
+        caption: 'Simulation tracks: UAT, GAT/NGAT, EUEE, freshman, EXIT, and COC.',
+      },
+      {
+        src: '/projects/uatmodel/signup.png',
+        alt: 'UAT Model account registration',
+        caption: 'Registration for students, families, and schools.',
+      },
+      {
+        src: '/projects/uatmodel/about.png',
+        alt: 'UAT Tutorial Official about page',
+        caption: 'About page stating what the product is and what it is not.',
+      },
+    ],
+  },
+  {
     slug: 'kiduspetros',
     name: 'Kidus Petros Gibi Gubae',
     category: 'Church Website & CMS',
@@ -94,6 +131,38 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'unscriptedcodes',
+    name: 'Unscripted Codes',
+    category: 'Engineering Blog & Digital Products',
+    serviceTag: 'Web Development',
+    url: 'https://unscriptedcodes.me',
+    heroImage: '/projects/unscriptedcodes/hero.png',
+    stack: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Stripe'],
+    problem:
+      'Publishing articles and selling digital products often means wiring together auth, payments, and access control across separate services.',
+    built:
+      'One platform with email and Google sign-in, password recovery, and Stripe webhooks that unlock products as soon as payment clears.',
+    outcome:
+      'Content, accounts, and payments run in a single flow. No manual fulfillment or duct-tape access rules.',
+    screenshots: [
+      {
+        src: '/projects/unscriptedcodes/hero.png',
+        alt: 'Unscripted Codes homepage',
+        caption: 'Homepage for the engineering publication.',
+      },
+      {
+        src: '/projects/unscriptedcodes/blogs.png',
+        alt: 'Unscripted Codes blog listing',
+        caption: 'Article index with tags and read times.',
+      },
+      {
+        src: '/projects/unscriptedcodes/signup.png',
+        alt: 'Unscripted Codes signup flow',
+        caption: 'Registration with password checks and Google sign-in.',
+      },
+    ],
+  },
+  {
     slug: 'brije',
     name: 'Brije',
     category: 'Brand–Creator Marketplace',
@@ -127,38 +196,6 @@ export const projects: Project[] = [
         src: '/projects/brije/campaign-chats.png',
         alt: 'Brije campaign messaging',
         caption: 'Campaign-scoped chat between brand and creator.',
-      },
-    ],
-  },
-  {
-    slug: 'unscriptedcodes',
-    name: 'Unscripted Codes',
-    category: 'Engineering Blog & Digital Products',
-    serviceTag: 'Web Development',
-    url: 'https://unscriptedcodes.me',
-    heroImage: '/projects/unscriptedcodes/hero.png',
-    stack: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Stripe'],
-    problem:
-      'Publishing articles and selling digital products often means wiring together auth, payments, and access control across separate services.',
-    built:
-      'One platform with email and Google sign-in, password recovery, and Stripe webhooks that unlock products as soon as payment clears.',
-    outcome:
-      'Content, accounts, and payments run in a single flow. No manual fulfillment or duct-tape access rules.',
-    screenshots: [
-      {
-        src: '/projects/unscriptedcodes/hero.png',
-        alt: 'Unscripted Codes homepage',
-        caption: 'Homepage for the engineering publication.',
-      },
-      {
-        src: '/projects/unscriptedcodes/blogs.png',
-        alt: 'Unscripted Codes blog listing',
-        caption: 'Article index with tags and read times.',
-      },
-      {
-        src: '/projects/unscriptedcodes/signup.png',
-        alt: 'Unscripted Codes signup flow',
-        caption: 'Registration with password checks and Google sign-in.',
       },
     ],
   },

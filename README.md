@@ -32,6 +32,7 @@ npm run preview
 ```
 ├── api/
 │   └── contact.ts          # Vercel serverless handler (contact form)
+├── content/blog/           # Markdown posts (drop a .md file; images live beside it)
 ├── public/                 # Static assets (sitemap, robots, favicon, OG image)
 ├── src/
 │   ├── components/         # Feature components (Header, Hero, Services, etc.)

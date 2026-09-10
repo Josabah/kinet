@@ -1,5 +1,6 @@
 export const primaryNavLinks = [
   { label: 'Projects', to: '/projects' },
+  { label: 'Blogs', to: '/blogs' },
   { label: 'Services', to: '/services' },
   { label: 'Process', to: '/process' },
   { label: 'FAQ', to: '/faq' },

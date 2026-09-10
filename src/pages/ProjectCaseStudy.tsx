@@ -1,11 +1,13 @@
 import { type ReactNode } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageGridBackground from '@/components/PageGridBackground';
+import SeoHead from '@/components/SeoHead';
+import { brand } from '@/config/seo';
 import { getProjectBySlug } from '@/data/projects';
+import { buildProjectJsonLd, projectSeoDescription } from '@/lib/seoJsonLd';
 
 const CaseStudySection = ({ title, children }: { title: string; children: ReactNode }) => (
   <section className="border-t border-border pt-10 md:pt-12">
@@ -24,11 +26,14 @@ const ProjectCaseStudy = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      <Helmet>
-        <title>{project.name} | Projects | Kinet</title>
-        <meta name="description" content={`${project.name}: ${project.outcome.slice(0, 140)}`} />
-        <link rel="canonical" href={`https://kinetsolutions.dev/projects/${project.slug}`} />
-      </Helmet>
+      <SeoHead
+        title={`${project.name} | Projects | ${brand.name}`}
+        description={projectSeoDescription(project)}
+        path={`/projects/${project.slug}`}
+        image={project.heroImage}
+        imageAlt={`${project.name} — ${project.category}`}
+        jsonLd={buildProjectJsonLd(project)}
+      />
       <Header />
       <main id="main-content" className="relative pt-24 md:pt-28" tabIndex={-1}>
         <PageGridBackground />
@@ -64,7 +69,7 @@ const ProjectCaseStudy = () => {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-heading hover:text-heading/70 transition-colors"
+              className="text-action mt-8"
             >
               Visit live site
               <ArrowUpRight className="h-4 w-4" aria-hidden />

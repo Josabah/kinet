@@ -1,0 +1,20 @@
+# Kinet Solutions
+
+> Kinet (Kinet Solutions) designs and builds software products for driven founders.
+
+Kinet does the product design and engineering: web applications, mobile products, backend systems, and AI.
+
+Some founders are building a technology company around a problem they believe software can solve. Some already have a business and want that offering delivered through a product.
+
+## Site
+
+- [Home](https://kinetsolutions.dev/): Kinet Solutions
+- [Projects](https://kinetsolutions.dev/projects): Selected product work
+- [Blogs](https://kinetsolutions.dev/blog): Writing on product and engineering
+- [Feed](https://kinetsolutions.dev/feed.xml): RSS
+
+## Contact
+
+- https://kinetsolutions.dev/contact
+- contact@kinetsolutions.dev
+- https://www.linkedin.com/company/kinet-solutions

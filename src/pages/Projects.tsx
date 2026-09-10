@@ -1,21 +1,21 @@
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageGridBackground from '@/components/PageGridBackground';
 import ProjectShowcaseCard from '@/components/projects/ProjectShowcaseCard';
+import SeoHead from '@/components/SeoHead';
 import { projects } from '@/data/projects';
+import { pageSeo } from '@/config/seo';
+import { buildProjectsCollectionJsonLd } from '@/lib/seoJsonLd';
 
 const Projects = () => (
   <div className="min-h-screen bg-background text-foreground relative">
-    <Helmet>
-      <title>Projects | Kinet</title>
-      <meta
-        name="description"
-        content="Selected client work from Kinet: production websites, marketplaces, and platforms built for real outcomes."
-      />
-      <link rel="canonical" href="https://kinetsolutions.dev/projects" />
-    </Helmet>
+    <SeoHead
+      title={pageSeo.projects.title}
+      description={pageSeo.projects.description}
+      path={pageSeo.projects.path}
+      jsonLd={buildProjectsCollectionJsonLd(projects)}
+    />
     <Header />
     <main id="main-content" className="relative pt-24 md:pt-28" tabIndex={-1}>
       <PageGridBackground />
@@ -27,8 +27,8 @@ const Projects = () => (
           </p>
           <h1 className="section-title text-h2 md:text-h1">Projects</h1>
           <p className="section-lead mx-0 text-left">
-            Production builds for communities, marketplaces, and founders, focused on outcomes staff and users can
-            rely on after launch.
+            Production builds for education, communities, marketplaces, and founders, focused on outcomes staff and
+            users can rely on after launch.
           </p>
         </header>
 

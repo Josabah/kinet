@@ -174,6 +174,10 @@
     @apply text-body text-muted-foreground max-w-prose mx-auto;
   }
 
+  .service-tabs {
+    --tab-progress: 0;
+  }
+
   .service-tablist {
     @apply flex flex-wrap items-center justify-center gap-2 md:flex-nowrap md:overflow-x-auto md:justify-center md:gap-3 px-1;
     -ms-overflow-style: none;
@@ -185,11 +189,38 @@
   }
 
   .service-tab {
-    @apply shrink-0 rounded-full border border-border bg-white px-3 py-2 text-xs font-medium min-h-9 whitespace-nowrap text-foreground/70 transition-all duration-200 ease-out hover:border-foreground/20 hover:text-heading sm:px-3.5 sm:py-2.5 sm:text-sm sm:min-h-10 md:px-4 md:text-body md:min-h-11;
+    @apply relative isolate inline-flex items-center justify-center shrink-0 overflow-hidden rounded-xl border border-border bg-white px-4 text-sm font-semibold min-h-10 whitespace-nowrap text-foreground/70 transition-all duration-300 ease-out hover:border-foreground/20 hover:text-heading hover:scale-[1.02];
   }
 
-  .service-tab-active {
-    @apply border-[#111827] bg-[#111827] text-white scale-[1.02] hover:border-[#111827] hover:text-white;
+  .service-tab-label {
+    @apply relative z-[1];
+  }
+
+  .service-tab-active,
+  .service-tab-static {
+    border-color: color-mix(in oklch, #2f39ba 48%, #e4e7ec);
+    @apply bg-white text-heading hover:text-heading;
+  }
+
+  .service-tab-active:hover,
+  .service-tab-static:hover {
+    border-color: color-mix(in oklch, #2f39ba 62%, #e4e7ec);
+  }
+
+  .service-tab-active .service-tab-label,
+  .service-tab-static .service-tab-label {
+    @apply text-heading;
+  }
+
+  .service-tab-progress {
+    @apply absolute inset-0 z-0 pointer-events-none;
+    background: color-mix(in oklch, #2f39ba 18%, #fff);
+    transform-origin: left center;
+    transform: scaleX(var(--tab-progress, 0));
+  }
+
+  .service-tab-static {
+    background: color-mix(in oklch, #2f39ba 18%, #fff);
   }
 
   /* Dashed row divider — matches portrait.so FAQ pattern */
@@ -204,13 +235,11 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background-image: repeating-linear-gradient(
-      90deg,
-      rgb(var(--border)),
-      rgb(var(--border)) 4px,
-      transparent 4px,
-      transparent 8px
-    );
+    background-image: repeating-linear-gradient(90deg,
+        rgb(var(--border)),
+        rgb(var(--border)) 4px,
+        transparent 4px,
+        transparent 8px);
     pointer-events: none;
   }
 
@@ -226,11 +255,15 @@
     box-shadow: 0 0 20px rgb(var(--btn-color) / 0.25);
   }
 
+  .text-action {
+    @apply inline-flex items-center gap-1.5 min-h-11 text-body font-semibold text-heading underline decoration-heading/40 underline-offset-[0.22em] decoration-1 transition-colors hover:decoration-heading;
+  }
+
   .btn-shimmer {
     @apply relative overflow-hidden isolate;
   }
 
-  .btn-shimmer > * {
+  .btn-shimmer>* {
     @apply relative z-[1];
   }
 
@@ -239,16 +272,14 @@
     position: absolute;
     inset: 0;
     width: 130%;
-    background: linear-gradient(
-      100deg,
-      transparent 0%,
-      rgb(255 255 255 / 0) 22%,
-      rgb(255 255 255 / 0.05) 38%,
-      rgb(255 255 255 / 0.12) 50%,
-      rgb(255 255 255 / 0.05) 62%,
-      rgb(255 255 255 / 0) 78%,
-      transparent 100%
-    );
+    background: linear-gradient(100deg,
+        transparent 0%,
+        rgb(255 255 255 / 0) 22%,
+        rgb(255 255 255 / 0.05) 38%,
+        rgb(255 255 255 / 0.12) 50%,
+        rgb(255 255 255 / 0.05) 62%,
+        rgb(255 255 255 / 0) 78%,
+        transparent 100%);
     transform: translateX(-130%);
     animation: btn-shimmer 6.5s linear infinite;
     pointer-events: none;
@@ -264,16 +295,14 @@
     content: "";
     position: absolute;
     inset: -120%;
-    background: conic-gradient(
-      from 0deg,
-      rgb(var(--border)) 0deg,
-      rgb(var(--primary) / 0.15) 60deg,
-      rgb(var(--primary) / 0.85) 120deg,
-      rgb(var(--primary) / 0.2) 180deg,
-      rgb(var(--border)) 240deg,
-      rgb(var(--primary) / 0.15) 300deg,
-      rgb(var(--border)) 360deg
-    );
+    background: conic-gradient(from 0deg,
+        rgb(var(--border)) 0deg,
+        rgb(var(--primary) / 0.15) 60deg,
+        rgb(var(--primary) / 0.85) 120deg,
+        rgb(var(--primary) / 0.2) 180deg,
+        rgb(var(--border)) 240deg,
+        rgb(var(--primary) / 0.15) 300deg,
+        rgb(var(--border)) 360deg);
     opacity: 0;
     transition: opacity 0.2s ease;
   }
@@ -305,6 +334,68 @@
 
   .work-marquee-track:hover {
     animation-play-state: paused;
+  }
+
+  .hero-field {
+    pointer-events: none;
+    position: absolute;
+    top: 4rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    background-image:
+      linear-gradient(to right, rgb(var(--heading) / 0.09) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--heading) / 0.09) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(
+      to right,
+      black 0%,
+      black 6%,
+      transparent 30%,
+      transparent 70%,
+      black 94%,
+      black 100%
+    );
+  }
+
+  .hero-copy::before {
+    content: "";
+    position: absolute;
+    inset: -18% -12%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      var(--background) 42%,
+      color-mix(in srgb, var(--background) 70%, transparent) 62%,
+      transparent 78%
+    );
+  }
+
+  @media (max-width: 767px) {
+    .hero-field {
+      mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 12%,
+        transparent 32%,
+        transparent 58%,
+        black 84%,
+        black 100%
+      );
+    }
+
+    .hero-copy::before {
+      inset: -8% -6%;
+      background: radial-gradient(
+        ellipse at center,
+        var(--background) 52%,
+        color-mix(in srgb, var(--background) 82%, transparent) 70%,
+        transparent 88%
+      );
+    }
   }
 }
 
@@ -340,5 +431,9 @@
   .design-pill::before,
   .work-marquee-track {
     animation: none !important;
+  }
+
+  .service-tab-progress {
+    transform: none;
   }
 }

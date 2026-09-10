@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import FeaturedWork from '@/components/FeaturedWork';
@@ -9,23 +8,20 @@ import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import PageGridBackground from '@/components/PageGridBackground';
+import SeoHead from '@/components/SeoHead';
 import SeoJsonLd from '@/components/SeoJsonLd';
-import { siteSeo, SITE_URL } from '@/config/seo';
+import { pageSeo } from '@/config/seo';
+import { buildHomeJsonLd } from '@/lib/seoJsonLd';
 
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground relative">
-    <Helmet>
-      <title>{siteSeo.title}</title>
-      <meta name="description" content={siteSeo.description} />
-      <meta name="keywords" content={siteSeo.keywords} />
-      <meta property="og:title" content={siteSeo.title} />
-      <meta property="og:description" content={siteSeo.description} />
-      <meta property="og:image:alt" content={siteSeo.ogImageAlt} />
-      <meta name="twitter:title" content={siteSeo.title} />
-      <meta name="twitter:description" content={siteSeo.description} />
-      <meta name="robots" content="index, follow" />
-      <link rel="canonical" href={SITE_URL} />
-    </Helmet>
+    <SeoHead
+      title={pageSeo.home.title}
+      description={pageSeo.home.description}
+      path={pageSeo.home.path}
+      keywords={pageSeo.home.keywords}
+      jsonLd={buildHomeJsonLd()}
+    />
     <SeoJsonLd />
     <Header />
     <main id="main-content" className="relative" tabIndex={-1}>

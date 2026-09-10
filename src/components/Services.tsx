@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type FocusEvent, type PointerEvent, type ReactNode } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { TechPillRow, TechStackRow } from '@/components/capabilityTechIcons';
 import { cn } from '@/lib/utils';
@@ -257,7 +257,7 @@ const services: Service[] = [
   },
   {
     id: 'design',
-    label: 'Design',
+    label: 'Product Design',
     title: 'Product Design',
     description: 'Thoughtful products start before development.',
     technologies: ['UXUI', 'Wireframes', 'Prototypes', 'Design Systems', 'Accessibility'],
@@ -271,29 +271,122 @@ const MOBILE_SERVICE_TAB_ROWS = [
   ['backend', 'design'],
 ] as const;
 
+const TAB_DURATION_MS = 5500;
+
 const Services = () => {
   const ref = useRef(null);
+  const tablistRef = useRef<HTMLDivElement>(null);
+  const elapsedRef = useRef(0);
+  const cycleRef = useRef(0);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isVisible = useInView(ref, { amount: 0.2 });
   const [activeId, setActiveId] = useState(services[0].id);
+  const [userLocked, setUserLocked] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [focusPaused, setFocusPaused] = useState(false);
 
   const active = services.find((service) => service.id === activeId) ?? services[0];
+  const playing = isVisible && pageVisible && !reduceMotion && !userLocked && !hoverPaused && !focusPaused;
 
-  const renderServiceTab = (service: (typeof services)[number], mobile = false) => {
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncMotion = () => setReduceMotion(media.matches);
+    syncMotion();
+    media.addEventListener('change', syncMotion);
+    return () => media.removeEventListener('change', syncMotion);
+  }, []);
+
+  useEffect(() => {
+    const syncVisibility = () => setPageVisible(document.visibilityState === 'visible');
+    syncVisibility();
+    document.addEventListener('visibilitychange', syncVisibility);
+    return () => document.removeEventListener('visibilitychange', syncVisibility);
+  }, []);
+
+  useEffect(() => {
+    const node = tablistRef.current;
+    if (!node) return;
+
+    if (reduceMotion) {
+      node.style.setProperty('--tab-progress', '1');
+      return;
+    }
+
+    if (!playing) return;
+
+    const cycle = cycleRef.current;
+    const startedAt = performance.now() - elapsedRef.current;
+    let frame = 0;
+
+    const tick = (now: number) => {
+      if (cycle !== cycleRef.current) return;
+
+      const elapsed = now - startedAt;
+      elapsedRef.current = elapsed;
+      const progress = Math.min(elapsed / TAB_DURATION_MS, 1);
+      node.style.setProperty('--tab-progress', String(progress));
+
+      if (progress >= 1) {
+        cycleRef.current += 1;
+        elapsedRef.current = 0;
+        node.style.setProperty('--tab-progress', '0');
+        setActiveId((current) => {
+          const index = services.findIndex((service) => service.id === current);
+          return services[(index + 1) % services.length].id;
+        });
+        return;
+      }
+
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeId, playing, reduceMotion]);
+
+  const selectTab = (id: string) => {
+    cycleRef.current += 1;
+    elapsedRef.current = 0;
+    tablistRef.current?.style.setProperty('--tab-progress', '0');
+    setUserLocked(true);
+    setActiveId(id);
+  };
+
+  const pauseForMouse = (event: PointerEvent<HTMLDivElement>, paused: boolean) => {
+    if (event.pointerType === 'mouse') setHoverPaused(paused);
+  };
+
+  const handleTablistFocus = (event: FocusEvent<HTMLDivElement>) => {
+    if (event.target instanceof HTMLElement && event.target.matches(':focus-visible')) {
+      setFocusPaused(true);
+    }
+  };
+
+  const handleTablistBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+      setFocusPaused(false);
+    }
+  };
+
+  const renderServiceTab = (service: (typeof services)[number], instance: 'desktop' | 'mobile') => {
     const isActive = service.id === activeId;
-    const label = mobile && service.id === 'design' ? 'Product Design' : service.label;
+    const useStaticFill = isActive && (reduceMotion || userLocked);
 
     return (
       <button
-        key={service.id}
+        key={`${instance}-${service.id}`}
         type="button"
-        id={`service-tab-${service.id}`}
+        id={instance === 'desktop' ? `service-tab-${service.id}` : undefined}
         role="tab"
         aria-selected={isActive}
         aria-controls={`service-panel-${service.id}`}
-        onClick={() => setActiveId(service.id)}
-        className={cn('service-tab', isActive && 'service-tab-active')}
+        onClick={() => selectTab(service.id)}
+        className={cn('service-tab', isActive && (useStaticFill ? 'service-tab-static' : 'service-tab-active'))}
       >
-        {label}
+        <span className="service-tab-label">{service.label}</span>
+        {isActive && !useStaticFill && <span className="service-tab-progress" aria-hidden />}
       </button>
     );
   };
@@ -323,18 +416,27 @@ const Services = () => {
           role="tablist"
           aria-label="Services"
         >
-          <div className="mx-auto max-w-5xl">
+          <div
+            ref={tablistRef}
+            className="service-tabs mx-auto max-w-5xl"
+            onPointerEnter={(event) => pauseForMouse(event, true)}
+            onPointerLeave={(event) => pauseForMouse(event, false)}
+            onFocusCapture={handleTablistFocus}
+            onBlurCapture={handleTablistBlur}
+          >
             <div className="flex flex-col items-center gap-2 md:hidden">
               {MOBILE_SERVICE_TAB_ROWS.map((row) => (
                 <div key={row.join('-')} className="flex flex-wrap items-center justify-center gap-2">
                   {row.map((id) => {
                     const service = services.find((item) => item.id === id);
-                    return service ? renderServiceTab(service, true) : null;
+                    return service ? renderServiceTab(service, 'mobile') : null;
                   })}
                 </div>
               ))}
             </div>
-            <div className="service-tablist hidden md:flex">{services.map(renderServiceTab)}</div>
+            <div className="service-tablist hidden md:flex">
+              {services.map((service) => renderServiceTab(service, 'desktop'))}
+            </div>
           </div>
         </motion.div>
 

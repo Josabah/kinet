@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kinet LinkedIn — page preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 1200px;
+      height: 420px;
+      background: #f3f2ef;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      overflow: hidden;
+    }
+    .page {
+      width: 1128px;
+      margin: 24px auto 0;
+      background: #fff;
+      border-radius: 8px;
+      overflow: visible;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(16, 24, 40, 0.06);
+    }
+    .cover {
+      width: 1128px;
+      height: 191px;
+      display: block;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+    }
+    .row {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      padding: 0 24px 20px;
+      min-height: 88px;
+    }
+    .avatar {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      margin-top: -56px;
+      background: #0B0B0C;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .meta { padding-bottom: 4px; }
+    .name {
+      font-size: 20px;
+      font-weight: 800;
+      color: #101828;
+      letter-spacing: -0.03em;
+    }
+    .tag {
+      margin-top: 2px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #475467;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <img class="cover" src="linkedin-cover.png" alt="" />
+    <div class="row">
+      <img class="avatar" src="linkedin-logo.png" alt="" />
+      <div class="meta">
+        <div class="name">Kinet Solutions</div>
+        <div class="tag">Designs and builds software products for driven founders.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

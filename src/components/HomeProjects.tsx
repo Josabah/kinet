@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
 import ProjectShowcaseCard from '@/components/projects/ProjectShowcaseCard';
 import { projects } from '@/data/projects';
 
@@ -19,8 +20,8 @@ const HomeProjects = () => {
         >
           <h2 className="section-title text-h3 sm:text-h2">Projects</h2>
           <p className="section-lead">
-            Production builds for communities, marketplaces, and founders, focused on outcomes staff and users can rely
-            on after launch.
+            Production builds for education, communities, marketplaces, and founders, focused on outcomes staff and users
+            can rely on after launch.
           </p>
         </motion.header>
 
@@ -41,8 +42,9 @@ const HomeProjects = () => {
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
           className="mt-8 md:mt-10 text-center"
         >
-          <Link to="/projects" className="text-sm font-semibold text-heading transition-colors hover:text-heading/70">
-            View all projects →
+          <Link to="/projects" className="text-action">
+            View all projects
+            <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </motion.div>
       </div>

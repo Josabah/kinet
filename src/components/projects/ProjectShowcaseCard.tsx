@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import type { Project } from '@/data/projects';
 import { cn } from '@/lib/utils';
 
@@ -49,10 +50,17 @@ const ProjectShowcaseCard = ({ project, variant = 'grid' }: ProjectShowcaseCardP
           </h3>
           {!isMarquee && <p className="mt-2 text-body text-muted-foreground">{project.category}</p>}
           <p className={cn(
-            'font-medium text-heading/70 transition-colors group-hover:text-heading',
+            'inline-flex items-center gap-1.5 font-medium text-heading/70 transition-colors group-hover:text-heading',
             isMarquee ? 'mt-2 text-xs sm:text-sm' : 'mt-4 text-sm',
           )}>
-            View case study →
+            View case study
+            <ArrowUpRight
+              className={cn(
+                'shrink-0 transition-transform duration-300 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
+                isMarquee ? 'h-3.5 w-3.5' : 'h-4 w-4',
+              )}
+              aria-hidden
+            />
           </p>
         </div>
       </article>

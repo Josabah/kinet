@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { CONTACT_DIRECT } from '@/config/contact';
 import { primaryNavLinks } from '@/config/navigation';
 import { useSectionNav } from '@/hooks/useSectionNav';
 
@@ -118,14 +117,18 @@ const Header = () => {
             <Link
               to="/"
               onClick={() => handleSectionNav('/')}
-              className="justify-self-start text-h5 font-display font-bold text-heading min-h-12 min-w-12 flex items-center shrink-0"
+              className="justify-self-start min-h-12 flex items-center shrink-0"
             >
-              Kinet
+              <img
+                src="/kinet-logo-lockup.svg"
+                alt="Kinet Solutions"
+                className="h-10 sm:h-11 w-auto"
+              />
             </Link>
 
             {/* Group 2 — navigation cluster */}
             <nav
-              className="hidden md:flex items-center justify-center gap-5 lg:gap-7 justify-self-center"
+              className="hidden md:flex items-center justify-center gap-4 lg:gap-7 justify-self-center"
               aria-label="Primary"
             >
               {navLinks.map((link) => (
@@ -133,7 +136,7 @@ const Header = () => {
                   key={link.label}
                   to={link.to}
                   onClick={() => handleSectionNav(link.to)}
-                  className="text-body font-medium text-muted-foreground hover:text-heading transition-colors duration-200 relative group whitespace-nowrap"
+                  className="text-sm lg:text-body font-medium text-muted-foreground hover:text-heading transition-colors duration-200 relative group whitespace-nowrap"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-heading transition-all duration-300 group-hover:w-full" />
@@ -141,16 +144,15 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Group 3 — book a meeting */}
+            {/* Group 3 — contact */}
             <div className="justify-self-end flex items-center shrink-0 md:col-start-3">
-              <a
-                href={CONTACT_DIRECT.calendar}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact"
+                onClick={() => handleSectionNav('/contact')}
                 className="btn-primary hidden md:inline-flex text-sm min-h-10 px-4 whitespace-nowrap"
               >
-                Book A Meeting
-              </a>
+                Contact us
+              </Link>
 
               <button
                 ref={menuButtonRef}
@@ -206,15 +208,13 @@ const Header = () => {
                 transition={{ duration: 0.3, delay: navLinks.length * 0.1 }}
                 className="mt-8 min-h-12 inline-flex items-center justify-center px-8"
               >
-                <a
-                  href={CONTACT_DIRECT.calendar}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleLinkClick}
+                <Link
+                  to="/contact"
+                  onClick={() => handleSectionNav('/contact')}
                   className="btn-primary text-body px-8"
                 >
-                  Book A Meeting
-                </a>
+                  Contact us
+                </Link>
               </motion.div>
             </nav>
           </motion.div>

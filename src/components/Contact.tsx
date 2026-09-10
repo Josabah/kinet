@@ -84,7 +84,7 @@ const directChannels = [
   },
   {
     icon: Calendar,
-    tooltip: 'Book a discovery call',
+    tooltip: 'Book a free discovery call',
     href: CONTACT_DIRECT.calendar,
     external: true,
   },

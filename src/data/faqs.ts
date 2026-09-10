@@ -12,7 +12,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'Can you work with our existing team?',
     answer:
-      'Yes. We often collaborate with founders, in-house teams, and external designers instead of replacing them.',
+      'Yes. We often join founders, in-house teams, and designers as part of the product work.',
   },
   {
     question: 'How much does a project typically cost?',
@@ -20,9 +20,9 @@ export const faqs: FaqItem[] = [
       "Every product is different. After a discovery call, we'll give you a clear proposal with scope, timeline, and pricing—no surprises.",
   },
   {
-    question: 'Do you only work with startups?',
+    question: 'Who do you work with?',
     answer:
-      'No. We work with startups, growing businesses, and established companies that need reliable product engineering.',
+      'Founders building a technology company around a problem they believe software can solve. And founders who already have a business and want that offering delivered through a product.',
   },
   {
     question: 'What happens after launch?',

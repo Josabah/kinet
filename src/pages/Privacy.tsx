@@ -1,18 +1,26 @@
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SeoHead from '@/components/SeoHead';
+import { brand, pageSeo } from '@/config/seo';
+import { buildInnerPageJsonLd } from '@/lib/seoJsonLd';
 
 const Privacy = () => (
   <div className="min-h-screen bg-background text-foreground relative">
-    <Helmet>
-      <title>Privacy | Kinet</title>
-      <meta
-        name="description"
-        content="How Kinet collects and uses information when you visit kinetsolutions.dev or contact us."
-      />
-      <link rel="canonical" href="https://kinetsolutions.dev/privacy" />
-    </Helmet>
+    <SeoHead
+      title={pageSeo.privacy.title}
+      description={pageSeo.privacy.description}
+      path={pageSeo.privacy.path}
+      jsonLd={buildInnerPageJsonLd({
+        title: pageSeo.privacy.title,
+        description: pageSeo.privacy.description,
+        path: pageSeo.privacy.path,
+        breadcrumbs: [
+          { name: brand.name, path: '/' },
+          { name: 'Privacy', path: pageSeo.privacy.path },
+        ],
+      })}
+    />
     <Header />
     <main id="main-content" className="container mx-auto px-6 py-24 max-w-2xl" tabIndex={-1}>
       <h1 className="text-4xl font-display font-bold mb-6">Privacy</h1>

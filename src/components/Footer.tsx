@@ -13,9 +13,13 @@ const Footer = () => {
           <Link
             to="/"
             onClick={() => handleSectionNav('/')}
-            className="text-h5 font-display font-bold text-white min-h-12 inline-flex items-center hover:text-white/90 transition-colors"
+            className="min-h-16 inline-flex items-center opacity-100 hover:opacity-90 transition-opacity"
           >
-            Kinet
+            <img
+              src="/kinet-logo-lockup.svg"
+              alt="Kinet Solutions"
+              className="h-16 w-auto brightness-0 invert"
+            />
           </Link>
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6 md:gap-x-8">
@@ -32,7 +36,7 @@ const Footer = () => {
           </div>
 
           <p className="text-sm text-white/50">
-            © {currentYear} Kinet. All rights reserved.
+            © {currentYear} Kinet Solutions. All rights reserved.
           </p>
         </div>
       </div>

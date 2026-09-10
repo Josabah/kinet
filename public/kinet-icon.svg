@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Kinet Solutions">
+  <title>Kinet Solutions</title>
+  <rect x="0" y="0" width="512" height="512" rx="112.64" fill="#0B0B0C"/>
+  <g fill="#FAFAF8" fill-rule="evenodd">
+    <g transform="translate(26.48,25.76) scale(1.45)">
+      <path d="M114 60L61 86L61 232L114 258L114 188L191 256L256 256L149 160L252 60L194 60L114 137Z"/>
+    </g>
+  </g>
+</svg>
