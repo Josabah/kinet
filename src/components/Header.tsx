@@ -7,10 +7,8 @@ import { useSectionNav } from '@/hooks/useSectionNav';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLDivElement>(null);
-  const lastScrollY = useRef(0);
 
   const navLinks = primaryNavLinks;
 
@@ -43,28 +41,6 @@ const Header = () => {
       main?.removeAttribute('inert');
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [isMobileMenuOpen]);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) return;
-
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
-      const scrollingDown = currentScrollY > lastScrollY.current;
-
-      if (currentScrollY < 16) {
-        setIsHeaderVisible(true);
-      } else if (scrollingDown && currentScrollY > 72) {
-        setIsHeaderVisible(false);
-      } else if (!scrollingDown) {
-        setIsHeaderVisible(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
@@ -104,10 +80,7 @@ const Header = () => {
     <>
       <motion.header
         initial={{ opacity: 0, y: 0 }}
-        animate={{
-          opacity: 1,
-          y: isHeaderVisible || isMobileMenuOpen ? 0 : '-100%',
-        }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="fixed top-0 left-0 right-0 h-16 bg-background/95 backdrop-blur-sm border-b border-border z-50"
       >

@@ -10,7 +10,7 @@ Some founders are building a technology company around a problem they believe so
 
 - [Home](https://kinetsolutions.dev/): Kinet Solutions
 - [Projects](https://kinetsolutions.dev/projects): Selected product work
-- [Blogs](https://kinetsolutions.dev/blog): Writing on product and engineering
+- [Blogs](https://kinetsolutions.dev/blogs): Writing on product and engineering
 - [Feed](https://kinetsolutions.dev/feed.xml): RSS
 
 ## Contact

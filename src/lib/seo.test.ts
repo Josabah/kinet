@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { brand, pageSeo, siteSeo } from '@/config/seo';
+import { brand, offeredServices, pageSeo, siteSeo } from '@/config/seo';
 import {
   buildHomeJsonLd,
   buildOrganizationNode,
@@ -21,7 +21,9 @@ const seoCopy = [
   siteSeo.keywords,
   siteSeo.organizationDescription,
   siteSeo.websiteDescription,
+  siteSeo.ogImageAlt,
   ...Object.values(pageSeo).flatMap((page) => [page.title, page.description]),
+  ...offeredServices.map((service) => `${service.name} ${service.description}`),
 ].join('\n');
 
 describe('brand SEO', () => {
@@ -53,6 +55,7 @@ describe('brand SEO', () => {
     expect(seoCopy.toLowerCase()).not.toMatch(/\benterprise software\b/);
     expect(seoCopy.toLowerCase()).not.toMatch(/\bcustom software development\b/);
     expect(seoCopy.toLowerCase()).not.toMatch(/non-founders/);
+    expect(seoCopy).not.toContain('\u2014');
   });
 });
 
@@ -77,6 +80,7 @@ describe('organization graph', () => {
     const html = readFileSync(path.join(process.cwd(), 'index.html'), 'utf8');
     const match = html.match(/<!--seo:jsonld-->\s*<script type="application\/ld\+json">([\s\S]*?)<\/script>\s*<!--\/seo:jsonld-->/);
     expect(match).toBeTruthy();
+    expect(JSON.stringify(buildHomeJsonLd())).not.toContain('\u2014');
     expect(JSON.parse(match![1])).toEqual(buildHomeJsonLd());
   });
 });
@@ -157,12 +161,12 @@ describe('html injection and sitemap', () => {
       {
         title: 'A note',
         description: 'On product.',
-        url: 'https://kinetsolutions.dev/blog/a-note',
+        url: 'https://kinetsolutions.dev/blogs/a-note',
         date: '2026-09-10',
       },
     ]);
     expect(xml).toContain('<title>Kinet Solutions</title>');
-    expect(xml).toContain('https://kinetsolutions.dev/blog/a-note');
+    expect(xml).toContain('https://kinetsolutions.dev/blogs/a-note');
   });
 
   it('maps routes to static html files', () => {

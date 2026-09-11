@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import PageGridBackground from '@/components/PageGridBackground';
 import MarkdownContent from '@/components/blog/MarkdownContent';
 import SeoHead from '@/components/SeoHead';
-import { blogsPath, formatPostDate, formatReadingTime, getPostBySlug } from '@/lib/blog';
+import { blogsPath, blogPath, formatPostDate, formatReadingTime, getPostBySlug } from '@/lib/blog';
 import { buildBlogPostingJsonLd } from '@/lib/seoJsonLd';
 import { brand } from '@/config/seo';
 import './Blog.css';
@@ -39,7 +39,7 @@ const BlogPost = () => {
     return <Navigate to={blogsPath()} replace />;
   }
 
-  const canonicalPath = `/blog/${post.slug}`;
+  const canonicalPath = blogPath(post.slug);
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">

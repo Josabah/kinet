@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { Plugin } from 'vite';
 import { parse as parseYaml } from 'yaml';
+import { BLOGS_PATH, blogPath } from './src/lib/blogPaths';
 import { projects } from './src/data/projects';
 import {
   INDEXING_ROBOTS,
@@ -169,17 +170,17 @@ function collectDocuments(root: string, outDir?: string): SeoDocument[] {
       canonical: absoluteUrl(`/projects/${project.slug}`),
       keywords: null,
       image: assetUrl(project.heroImage),
-      imageAlt: `${project.name} — ${project.category}`,
+      imageAlt: `${project.name}, ${project.category}`,
       jsonLd: buildProjectJsonLd(project),
       lastmod: fileDate(path.join(root, 'src/data/projects.ts')),
       changefreq: 'yearly' as const,
       priority: 0.7,
     })),
     {
-      path: '/blog',
+      path: BLOGS_PATH,
       title: pageSeo.blog.title,
       description: pageSeo.blog.description,
-      canonical: absoluteUrl('/blog'),
+      canonical: absoluteUrl(BLOGS_PATH),
       keywords: null,
       jsonLd: buildBlogJsonLd(posts.map((post) => asBlogPost(post))),
       lastmod: posts[0]?.date ?? lastmodHome,
@@ -189,10 +190,10 @@ function collectDocuments(root: string, outDir?: string): SeoDocument[] {
     ...posts.map((post) => {
       const publicCover = copyCover(post, root, outDir);
       return {
-        path: `/blog/${post.slug}`,
+        path: blogPath(post.slug),
         title: `${post.title} | ${brand.name}`,
         description: post.description,
-        canonical: absoluteUrl(`/blog/${post.slug}`),
+        canonical: absoluteUrl(blogPath(post.slug)),
         keywords: null,
         ogType: 'article' as const,
         image: publicCover ?? siteSeo.ogImage,
@@ -259,11 +260,11 @@ function collectDocuments(root: string, outDir?: string): SeoDocument[] {
 function copyCover(post: MarkdownPost, root: string, outDir?: string): string | undefined {
   if (!post.coverFile || !outDir) return undefined;
   const ext = path.extname(post.coverFile) || '.jpg';
-  const destDir = path.join(outDir, 'blog', post.slug);
+  const destDir = path.join(outDir, BLOGS_PATH.replace(/^\//, ''), post.slug);
   fs.mkdirSync(destDir, { recursive: true });
   const destName = `cover${ext}`;
   fs.copyFileSync(post.coverFile, path.join(destDir, destName));
-  return `${SITE_URL}/blog/${post.slug}/${destName}`;
+  return `${SITE_URL}${blogPath(post.slug)}/${destName}`;
 }
 
 function writeSeoDocuments(root: string, outDir: string) {
@@ -289,7 +290,7 @@ function writeSeoDocuments(root: string, outDir: string) {
       posts.map((post) => ({
         title: post.title,
         description: post.description,
-        url: absoluteUrl(`/blog/${post.slug}`),
+        url: absoluteUrl(blogPath(post.slug)),
         date: post.date,
       })),
     ),
@@ -321,7 +322,7 @@ export function kinetSeoPlugin(): Plugin {
             posts.map((post) => ({
               title: post.title,
               description: post.description,
-              url: absoluteUrl(`/blog/${post.slug}`),
+              url: absoluteUrl(blogPath(post.slug)),
               date: post.date,
             })),
           );

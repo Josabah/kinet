@@ -33,13 +33,24 @@ const Story = () => {
 
     try {
       const images = [...node.querySelectorAll("img")];
-      await Promise.all(images.map((image) => image.decode().catch(() => undefined)));
+      await Promise.all([
+        document.fonts.ready,
+        ...images.map((image) => image.decode().catch(() => undefined)),
+      ]);
 
-      const scale = Math.max(2, 1080 / node.offsetWidth);
+      const width = node.offsetWidth;
+      const height = node.offsetHeight;
       const dataUrl = await toPng(node, {
         cacheBust: true,
-        pixelRatio: scale,
+        pixelRatio: Math.max(2, 1080 / width),
+        width,
+        height,
         backgroundColor: "#fafaf8",
+        style: {
+          width: `${width}px`,
+          height: `${height}px`,
+          maxHeight: "none",
+        },
       });
 
       const link = document.createElement("a");
@@ -117,24 +128,16 @@ const Story = () => {
         </section>
 
         <section className="story-work" aria-label="Selected Kinet product interfaces">
-          <svg
-            className="story-field-mark"
-            viewBox="0 0 1000 959.8"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <rect className="story-field-background" x="0" y="7.5" width="1000" height="945" />
+          <div className="story-field" aria-hidden="true">
             <svg
-              x="17.5"
-              y="-10.25"
-              width="965"
-              height="980.31"
+              className="story-field-mark"
               viewBox="61 60 195 198"
-              preserveAspectRatio="xMidYMid meet"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path d={KINET_MARK_PATH} />
+              <path fill="#fafaf8" d={KINET_MARK_PATH} />
             </svg>
-          </svg>
+          </div>
 
           <div className="story-device-stack">
             <figure className="story-product story-product-kidus">
@@ -190,13 +193,13 @@ const Story = () => {
               <br />
               about getting it right the first time.
             </p>
-            <div>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
+            <p className="story-url">
+              <svg className="story-url-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
                 <circle cx="12" cy="12" r="9.5" />
                 <path d="M12 2.5v19M9.5 2.9C7.3 7.5 7.3 16.5 9.5 21.1M14.5 2.9c2.2 4.6 2.2 13.6 0 18.2M5.1 6h13.8M3 10h18M2.5 14h19M5.1 18h13.8" />
               </svg>
               <strong>kinetsolutions.dev</strong>
-            </div>
+            </p>
           </div>
         </footer>
         </div>

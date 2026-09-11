@@ -1,4 +1,5 @@
 import type { BlogPost } from './blog';
+import { BLOGS_PATH, blogPath } from './blogPaths';
 import type { FaqItem } from '../data/faqs';
 import type { Project } from '../data/projects';
 import {
@@ -189,10 +190,10 @@ export function buildBlogJsonLd(posts: BlogPost[]) {
     buildWebSiteNode(),
     {
       '@type': 'Blog',
-      '@id': `${absoluteUrl('/blog')}#blog`,
+      '@id': `${absoluteUrl(BLOGS_PATH)}#blog`,
       name: 'Kinet Solutions Blogs',
       description: pageSeo.blog.description,
-      url: absoluteUrl('/blog'),
+      url: absoluteUrl(BLOGS_PATH),
       inLanguage: siteSeo.language,
       publisher: organizationRef(),
       blogPost: posts.map((post) => ({
@@ -200,18 +201,18 @@ export function buildBlogJsonLd(posts: BlogPost[]) {
         headline: post.title,
         description: post.description,
         datePublished: post.date,
-        url: absoluteUrl(`/blog/${post.slug}`),
+        url: absoluteUrl(blogPath(post.slug)),
       })),
     },
     buildBreadcrumbNode([
       { name: brand.name, path: '/' },
-      { name: 'Blogs', path: '/blog' },
+      { name: 'Blogs', path: BLOGS_PATH },
     ]),
   ]);
 }
 
 export function buildBlogPostingJsonLd(post: BlogPost) {
-  const path = `/blog/${post.slug}`;
+  const path = blogPath(post.slug);
   const url = absoluteUrl(path);
   return buildGraph([
     buildOrganizationNode(),
@@ -224,7 +225,7 @@ export function buildBlogPostingJsonLd(post: BlogPost) {
     }),
     buildBreadcrumbNode([
       { name: brand.name, path: '/' },
-      { name: 'Blogs', path: '/blog' },
+      { name: 'Blogs', path: BLOGS_PATH },
       { name: post.title, path },
     ]),
     {
@@ -313,7 +314,7 @@ export function buildProjectJsonLd(project: Project) {
 export function projectSeoDescription(project: Project): string {
   const outcome = project.outcome.replace(/\s+/g, ' ').trim();
   const clipped = outcome.length > 120 ? `${outcome.slice(0, 117).trimEnd()}…` : outcome;
-  const description = `${project.name} — ${project.category}. ${clipped}`;
+  const description = `${project.name}: ${project.category}. ${clipped}`;
   return description.length > 160 ? `${description.slice(0, 157).trimEnd()}…` : description;
 }
 

@@ -31,7 +31,7 @@ const ProjectCaseStudy = () => {
         description={projectSeoDescription(project)}
         path={`/projects/${project.slug}`}
         image={project.heroImage}
-        imageAlt={`${project.name} — ${project.category}`}
+        imageAlt={`${project.name}, ${project.category}`}
         jsonLd={buildProjectJsonLd(project)}
       />
       <Header />

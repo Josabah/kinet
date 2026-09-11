@@ -26,7 +26,7 @@ export const siteSeo = {
   siteName: brand.name,
   title: 'Kinet Solutions | Products Founders Rely On',
   description:
-    'Kinet (Kinet Solutions) designs and builds software products for driven founders. Web, mobile, backend, and AI — built to last.',
+    'Kinet (Kinet Solutions) designs and builds software products for driven founders. Web, mobile, backend, and AI, built to last.',
   keywords: [
     'Kinet',
     'Kinet Solutions',
@@ -44,10 +44,10 @@ export const siteSeo = {
     'React',
     'Next.js',
   ].join(', '),
-  ogImage: `${SITE_URL}/og-image.png`,
-  ogImageWidth: 1376,
-  ogImageHeight: 768,
-  ogImageAlt: 'Kinet Solutions — design and engineering for founders',
+  ogImage: `${SITE_URL}/og.png`,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: 'Kinet Solutions. Design and engineering for founders',
   logo: `${SITE_URL}/kinet-icon.png`,
   logoWidth: 512,
   logoHeight: 512,
@@ -57,7 +57,7 @@ export const siteSeo = {
   organizationDescription:
     'Kinet Solutions designs and builds software products. We work with founders building a technology company around a problem they believe software can solve, and with founders who want an existing business delivered through a product.',
   websiteDescription:
-    'Kinet Solutions designs and builds software products — product design and engineering for driven founders.',
+    'Kinet Solutions designs and builds software products: product design and engineering for driven founders.',
 } as const;
 
 export const pageSeo = {
@@ -93,7 +93,7 @@ export const pageSeo = {
     path: '/story',
     title: 'Kinet Solutions',
     description:
-      'Kinet Solutions — design and engineering for ambitious founders who care about getting it right the first time.',
+      'Kinet Solutions. Design and engineering for ambitious founders who care about getting it right the first time.',
     noindex: true,
   },
   notFound: {
@@ -120,7 +120,7 @@ export const offeredServices = [
   },
   {
     name: 'AI product development',
-    description: 'Useful AI inside real products — model-backed workflows, RAG, and automation.',
+    description: 'Useful AI inside real products: model-backed workflows, RAG, and automation.',
   },
   {
     name: 'Product design',

@@ -17,7 +17,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'How much does a project typically cost?',
     answer:
-      "Every product is different. After a discovery call, we'll give you a clear proposal with scope, timeline, and pricing—no surprises.",
+      "Every product is different. After a discovery call, we'll give you a clear proposal with scope, timeline, and pricing. No surprises.",
   },
   {
     question: 'Who do you work with?',

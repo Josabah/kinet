@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageGridBackground from '@/components/PageGridBackground';
 import SeoHead from '@/components/SeoHead';
-import { formatPostDate, formatReadingTime, getPublishedPosts } from '@/lib/blog';
+import { formatPostDate, formatReadingTime, getPublishedPosts, blogPath } from '@/lib/blog';
 import { buildBlogJsonLd } from '@/lib/seoJsonLd';
 import { pageSeo } from '@/config/seo';
 import './Blog.css';
@@ -59,7 +59,7 @@ const Blog = () => {
                   className="blog-entry"
                 >
                   <Link
-                    to={`/blog/${featured.slug}`}
+                    to={blogPath(featured.slug)}
                     className="blog-entry-featured group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
                   >
                     <div className="min-w-0 py-2">
@@ -99,7 +99,7 @@ const Blog = () => {
                       className="border-b border-border"
                     >
                       <Link
-                        to={`/blog/${post.slug}`}
+                        to={blogPath(post.slug)}
                         className={`group grid gap-4 py-8 sm:gap-8 md:py-10 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 ${
                           post.cover
                             ? 'sm:grid-cols-[8.5rem_minmax(0,1fr)_minmax(9rem,13rem)]'
